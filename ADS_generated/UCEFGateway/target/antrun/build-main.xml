@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy todir="/home/vagrant/Desktop/ADS/ADS_generated/UCEFGateway/target/conf" overwrite="true">
+    <fileset dir="/home/vagrant/Desktop/ADS/ADS_generated/UCEFGateway/conf"/>
+  </copy>
+  <copy todir="/home/vagrant/Desktop/ADS/ADS_generated/UCEFGateway/target" overwrite="true">
+    <fileset file="/home/vagrant/Desktop/ADS/ADS_generated/UCEFGateway/RTI.rid"/>
+  </copy>
+</target>
+</project>

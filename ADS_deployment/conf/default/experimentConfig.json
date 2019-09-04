@@ -1,0 +1,53 @@
+{
+  "federateTypesAllowed": [
+    "DataAnalytics",
+    "Database",
+    "EventInjection",
+    "UCEFGateway",
+    "VehicleControl"
+  ],
+  "expectedFederates": [
+    {
+      "federateType": "DataAnalytics",
+      "count": 1
+    },
+    {
+      "federateType": "Database",
+      "count": 1
+    },
+    {
+      "federateType": "EventInjection",
+      "count": 1
+    },
+    {
+      "federateType": "UCEFGateway",
+      "count": 1
+    },
+    {
+      "federateType": "VehicleControl",
+      "count": 1
+    }
+  ],
+  "lateJoinerFederates": [
+    {
+      "federateType": "DataAnalytics",
+      "count": 0
+    },
+    {
+      "federateType": "Database",
+      "count": 0
+    },
+    {
+      "federateType": "EventInjection",
+      "count": 0
+    },
+    {
+      "federateType": "UCEFGateway",
+      "count": 0
+    },
+    {
+      "federateType": "VehicleControl",
+      "count": 0
+    }
+  ]
+}
