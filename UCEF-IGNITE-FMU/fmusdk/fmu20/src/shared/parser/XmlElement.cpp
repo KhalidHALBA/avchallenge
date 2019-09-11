@@ -342,11 +342,11 @@ void ScalarVariable::printElement(int indent) {
     printListOfElements(childIndent, annotations);
 }
 
-odelStructure::ModelStructure() {
+ModelStructure::ModelStructure() {
     unknownParentType = XmlParser::elm_BAD_DEFINED;
 }
 
-odelStructure::~ModelStructure() {
+ModelStructure::~ModelStructure() {
     deleteListOfElements(outputs);
     deleteListOfElements(derivatives);
     deleteListOfElements(discreteStates);
@@ -424,13 +424,13 @@ void ModelStructure::printElement(int indent) {
 }
 
 
-odelDescription::ModelDescription() {
+ModelDescription::ModelDescription() {
     modelExchange = NULL;
     coSimulation = NULL;
     defaultExperiment = NULL;
     modelStructure = NULL;
 }
-odelDescription::~ModelDescription() {
+ModelDescription::~ModelDescription() {
     deleteListOfElements(unitDefinitions);
     deleteListOfElements(typeDefinitions);
     if (coSimulation) delete coSimulation;

@@ -30,7 +30,7 @@ CO_SIMULATION_DEPS = \
 	co_simulation/main.c
 
 # Dependencies for only fmusim_me
-ODEL_EXCHANGE_DEPS = \
+MODEL_EXCHANGE_DEPS = \
 	model_exchange/main.c
 
 # Dependencies shared between both fmusim_cs and fmusim_me

@@ -30,7 +30,7 @@ CO_SIMULATION_DEPS = \
 	co_simulation/include/fmiPlatformTypes.h 
 
 # Dependencies for only fmusim_me
-ODEL_EXCHANGE_DEPS = \
+MODEL_EXCHANGE_DEPS = \
 	model_exchange/fmusim_me/main.c \
 	model_exchange/fmusim_me/fmi_me.h \
 	model_exchange/include/fmiModelFunctions.h \
