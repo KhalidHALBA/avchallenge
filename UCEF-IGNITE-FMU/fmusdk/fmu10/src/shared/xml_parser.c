@@ -842,7 +842,7 @@ static void freeList(void** list){
 // -------------------------------------------------------------------------
 // Validation - done after parsing to report all errors 
 
-ModelDescription* validate(ModelDescription* md) {
+odelDescription* validate(ModelDescription* md) {
     int error = 0;
     int i;
     if (md->modelVariables)
@@ -873,7 +873,7 @@ static void cleanup(FILE *file) {
     fclose(file);
 }
 
-ModelDescription* parse_encoding(const char* xmlPath, const char *encoding) {
+odelDescription* parse_encoding(const char* xmlPath, const char *encoding) {
     ModelDescription* md = NULL;
     FILE *file;
     int done = 0;
@@ -914,7 +914,7 @@ ModelDescription* parse_encoding(const char* xmlPath, const char *encoding) {
 // Returns NULL to indicate failure
 // Otherwise, return the root node md of the AST.
 // The receiver must call freeElement(md) to release AST memory.
-ModelDescription* parse(const char* xmlPath) {
+odelDescription* parse(const char* xmlPath) {
     // UTF-8
     // ISO-8859-1
     // US-ASCII

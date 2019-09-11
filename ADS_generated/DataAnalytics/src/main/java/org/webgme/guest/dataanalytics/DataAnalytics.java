@@ -26,6 +26,7 @@ import org.knowm.xchart.XYChart;
 public class DataAnalytics extends DataAnalyticsBase {
 	
 	ExecutorService myExecutor = Executors.newCachedThreadPool(); 
+	ExecutorService myExecutor1 = Executors.newCachedThreadPool(); 
 	
     private final static Logger log = LogManager.getLogger();
 
@@ -61,22 +62,7 @@ public class DataAnalytics extends DataAnalyticsBase {
     }
 
     
-    
-    
-    public void Sense_speed()
 
-    {
-    	DataAnalyticsparameter.Engine_Speed       = Integer.toString(ThreadLocalRandom.current().nextInt(600, 1000 + 1)); 
-    }
-
-    
-    public String Build_SPN()
-    
-    {  
-    	return DataAnalyticsparameter.DataAnalyticsSPNs = DataAnalyticsparameter.Engine_Temperature + " " + DataAnalyticsparameter.Engine_Speed  + " " +DataAnalyticsparameter.Motor_Power_Limits  + " " +  DataAnalyticsparameter.Inverter_Temperature  ;
-    	
-    }
-     
     
     public void AV_Log()
     
@@ -127,10 +113,38 @@ public class DataAnalytics extends DataAnalyticsBase {
     
     
     
-    public void update_chart(int ost , int speed, XYChart chart, SwingWrapper<XYChart> sw, double[] xData, ArrayList<Integer> yData) throws Exception
+    public void update_chart(int ost , int speed, int speed1, XYChart chart, SwingWrapper<XYChart> sw, double[] xData, double[] xData1,  ArrayList<Integer> yData ,ArrayList<Integer> yData1) throws Exception
     
     {
     	  	 
+    	
+    	
+    	
+    	
+	      final ArrayList<Integer> data1 = fill_array(ost,speed1,xData, yData1);
+
+	      
+	      System.out.println("Step Number : "+ost);
+
+	      for(int i=0; i<data1.size(); i++)
+	      {
+	    	  System.out.println("Speed Array : "+i+" = " +data1.get(i));
+	      }
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
 	      final ArrayList<Integer> data = fill_array(ost,speed,xData, yData);
 
 	      System.out.println();
@@ -153,12 +167,16 @@ public class DataAnalytics extends DataAnalyticsBase {
       Thread.sleep(ost);
     	 
 	      chart.updateXYSeries("Vehicle_Response", null, data, null);
+	      chart.updateXYSeries("Speed_Control", null, data1, null);
 	      sw.repaintChart();
     	
     	
     }
      
     
+    
+    
+
     
 	  private static ArrayList<Integer> fill_array(int time, int speed, double[] xData, ArrayList<Integer> yData) throws Exception{
 		    		  xData[time] =  time;
@@ -167,8 +185,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 		  }
 	
 	
-    
-    
+
     
     
     private void execute() throws Exception {
@@ -177,9 +194,9 @@ public class DataAnalytics extends DataAnalyticsBase {
 	    ArrayList<Integer> initdata = new ArrayList<Integer>();
 	    initdata.add(0);
 
-	    final XYChart chart = QuickChart.getChart("IGNITE Vehicle Response", "Time", "Speed", "Vehicle_Response", null, initdata);
+	    XYChart chart = QuickChart.getChart("IGNITE Vehicle Response", "Time", "Speed", "Vehicle_Response", null, initdata);
 
-	    final SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
+	    SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
 	    sw.displayChart();
 	 
 	    
@@ -188,14 +205,13 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 
 
+	    ArrayList<Integer> initdata1 = new ArrayList<Integer>();
+	    initdata1.add(0);
+
+
     	
     	
-    	
-    	
-    	
-    	
-    	
-    	
+	    chart.addSeries("Speed_Control", initdata1);
     	
     	
     	
@@ -241,7 +257,8 @@ public class DataAnalytics extends DataAnalyticsBase {
 		   double[] xData = new double[120];
 		   ArrayList<Integer> yData = new ArrayList<Integer>();
         
-        
+		   double[] xData1 = new double[120];
+		   ArrayList<Integer> yData1 = new ArrayList<Integer>();
 
         while (!exitCondition) {
             atr.requestSyncStart();
@@ -268,7 +285,7 @@ public class DataAnalytics extends DataAnalyticsBase {
             //    vCAN.set_ReservedBit1( < YOUR VALUE HERE > );
             //    vCAN.set_ReservedBit2( < YOUR VALUE HERE > );
             //    vCAN.set_SRR( < YOUR VALUE HERE > );
-            //    vCAN.set_StartOfFrame( < YOUR VALUE HERE > );
+            //    vCAN.set_StartOfFrame( < YOUR VALUE HERE > );'
             //    vCAN.set_actualLogicalGenerationTime( < YOUR VALUE HERE > );
             //    vCAN.set_federateFilter( < YOUR VALUE HERE > );
             //    vCAN.set_originFed( < YOUR VALUE HERE > );
@@ -279,12 +296,13 @@ public class DataAnalytics extends DataAnalyticsBase {
 
             
         	final int  speed = (int)(Double.parseDouble(DataAnalyticsparameter.Motor_Power_Limits)); 
+        	final int  speed1 = (int)(Double.parseDouble(DataAnalyticsparameter.Engine_Speed)); 
             //     double something =  Double.parseDouble(MCUparameter.VCU_Torque_Commands);
              	
                  int osd = (int)(currentTime) % 20;
                  int time = (int)(currentTime/20);
 
-          		 log.info("time   "+ time + "   speed  " +speed + "  current_time "  + currentTime);
+          		 log.info("time   "+ time + "   speed  " +speed + " speed1 "  +  speed1 +  "  current_time "  + currentTime);
          		   
 
       
@@ -305,7 +323,8 @@ public class DataAnalytics extends DataAnalyticsBase {
             		        public void run() {
             		          try {
             		        	  
-            		        	update_chart(time , speed, chart, sw, xData, yData);
+            		        	update_chart(time , speed, speed1, chart, sw, xData, xData1, yData, yData1);
+//            		        	update_chart1(time , speed1, chart1, sw1, xData1, yData1);
          					} catch (Exception e) {
          						// TODO Auto-generated catch block
          						e.printStackTrace();
@@ -313,6 +332,20 @@ public class DataAnalytics extends DataAnalyticsBase {
             		        }
             		    });
                      
+           		    
+           		    
+//           		    myExecutor1.execute(new Runnable() {
+//        		        public void run() {
+//        		          try {
+//        		        	  
+////        		        	update_chart(time , speed, chart, sw, xData, yData);
+//        		        	update_chart1(time , speed1, chart1, sw1, xData1, yData1);
+//     					} catch (Exception e) {
+//     						// TODO Auto-generated catch block
+//     						e.printStackTrace();
+//     					}
+//        		        }
+//        		    });
            		   
            		   
            		
@@ -320,9 +353,9 @@ public class DataAnalytics extends DataAnalyticsBase {
            		   
            	   case 4:
            
-                   Sense_speed();
+//                   Sense_speed();
 //                   Calculate_power_limits();
-                   Build_and_Send_CAN_Frame( DataAnalyticsparameter.DataAnalyticsPGN, Build_SPN());
+//                   Build_and_Send_CAN_Frame( DataAnalyticsparameter.DataAnalyticsPGN, Build_SPN());
                    
                    break;
                    
@@ -379,7 +412,11 @@ public class DataAnalytics extends DataAnalyticsBase {
             	DataAnalyticsparameter.messageTime=interaction.getTime();
        
                 break;   
-    
+            case "VehicleControl":
+            	DataAnalyticsparameter.Engine_Speed      = CSPNs[0];
+            	DataAnalyticsparameter.messageTime=interaction.getTime();
+       
+                break; 
     	}
     	
     	

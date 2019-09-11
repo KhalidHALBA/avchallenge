@@ -145,7 +145,7 @@ typedef enum {
 } ValueStatus;
 
 // Public methods: Parsing and low-level AST access
-ModelDescription* parse(const char* xmlPath);
+odelDescription* parse(const char* xmlPath);
 const char* getString(void* element, Att a);
 double getDouble     (void* element, Att a, ValueStatus* vs);
 int getInt           (void* element, Att a, ValueStatus* vs);

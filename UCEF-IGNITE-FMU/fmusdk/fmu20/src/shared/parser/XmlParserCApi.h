@@ -78,7 +78,7 @@ typedef enum {
 // Otherwise, return the root node md of the AST. From the result of this
 // function user can access all other elements from ModelDescription.xml.
 // The receiver must call freeModelDescription(md) to release AST memory.
-ModelDescription* parse(char* xmlPath);
+odelDescription* parse(char* xmlPath);
 void freeModelDescription(ModelDescription *md);
 
 
@@ -110,7 +110,7 @@ int getScalarVariableSize(ModelDescription *md);
 // get scalar variable at index
 ScalarVariable *getScalarVariable(ModelDescription *md, int index);
 // Null or ModelStructure
-ModelStructure  *getModelStructure (ModelDescription *md);
+odelStructure  *getModelStructure (ModelDescription *md);
 
 // get the SimpleType definition by name, if any. NULL if not found.
 SimpleType *getSimpleType(ModelDescription *md, const char *name);

@@ -211,7 +211,7 @@ public class UCEFGateway extends UCEFGatewayBase {
  					try {
  						 DatagramSocket clientSocket = new DatagramSocket();
  					     
- 					      InetAddress IPAddress = InetAddress.getByName("192.168.56.1");
+ 					      InetAddress IPAddress = InetAddress.getByName("192.168.78.1");
  					      byte[] sendData = new byte[1024];		
  					      
 

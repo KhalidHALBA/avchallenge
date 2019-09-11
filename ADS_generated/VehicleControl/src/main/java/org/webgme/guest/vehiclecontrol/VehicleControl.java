@@ -20,7 +20,10 @@ public class VehicleControl extends VehicleControlBase {
 
     private double currentTime = 0;
     
-    
+    String speed1 = "0";
+	   
+		String speed = "0";
+
 
     public VehicleControlConfig VehicleControlparameter = new VehicleControlConfig();
     CAN VehicleControlCAN = create_CAN();
@@ -90,9 +93,7 @@ public class VehicleControl extends VehicleControlBase {
  	   
  	   
  	   
- 	   
- 		String speed = "0";
-
+ 
  	   
  	   
  		try {
@@ -100,14 +101,14 @@ public class VehicleControl extends VehicleControlBase {
  			
  			if(speedline-1>=0)
  			{
- 			 speed = Files.readAllLines(Paths.get("/home/vagrant/Desktop/ADS/ADS_generated/VehicleControl/src/main/java/org/webgme/guest/vehiclecontrol/FTP75.txt")).get(speedline);
+ 			 speed1 = Files.readAllLines(Paths.get("/home/vagrant/Desktop/ADS/ADS_generated/VehicleControl/src/main/java/org/webgme/guest/vehiclecontrol/FTP75.txt")).get(speedline);
  			}
 
  		     
- 			 log.info("Control Input :  Vehicle Response " + VehicleControlparameter.UCEFGateway_Motor_Torque_cmd+ " Obstacle Notification " +  VehicleControlparameter.EventInjection_Obstacle_Presence_distance  + " DriveCycle Data "+ speed );
+ 			 log.info("Control Input :  Vehicle Response " + VehicleControlparameter.UCEFGateway_Motor_Torque_cmd+ " Obstacle Notification " +  VehicleControlparameter.EventInjection_Obstacle_Presence_distance  + " DriveCycle Data "+ speed1 );
 // 			 double average = (Double.valueOf(VehicleControlparameter.EventInjection_Obstacle_Presence_distance))*0.1 +Double.valueOf(speed);
  			 
- 			log.info("average drivecycle and vehicle response" + speed);
+// 			log.info("average drivecycle and vehicle response" + speed1);
 // 		      
  		      if(VehicleControlparameter.EventInjection_Obstacle_Presence_distance.equals("true") )
  		      {
@@ -115,16 +116,17 @@ public class VehicleControl extends VehicleControlBase {
  		    	  
  		    	  speed = "0";
  		    	  VehicleControlparameter.Wheel_Speed = speed;
- 		    	  
- 		    	  System.out.println(" obstacle detected : speed " + speed + " time " + speedline);
+ 		    	 VehicleControlparameter.Wheel_Speed_Sensors = speed1;
+ 		    	  System.out.println(" obstacle detected : speed " + VehicleControlparameter.Wheel_Speed + " time " + speedline);
  		    	  // replace with transmit frame
 // 		      sendData = speed.getBytes();
  		      }
  		      else
  		      {
 
- 		       	  System.out.println("  obstacle NOT detected : speed " + speed + " time " + speedline + " currentTime" + currentTime);
- 		       	VehicleControlparameter.Wheel_Speed = speed;
+ 		    	 VehicleControlparameter.Wheel_Speed_Sensors = speed1;
+ 		       	VehicleControlparameter.Wheel_Speed = speed1;
+ 		       System.out.println("  obstacle NOT detected : speed " + 	VehicleControlparameter.Wheel_Speed + " time " + speedline + " currentTime" + currentTime);
  		       	  
 // 		       	VehicleControlparameter.Wheel_Speed = Double.toString(average);
  		    		  // replace with transmit frame
@@ -223,7 +225,7 @@ public class VehicleControl extends VehicleControlBase {
     public String Build_SPN()
     
     {
- 	   return VehicleControlparameter.VehicleControlSPNs= VehicleControlparameter.Wheel_Speed +" "+ VehicleControlparameter.Vehicle_Speed +" "+ VehicleControlparameter.VehicleControl_Event_Status+" " + VehicleControlparameter.Traction_Stability_Torque_Request;
+ 	   return VehicleControlparameter.VehicleControlSPNs= VehicleControlparameter.Wheel_Speed +" "+  VehicleControlparameter.Wheel_Speed_Sensors +" "+ VehicleControlparameter.VehicleControl_Event_Status+" " + VehicleControlparameter.Traction_Stability_Torque_Request;
     }
      
      

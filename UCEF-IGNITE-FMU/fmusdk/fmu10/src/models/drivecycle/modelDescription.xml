@@ -22,7 +22,10 @@
       <ScalarVariable name="vehicle_velocity" valueReference="4" description="vehicle speed in kmph" causality = "input">
      <Real start="0" fixed="false"/>
   </ScalarVariable>
-      <ScalarVariable name="counter" valueReference="5" description="counts the seconds" causality = "internal">
+  <ScalarVariable name="driver_brake_demand" valueReference="5" description="driver brake demand unit tbd" causality = "input">
+     <Real start="0" fixed="false"/>
+  </ScalarVariable>
+      <ScalarVariable name="counter" valueReference="6" description="counts the seconds" causality = "internal">
      <Integer start="1" fixed="true"/>
   </ScalarVariable>
 </ModelVariables>

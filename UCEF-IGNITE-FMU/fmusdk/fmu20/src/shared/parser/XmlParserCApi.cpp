@@ -19,7 +19,7 @@
 #include "logging.h"  // logThis
 #endif  // STANDALONE_XML_PARSER
 
-ModelDescription* parse(char* xmlPath) {
+odelDescription* parse(char* xmlPath) {
     XmlParser parser(xmlPath);
     return parser.parse();
 }
@@ -80,7 +80,7 @@ ScalarVariable *getScalarVariable(ModelDescription *md, int index) {
     return md->modelVariables.at(index);
 }
 
-ModelStructure  *getModelStructure (ModelDescription *md) {
+odelStructure  *getModelStructure (ModelDescription *md) {
     return md->modelStructure;
 }
 

@@ -82,7 +82,7 @@ XmlParser::~XmlParser() {
     //xmlCleanupParser();
 }
 
-ModelDescription *XmlParser::parse() {
+odelDescription *XmlParser::parse() {
     xmlReader = xmlReaderForFile(xmlPath, NULL, 0);
     ModelDescription *md = NULL;
     if (xmlReader != NULL) {
@@ -231,7 +231,7 @@ XmlParser::Enu XmlParser::checkEnumValue(const char *enu) {
     return (XmlParser::Enu)checkName(enu, "enum value", XmlParser::enuNames, XmlParser::SIZEOF_ENU);
 }
 
-ModelDescription *XmlParser::validate(ModelDescription *md) {
+odelDescription *XmlParser::validate(ModelDescription *md) {
     if (md == NULL) return NULL;
     int errors = 0;
     // check modelDescription required attributes

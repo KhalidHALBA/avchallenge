@@ -1,12 +1,13 @@
 #define MODEL_IDENTIFIER drivecycle
 #define MODEL_GUID "{8c4e810f-3df3-4a00-8276-176fa3c9f008}"
-#define NUMBER_OF_REALS 5
+#define NUMBER_OF_REALS 6
 #define NUMBER_OF_INTEGERS 1
 #define NUMBER_OF_BOOLEANS 0
 #define NUMBER_OF_STRINGS 0
 #define NUMBER_OF_STATES 0
 #define NUMBER_OF_EVENT_INDICATORS 0
-#define BUFLEN 512	//Max length of buffer
+#define BUFLEN 200	//Max length of buffer
+#define BUFLEN1 100
 #define PORT 8888
 #include "fmuTemplate.h"
 #include <winsock2.h>
@@ -24,7 +25,8 @@ int xx = 0;
 #define cycle_time_ 2
 #define cycle_speed_ahead_kmph_ 3
 #define vehicle_velocity_ 4
-#define counter_ 5
+#define driver_brake_demand_ 5
+#define counter_ 6
 
 void setStartValues(ModelInstance *comp) {
     r(cycle_speed_kmph_) = 0;
@@ -32,6 +34,7 @@ void setStartValues(ModelInstance *comp) {
     r(cycle_speed_ahead_kmph_) = 0;
     r(cycle_time_ahead_) = 0;
 	r(vehicle_velocity_) = 0;
+	r(driver_brake_demand_) = 0;
     i(counter_) = 0;
 }
 fmiReal getReal(ModelInstance* comp, fmiValueReference vr){
@@ -41,6 +44,7 @@ fmiReal getReal(ModelInstance* comp, fmiValueReference vr){
         case cycle_speed_ahead_kmph_ : return r(cycle_speed_ahead_kmph_);
         case cycle_time_ahead_ : return r(cycle_time_ahead_);
 		case vehicle_velocity_ : return r(vehicle_velocity_);
+		case driver_brake_demand_ : return r(driver_brake_demand_);
         default: return 0;
     }
 }
@@ -54,8 +58,10 @@ void eventUpdate(ModelInstance* comp, fmiEventInfo* eventInfo) {
 SOCKET s;
 	struct sockaddr_in server, si_other;
 	int slen , recv_len;
-	char buf[BUFLEN];
+	char buf[BUFLEN1];
 	char bufr[BUFLEN];
+	char bufra[BUFLEN1];
+	char bufrb[BUFLEN1];
 	WSADATA wsa;
 
 	slen = sizeof(si_other) ;
@@ -122,10 +128,12 @@ SOCKET s;
 		fflush(stdout);
 		
 
-		memset(buf,0, BUFLEN);
+		memset(buf,0, BUFLEN1);
 		
 		memset(bufr,0, BUFLEN);
 
+		memset(bufra,0, BUFLEN1);
+        memset(bufrb,0, BUFLEN1);
 		if ((recv_len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen)) == SOCKET_ERROR)
 		{
 			exit(EXIT_FAILURE);
@@ -134,44 +142,33 @@ SOCKET s;
         r(cycle_speed_kmph_)=(float)( atoi(buf));
 		// r(cycle_speed_ahead_kmph_)=(float)( atoi(buf) + (rand()%5) );
 
-		 printf("DriveCycle %f VehicleResponse %f CycleTime %f\n" ,  r(cycle_speed_kmph_), (((r(vehicle_velocity_))/1000)*(3600)), r(cycle_time_));
+		//  printf("DriveCycle %f VehicleResponse %f CycleTime %f\n" ,  r(cycle_speed_kmph_), (((r(vehicle_velocity_))/1000)*(3600)), r(cycle_time_));
 
-double a=(((r(vehicle_velocity_))/1000)*(3600));
+double a=((r(vehicle_velocity_))*3.6);
+  
+   // 4 digits after the decimal point 
+//    a = floor(10*a)/10; 
 
- double floating = a, fractional, integer;
-
-    fractional = modf(floating, &integer);
-
-int diff = 1000*(floating-integer);
-
+double b0=r(driver_brake_demand_);
 
 
-    printf ("Floating: %g\nInteger: %g\nFractional: %d", floating, integer, diff); // when using printf, there are no floats
+double b= 100+b0 ;
 
+//   b = floor(100*b)/100; 
 
-int numm = integer;
-
-  int y = integer;
-  char str1[10];
-
-  sprintf(str1, "%d", y);
-
-  int u = diff;
-  char str2[10];
-
-  sprintf(str2, "%d", u);
-
-strcat(str1, ".");
-strcat(str1, str2);
+// memcpy(bufr,&a,sizeof(a));
 
 
 
-    sprintf(bufr, "%s",  str1 );
 
+sprintf(bufra, "%f", a);
+sprintf(bufrb, "%f", b);
 
-      
+strcat(bufr, bufra);
+strcat(bufr, " ");
+strcat(bufr, bufrb);
 
-    printf("\n a %s", str1); 
+ printf("DriveCycle %f VehicleResponse %f  braking  %f CycleTime %f concatenated and absoluuted %s \n" ,  r(cycle_speed_kmph_), (((r(vehicle_velocity_))/1000)*(3600)), b,  r(cycle_time_), bufr);
 
 		if (sendto(s, bufr, recv_len, 0, (struct sockaddr*) &si_other, slen) == SOCKET_ERROR)
 		{
@@ -183,8 +180,6 @@ strcat(str1, str2);
 //try without break
 
     }
-
-
 }
 	closesocket(s);
 	WSACleanup();
