@@ -36,7 +36,7 @@ public class DataAnalyticsConfig extends FederateConfig {
 	public String UCEFGateway_Torque_Commands;
 	// Messages sent/received to/from actuators/sensors
 	@FederateParameter
-	public String Motor_Speed; // see graph in slide 3
+	public String Vehicle_Speed_Response; // see graph in slide 3
 	// PGN : multiple PGNs per Federate are possible. we use the Federate name
 	// as a placeholder for now.
 	@FederateParameter

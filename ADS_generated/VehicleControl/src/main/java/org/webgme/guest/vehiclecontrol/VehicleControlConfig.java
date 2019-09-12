@@ -22,7 +22,7 @@ public class VehicleControlConfig extends FederateConfig {
 	@FederateParameter
 	public double messageTime;
 	@FederateParameter
-	public String Wheel_Speed;
+	public String Vehicle_Control_Speed;
 	@FederateParameter
 	public String VehicleControl_Event_Status; // pgn ? SPN ?
 	// J1931-71 NON-compliant local Messages
@@ -35,7 +35,7 @@ public class VehicleControlConfig extends FederateConfig {
 	public String UCEFGateway_PGN;
 	// Messages sent/received to/from actuators/sensors
 	@FederateParameter
-	public String Wheel_Speed_Sensors; // see graph i`n slide 3
+	public String UCEF_Control_Speed; // see graph i`n slide 3
 	@FederateParameter
 	public String Hydraulic_Valve_Commands; // see graph in slide 3
 	// PGN : multiple PGNs per Federate are possible. we use the Federate name
@@ -52,7 +52,7 @@ public class VehicleControlConfig extends FederateConfig {
 	@FederateParameter
 	public String UCEFGateway_Motor_Torque_cmd;
 	@FederateParameter
-	public String UCEFGateway_Motor_Speed;
+	public String UCEFGateway_Vehicle_Speed_Response;
 	@FederateParameter
 	public String UCEFGateway_Volt_Cmd;
 	@FederateParameter
