@@ -50,10 +50,6 @@ public class EventInjection extends EventInjectionBase {
 
 	{
 
-		// EventInjectionparameter.Peak_Current_Limit
-		// =Integer.toString(ThreadLocalRandom.current().nextInt(1,3 + 1));
-
-		// if (((currentTime/20.2) > 99) && ((currentTime/20.2) < 120 ))
 		if (((currentTime / 20) > 249) && ((currentTime / 20) < 276)) {
 			d = true;
 
@@ -74,15 +70,6 @@ public class EventInjection extends EventInjectionBase {
 	}
 
 	public String Build_SPN() {
-		// return EventInjectionparameter.EventInjectionSPNs =
-		// EventInjectionparameter.Peak_Voltage + " " +
-		// EventInjectionparameter.Peak_Current + " "
-		// +EventInjectionparameter.State_Of_Charge + " "
-		// +EventInjectionparameter.State_Of_Health + " "
-		// +EventInjectionparameter.Remaining_Capacity + " " +
-		// EventInjectionparameter.Max_Temperature + " " +
-		// EventInjectionparameter.Min_Temperature + " "
-		// +EventInjectionparameter.Peak_Current_Limit;
 
 		return EventInjectionparameter.EventInjectionSPNs = EventInjectionparameter.Obstacle_Presence_distance;
 	}
@@ -164,9 +151,7 @@ public class EventInjection extends EventInjectionBase {
 
 			checkReceivedSubscriptions();
 			int osd = (int) (currentTime) % 20;
-			// int kk = (int)(currentTime/20);
-			// Send_Obstacle_Notification();
-			// System.out.println("outside");
+
 			switch (osd) {
 
 			case 0:

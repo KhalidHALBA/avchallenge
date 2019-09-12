@@ -123,82 +123,6 @@ public class VehicleControl extends VehicleControlBase {
 
 	}
 
-	// public void Control(int speedline)
-	//
-	// {
-	//
-	//
-	//
-	//
-	//
-	// String speed = "0";
-	//
-	////
-	////
-	//// try {
-	////
-	////
-	// if(speedline-1>=0)
-	// {
-	// try {
-	// speed =
-	// Files.readAllLines(Paths.get("/home/vagrant/Desktop/ADS/ADS_generated/VehicleControl/src/main/java/org/webgme/guest/vehiclecontrol/FTP75.txt")).get(speedline);
-	// } catch (IOException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
-	////
-	////
-	//// log.info("Control Input : Vehicle Response " +
-	// VehicleControlparameter.UCEFGateway_Motor_Torque_cmd+ " Obstacle
-	// Notification " +
-	// VehicleControlparameter.EventInjection_Obstacle_Presence_distance + "
-	// DriveCycle Data "+ speed );
-	////// double average =
-	// (Double.valueOf(VehicleControlparameter.EventInjection_Obstacle_Presence_distance))*0.1
-	// +Double.valueOf(speed);
-	////
-	//// log.info("average drivecycle and vehicle response" + speed);
-	//////
-	//// if(VehicleControlparameter.EventInjection_Obstacle_Presence_distance.equals("true")
-	// )
-	//// {
-	////
-	////
-	//// speed = "0";
-	//// VehicleControlparameter.Wheel_Speed = speed;
-	////
-	//// System.out.println(" obstacle detected stopping car" + speed + " time "
-	// + speedline);
-	//// // replace with transmit frame
-	////// sendData = speed.getBytes();
-	//// }
-	//// else
-	//// {
-	//
-	// System.out.println(" speed " + speed + " time " + speedline + "
-	// currentTime" + currentTime);
-	// VehicleControlparameter.Wheel_Speed = speed;
-	//
-	//// VehicleControlparameter.Wheel_Speed = Double.toString(average);
-	// // replace with transmit frame
-	//// sendData = speed.getBytes();
-	//// }
-	//
-	//
-	//
-	////
-	//// } catch (Exception e) {
-	//// System.out.println(e);
-	//// }
-	////
-	//
-	//
-	//
-	// }
-	//
-
 	public String Build_SPN()
 
 	{
@@ -296,15 +220,11 @@ public class VehicleControl extends VehicleControlBase {
 				Control((int) (currentTime / 20));
 
 				Build_and_Send_CAN_Frame(VehicleControlparameter.VehicleControlPGN, Build_SPN());
-				// log.info(" speed " +
-				// VehicleControlparameter.UCEFGateway_Motor_Speed+ " response "
-				// + VehicleControlparameter.UCEFGateway_Motor_Torque_cmd );
+
 				break;
 
 			case 6:
-				// VehicleControl_Event_Status ();
-				// Build_and_Send_CAN_Frame(
-				// VehicleControlparameter.VehicleControlPGN, Build_SPN());
+
 
 				break;
 			}

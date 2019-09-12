@@ -155,15 +155,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 	}
 
 	public String Build_SPN() {
-		// return UCEFGatewayparameter.UCEFGatewaySPNs=
-		// UCEFGatewayparameter.Motor_Operating_Mode + " " +
-		// UCEFGatewayparameter.Motor_Torque_cmd + " "
-		// +UCEFGatewayparameter.Motor_Speed + " " +
-		// UCEFGatewayparameter.Volt_Cmd+ " " +
-		// UCEFGatewayparameter.Contactor_Override_Commands+ " " +
-		// UCEFGatewayparameter.Battery_Commands+ " " +
-		// UCEFGatewayparameter.Torque_Commands +"
-		// "+UCEFGatewayparameter.InverterCoolingAndHeatingCommands ;
+
 		return UCEFGatewayparameter.UCEFGatewaySPNs = UCEFGatewayparameter.Motor_Speed + " "
 				+ UCEFGatewayparameter.Motor_Torque_cmd;
 	}

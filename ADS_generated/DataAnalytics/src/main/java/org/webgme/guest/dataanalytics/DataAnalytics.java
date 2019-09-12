@@ -18,7 +18,6 @@ import org.knowm.xchart.XYChart;
 public class DataAnalytics extends DataAnalyticsBase {
 
 	ExecutorService myExecutor = Executors.newCachedThreadPool();
-	ExecutorService myExecutor1 = Executors.newCachedThreadPool();
 
 	private final static Logger log = LogManager.getLogger();
 
@@ -206,8 +205,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 			final int speed = (int) (Double.parseDouble(DataAnalyticsparameter.Motor_Power_Limits));
 			final int speed1 = (int) (Double.parseDouble(DataAnalyticsparameter.Engine_Speed));
-			// double something =
-			// Double.parseDouble(MCUparameter.VCU_Torque_Commands);
+
 
 			int osd = (int) (currentTime) % 20;
 			int time = (int) (currentTime / 20);
@@ -231,35 +229,6 @@ public class DataAnalytics extends DataAnalyticsBase {
 						}
 					}
 				});
-
-				// myExecutor1.execute(new Runnable() {
-				// public void run() {
-				// try {
-				//
-				//// update_chart(time , speed, chart, sw, xData, yData);
-				// update_chart1(time , speed1, chart1, sw1, xData1, yData1);
-				// } catch (Exception e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
-				// }
-				// });
-
-				break;
-
-			case 4:
-
-				// Sense_speed();
-				// Calculate_power_limits();
-				// Build_and_Send_CAN_Frame(
-				// DataAnalyticsparameter.DataAnalyticsPGN, Build_SPN());
-
-				break;
-
-			case 9:
-
-				checkReceivedSubscriptions();
-				AV_Log();
 
 				break;
 
