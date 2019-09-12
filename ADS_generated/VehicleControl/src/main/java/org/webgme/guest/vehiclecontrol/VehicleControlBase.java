@@ -1,20 +1,14 @@
 package org.webgme.guest.vehiclecontrol;
 
 import org.webgme.guest.vehiclecontrol.rti.*;
-
 import hla.rti.EventRetractionHandle;
 import hla.rti.LogicalTime;
 import hla.rti.ReceivedInteraction;
-
 import org.cpswt.hla.C2WInteractionRoot;
 import org.cpswt.hla.InteractionRoot;
 import org.cpswt.hla.SubscribedInteractionFilter;
 import org.cpswt.hla.SynchronizedFederate;
-
 import org.cpswt.config.FederateConfig;
-import org.cpswt.utils.CpswtDefaults;
-
-import org.cpswt.*;
 
 
 public class VehicleControlBase extends SynchronizedFederate {

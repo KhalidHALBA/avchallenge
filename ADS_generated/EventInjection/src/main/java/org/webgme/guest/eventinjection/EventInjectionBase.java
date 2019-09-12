@@ -1,20 +1,15 @@
 package org.webgme.guest.eventinjection;
 
 import org.webgme.guest.eventinjection.rti.*;
-
 import hla.rti.EventRetractionHandle;
 import hla.rti.LogicalTime;
 import hla.rti.ReceivedInteraction;
-
 import org.cpswt.hla.C2WInteractionRoot;
 import org.cpswt.hla.InteractionRoot;
 import org.cpswt.hla.SubscribedInteractionFilter;
 import org.cpswt.hla.SynchronizedFederate;
-
 import org.cpswt.config.FederateConfig;
-import org.cpswt.utils.CpswtDefaults;
 
-import org.cpswt.*;
 
 
 public class EventInjectionBase extends SynchronizedFederate {

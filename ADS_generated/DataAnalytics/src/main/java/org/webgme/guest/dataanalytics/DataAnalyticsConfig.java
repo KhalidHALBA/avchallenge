@@ -6,42 +6,47 @@ import org.cpswt.config.FederateParameter;
 /**
  * An example of how to implement custom configuration options for a federate.
  * 
- * A custom configuration file requires the definition of a class that extends from FederateConfig. Each configuration
- * option must be declared as a public member variable annotated with the FederateParameter annotation.
+ * A custom configuration file requires the definition of a class that extends
+ * from FederateConfig. Each configuration option must be declared as a public
+ * member variable annotated with the FederateParameter annotation.
  * 
- * See {@link InputSource#main(String[])} and {@link InputSource#InputSource(InputSourceConfig)} for how to use the
+ * See {@link InputSource#main(String[])} and
+ * {@link InputSource#InputSource(InputSourceConfig)} for how to use the
  * configuration class to initialize a federate.
  */
 public class DataAnalyticsConfig extends FederateConfig {
-    /**
-     * ABS Measured Wheel Speed.
-     */
+	/**
+	 * ABS Measured Wheel Speed.
+	 */
 
-    @FederateParameter
-    public double messageTime ;
+	@FederateParameter
+	public double messageTime;
 
-    // J1931-71 compliant local Messages
+	// J1931-71 compliant local Messages
 	@FederateParameter
-    public String Engine_Speed;         // pgn61444 SPN190
+	public String Engine_Speed; // pgn61444 SPN190
 	@FederateParameter
-	public String Engine_Temperature;   // pgn65262 SPN110
+	public String Engine_Temperature; // pgn65262 SPN110
 	@FederateParameter
-	public String Motor_Power_Limits;   // pgn ?    SPN ?
+	public String Motor_Power_Limits; // pgn ? SPN ?
 	@FederateParameter
-	public String Inverter_Temperature; // pgn ?    SPN ? 
-    // J1931-71 compliant external Messages
+	public String Inverter_Temperature; // pgn ? SPN ?
+	// J1931-71 compliant external Messages
 	@FederateParameter
-	public String  UCEFGateway_Torque_Commands ;
-
-   // Messages sent/received to/from actuators/sensors
+	public String UCEFGateway_Torque_Commands;
+	// Messages sent/received to/from actuators/sensors
 	@FederateParameter
 	public String Motor_Speed; // see graph in slide 3
-   // PGN : multiple PGNs per Federate are possible. we use the Federate name as a placeholder for now.
+	// PGN : multiple PGNs per Federate are possible. we use the Federate name
+	// as a placeholder for now.
 	@FederateParameter
-	public String DataAnalyticsPGN ;
-    // SPNs aggregation : We suppose all SPNs have the same PGN so far, to be modified when the right PGNs are described.
+	public String DataAnalyticsPGN;
+	// SPNs aggregation : We suppose all SPNs have the same PGN so far, to be
+	// modified when the right PGNs are described.
 	@FederateParameter
-	public String DataAnalyticsSPNs ; 
+	public String DataAnalyticsSPNs;
 
-   // String BMSSPNs = Peak_Voltage + Peak_Current + State_Of_Charge + State_Of_Health +  Remaining_Capacity + Max_Temperature +Min_Temperature + Peak_Current_Limit  ; 
+	// String BMSSPNs = Peak_Voltage + Peak_Current + State_Of_Charge +
+	// State_Of_Health + Remaining_Capacity + Max_Temperature +Min_Temperature +
+	// Peak_Current_Limit ;
 }
