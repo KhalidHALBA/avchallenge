@@ -113,7 +113,8 @@ public class UCEFGateway extends UCEFGatewayBase {
 		}
 	}
 
-	public void Send_Receive() {
+	public void Send_Receive(byte[] receiveData ) {
+
 
 		try {
 			DatagramSocket clientSocket = new DatagramSocket();
@@ -121,7 +122,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			InetAddress IPAddress = InetAddress.getByName("192.168.78.1");
 			byte[] sendData = new byte[1024];
 
-			byte[] receiveData = new byte[1024];
+//			byte[] receiveData = new byte[1024];
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
 			sendData = (UCEFGatewayparameter.VehicleControl_Vehicle_Control_Speed).getBytes();
@@ -232,7 +233,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			// vCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 
 			checkReceivedSubscriptions();
-
+			
 			////////////////////////////////////////////////////////////////////
 			// TODO break here if ready to resign and break out of while loop //
 			////////////////////////////////////////////////////////////////////
@@ -241,19 +242,13 @@ public class UCEFGateway extends UCEFGatewayBase {
 			switch (osd) {
 
 			case 2:
-				log.info(" notif as received " + UCEFGatewayparameter.EventInjection_Obstacle_Presence_distance);
-				Send_Receive();
+				byte[] receiveData = new byte[1024];
+				Send_Receive(receiveData);
 				break;
 			case 3:
 				Build_and_Send_CAN_Frame(UCEFGatewayparameter.UCEFGatewayPGN, Build_SPN());
 				break;
-			case 7:
-				// AV_Log();
-				break;
-			case 8:
-				// Build_and_Send_CAN_Frame(
-				// UCEFGatewayparameter.UCEFGatewayPGN, Build_SPN());
-				break;
+
 			}
 
 			if (!exitCondition) {

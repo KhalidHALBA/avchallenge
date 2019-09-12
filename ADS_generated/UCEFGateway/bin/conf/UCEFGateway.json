@@ -9,7 +9,11 @@
   "UCEFGatewaySPNs" : "0",
   "Motor_Operating_Mode":"0",
   "Motor_Torque_cmd":"0",
+<<<<<<< HEAD
   "Vehicle_Speed_Response":"0",
+=======
+  "Motor_Speed":"0",
+>>>>>>> 6e1362504b16dd5b436837cbe7d96230d61b1801
   "Volt_Cmd":"0",
   "Contactor_Override_Commands":"0", 
   "Battery_Cooling_Heating_Commands":"0", 
@@ -19,7 +23,11 @@
 
   "DataAnalytics_Motor_Temperature" : "0",
   "DataAnalytics_Inverter_Temperature" : "0",
+<<<<<<< HEAD
   "DataAnalytics_Vehicle_Speed_Response" : "0",
+=======
+  "DataAnalytics_Motor_Speed" : "0",
+>>>>>>> 6e1362504b16dd5b436837cbe7d96230d61b1801
   "DataAnalytics_Motor_Power_Limits" : "0",
   
   
@@ -31,7 +39,11 @@
   "EventInjection_Battery_Pack_Power_limit" : "0",
   "EventInjection_Obstacle_Presence_distance" : "0",      
   
+<<<<<<< HEAD
   "VehicleControl_Vehicle_Control_Speed" : "0",
+=======
+  "VehicleControl_Wheel_Speed" : "0",
+>>>>>>> 6e1362504b16dd5b436837cbe7d96230d61b1801
   "VehicleControl_Vehicle_Speed" : "0",
   "VehicleControl_Event_Status" : "0",
 

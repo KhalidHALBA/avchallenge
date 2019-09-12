@@ -50,7 +50,7 @@ public class EventInjection extends EventInjectionBase {
 
 	{
 
-		if (((currentTime / 20) > 249) && ((currentTime / 20) < 276)) {
+		if ((((currentTime / 20) > 249) && ((currentTime / 20) < 276)) || (((currentTime / 20) > 40) && ((currentTime / 20) < 50))   ) {
 			d = true;
 
 			EventInjectionparameter.Obstacle_Presence_distance = Boolean.toString(d);
