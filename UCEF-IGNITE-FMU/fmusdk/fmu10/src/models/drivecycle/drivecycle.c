@@ -144,28 +144,24 @@ SOCKET s;
 
 		//  printf("DriveCycle %f VehicleResponse %f CycleTime %f\n" ,  r(cycle_speed_kmph_), (((r(vehicle_velocity_))/1000)*(3600)), r(cycle_time_));
 
-double a=((r(vehicle_velocity_))*3.6);
+int a=((r(vehicle_velocity_))*3.6);
   
    // 4 digits after the decimal point 
 //    a = floor(10*a)/10; 
 
-double b0=r(driver_brake_demand_);
+int b0=r(driver_brake_demand_);
 
 
-double b= 100+b0 ;
-
-//   b = floor(100*b)/100; 
-
-// memcpy(bufr,&a,sizeof(a));
+int b= 100*b0 ;
 
 
 
 
-sprintf(bufra, "%f", a);
-sprintf(bufrb, "%f", b);
+sprintf(bufra, "%d", a);
+sprintf(bufrb, "%d", b);
 
 strcat(bufr, bufra);
-strcat(bufr, " ");
+strcat(bufr, ".");
 strcat(bufr, bufrb);
 
  printf("DriveCycle %f VehicleResponse %f  braking  %f CycleTime %f concatenated and absoluuted %s \n" ,  r(cycle_speed_kmph_), (((r(vehicle_velocity_))/1000)*(3600)), b,  r(cycle_time_), bufr);
