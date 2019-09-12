@@ -101,7 +101,7 @@ public class VehicleControl extends VehicleControlBase {
  			
  			if(speedline-1>=0)
  			{
- 			 speed1 = Files.readAllLines(Paths.get("/home/vagrant/Desktop/ADS/ADS_generated/VehicleControl/src/main/java/org/webgme/guest/vehiclecontrol/FTP75.txt")).get(speedline);
+ 			 speed1 = Files.readAllLines(Paths.get("/home/vagrant/avchallenge/ADS_generated/VehicleControl/src/main/java/org/webgme/guest/vehiclecontrol/FTP75.txt")).get(speedline);
  			}
 
  		     

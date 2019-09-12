@@ -149,11 +149,11 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 	      System.out.println();
 	 
-	      chart.getStyler().setYAxisMax((double) 60);
+	      chart.getStyler().setYAxisMax((double) 100);
 	      chart.getStyler().setYAxisMin(null, (double)0);
 	      
 	      
-	      chart.getStyler().setXAxisMax((double) 120);
+	      chart.getStyler().setXAxisMax((double) 350);
 	      chart.getStyler().setXAxisMin((double)0);
 	      
 	      
@@ -194,7 +194,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 	    ArrayList<Integer> initdata = new ArrayList<Integer>();
 	    initdata.add(0);
 
-	    XYChart chart = QuickChart.getChart("IGNITE Vehicle Response", "Time", "Speed", "Vehicle_Response", null, initdata);
+	    XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time", "Speed", "Vehicle_Response", null, initdata);
 
 	    SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
 	    sw.displayChart();
@@ -254,10 +254,10 @@ public class DataAnalytics extends DataAnalyticsBase {
         
         
         
-		   double[] xData = new double[120];
+		   double[] xData = new double[350];
 		   ArrayList<Integer> yData = new ArrayList<Integer>();
         
-		   double[] xData1 = new double[120];
+		   double[] xData1 = new double[350];
 		   ArrayList<Integer> yData1 = new ArrayList<Integer>();
 
         while (!exitCondition) {

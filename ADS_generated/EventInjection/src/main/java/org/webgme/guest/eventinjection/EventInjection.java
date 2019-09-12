@@ -61,7 +61,7 @@ public void Send_Obstacle_Notification()
 //    	EventInjectionparameter.Peak_Current_Limit =Integer.toString(ThreadLocalRandom.current().nextInt(1,3 + 1));
 
 //	if (((currentTime/20.2) > 99) &&  ((currentTime/20.2) < 120 ))
-		if (((currentTime/20) > 250) &&  ((currentTime/20) < 270 ))
+		if (((currentTime/20) > 249) &&  ((currentTime/20) < 276 ))
 	{
 	d=true;
 
