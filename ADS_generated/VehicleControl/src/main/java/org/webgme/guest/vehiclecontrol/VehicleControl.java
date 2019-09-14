@@ -16,7 +16,7 @@ public class VehicleControl extends VehicleControlBase {
 
 	private double currentTime = 0;
 
-	String speed1 = "0";
+	String Drive_Cycle_Speed = "0";
 
 	String speed = "0";
 
@@ -30,18 +30,18 @@ public class VehicleControl extends VehicleControlBase {
 
 		VehicleControlparameter.UCEFGateway_Motor_Torque_cmd = params.UCEFGateway_Motor_Torque_cmd;
 
-		VehicleControlparameter.UCEFGateway_Motor_Speed = params.UCEFGateway_Motor_Speed;
+		VehicleControlparameter.UCEFGateway_Vehicle_Speed_Response = params.UCEFGateway_Vehicle_Speed_Response;
 
 		VehicleControlparameter.UCEFGateway_Volt_Cmd = params.UCEFGateway_Volt_Cmd;
 
 		VehicleControlparameter.messageTime = params.messageTime;
-		VehicleControlparameter.Wheel_Speed = params.Wheel_Speed;
+		VehicleControlparameter.Vehicle_Control_Speed = params.Vehicle_Control_Speed;
 		VehicleControlparameter.VehicleControl_Event_Status = params.VehicleControl_Event_Status;
 		VehicleControlparameter.Traction_Stability_Torque_Request = params.Traction_Stability_Torque_Request;
 		// VehicleControlparameter.UCEFGateway_Motor_Torque=
 		// params.UCEFGateway_Motor_Torque;
 		VehicleControlparameter.UCEFGateway_PGN = params.UCEFGateway_PGN;
-		VehicleControlparameter.Wheel_Speed_Sensors = params.Wheel_Speed_Sensors;
+		VehicleControlparameter.UCEF_Control_Speed = params.UCEF_Control_Speed;
 		VehicleControlparameter.Hydraulic_Valve_Commands = params.Hydraulic_Valve_Commands;
 		VehicleControlparameter.VehicleControlPGN = params.VehicleControlPGN;
 		VehicleControlparameter.VehicleControlSPNs = params.VehicleControlSPNs;
@@ -80,7 +80,7 @@ public class VehicleControl extends VehicleControlBase {
 		try {
 
 			if (speedline - 1 >= 0) {
-				speed1 = Files
+				Drive_Cycle_Speed = Files
 						.readAllLines(Paths
 								.get("/home/vagrant/avchallenge/ADS_generated/VehicleControl/src/main/java/org/webgme/guest/vehiclecontrol/FTP75.txt"))
 						.get(speedline);
@@ -88,30 +88,24 @@ public class VehicleControl extends VehicleControlBase {
 
 			log.info("Control Input :  Vehicle Response " + VehicleControlparameter.UCEFGateway_Motor_Torque_cmd
 					+ " Obstacle Notification " + VehicleControlparameter.EventInjection_Obstacle_Presence_distance
-					+ " DriveCycle Data " + speed1);
-			// double average =
-			// (Double.valueOf(VehicleControlparameter.EventInjection_Obstacle_Presence_distance))*0.1
-			// +Double.valueOf(speed);
+					+ " DriveCycle Data " + Drive_Cycle_Speed);
 
-			// log.info("average drivecycle and vehicle response" + speed1);
-			//
 			if (VehicleControlparameter.EventInjection_Obstacle_Presence_distance.equals("true")) {
 
-				speed = "0";
-				VehicleControlparameter.Wheel_Speed = speed;
-				VehicleControlparameter.Wheel_Speed_Sensors = speed1;
+			
+				VehicleControlparameter.Vehicle_Control_Speed = "0";
+				VehicleControlparameter.UCEF_Control_Speed = Drive_Cycle_Speed;
 				System.out.println(
-						" obstacle detected : speed " + VehicleControlparameter.Wheel_Speed + " time " + speedline);
-				// replace with transmit frame
-				// sendData = speed.getBytes();
+						" obstacle detected : speed " + VehicleControlparameter.Vehicle_Control_Speed + " time " + speedline);
+
 			} else {
 
-				VehicleControlparameter.Wheel_Speed_Sensors = speed1;
-				VehicleControlparameter.Wheel_Speed = speed1;
-				System.out.println("  obstacle NOT detected : speed " + VehicleControlparameter.Wheel_Speed + " time "
+				VehicleControlparameter.UCEF_Control_Speed = Drive_Cycle_Speed;
+				VehicleControlparameter.Vehicle_Control_Speed = Drive_Cycle_Speed;
+				System.out.println("  obstacle NOT detected : speed " + VehicleControlparameter.Vehicle_Control_Speed + " time "
 						+ speedline + " currentTime" + currentTime);
 
-				// VehicleControlparameter.Wheel_Speed =
+				// VehicleControlparameter.Vehicle_Control_Speed =
 				// Double.toString(average);
 				// replace with transmit frame
 				// sendData = speed.getBytes();
@@ -126,8 +120,8 @@ public class VehicleControl extends VehicleControlBase {
 	public String Build_SPN()
 
 	{
-		return VehicleControlparameter.VehicleControlSPNs = VehicleControlparameter.Wheel_Speed + " "
-				+ VehicleControlparameter.Wheel_Speed_Sensors + " "
+		return VehicleControlparameter.VehicleControlSPNs = VehicleControlparameter.Vehicle_Control_Speed + " "
+				+ VehicleControlparameter.UCEF_Control_Speed + " "
 				+ VehicleControlparameter.VehicleControl_Event_Status + " "
 				+ VehicleControlparameter.Traction_Stability_Torque_Request;
 	}
@@ -265,7 +259,7 @@ public class VehicleControl extends VehicleControlBase {
 
 		case "UCEFGateway":
 			VehicleControlparameter.UCEFGateway_Motor_Torque_cmd = CSPNs[0];
-			VehicleControlparameter.UCEFGateway_Motor_Speed = CSPNs[1];
+			VehicleControlparameter.UCEFGateway_Vehicle_Speed_Response = CSPNs[1];
 			VehicleControlparameter.messageTime = interaction.getTime();
 
 			break;

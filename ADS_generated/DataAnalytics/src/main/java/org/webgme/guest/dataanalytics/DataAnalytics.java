@@ -34,7 +34,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 		DataAnalyticsparameter.Motor_Power_Limits = params.Motor_Power_Limits;
 		DataAnalyticsparameter.Inverter_Temperature = params.Inverter_Temperature;
 		DataAnalyticsparameter.UCEFGateway_Torque_Commands = params.UCEFGateway_Torque_Commands;
-		DataAnalyticsparameter.Motor_Speed = params.Motor_Speed;
+		DataAnalyticsparameter.Vehicle_Speed_Response = params.Vehicle_Speed_Response;
 		DataAnalyticsparameter.DataAnalyticsPGN = params.DataAnalyticsPGN;
 		DataAnalyticsparameter.DataAnalyticsSPNs = params.DataAnalyticsSPNs;
 		DataAnalyticsparameter.messageTime = params.messageTime;

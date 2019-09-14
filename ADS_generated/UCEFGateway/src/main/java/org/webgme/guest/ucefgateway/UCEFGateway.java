@@ -41,7 +41,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 		UCEFGatewayparameter.Motor_Torque_cmd = params.Motor_Torque_cmd;
 
-		UCEFGatewayparameter.Motor_Speed = params.Motor_Speed;
+		UCEFGatewayparameter.Vehicle_Speed_Response = params.Vehicle_Speed_Response;
 
 		UCEFGatewayparameter.Volt_Cmd = params.Volt_Cmd;
 
@@ -57,7 +57,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 		UCEFGatewayparameter.DataAnalytics_Inverter_Temperature = params.DataAnalytics_Inverter_Temperature;
 
-		UCEFGatewayparameter.DataAnalytics_Motor_Speed = params.DataAnalytics_Motor_Speed;
+		UCEFGatewayparameter.DataAnalytics_Vehicle_Speed_Response = params.DataAnalytics_Vehicle_Speed_Response;
 
 		UCEFGatewayparameter.DataAnalytics_Motor_Power_Limits = params.DataAnalytics_Motor_Power_Limits;
 
@@ -75,7 +75,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 		UCEFGatewayparameter.EventInjection_Battery_Pack_Power_limit = params.EventInjection_Battery_Pack_Power_limit;
 
-		UCEFGatewayparameter.VehicleControl_Wheel_Speed = params.VehicleControl_Wheel_Speed;
+		UCEFGatewayparameter.VehicleControl_Vehicle_Control_Speed = params.VehicleControl_Vehicle_Control_Speed;
 
 		UCEFGatewayparameter.VehicleControl_Vehicle_Speed = params.VehicleControl_Vehicle_Speed;
 
@@ -113,7 +113,8 @@ public class UCEFGateway extends UCEFGatewayBase {
 		}
 	}
 
-	public void Send_Receive() {
+	public void Send_Receive(byte[] receiveData ) {
+
 
 		try {
 			DatagramSocket clientSocket = new DatagramSocket();
@@ -121,10 +122,10 @@ public class UCEFGateway extends UCEFGatewayBase {
 			InetAddress IPAddress = InetAddress.getByName("192.168.78.1");
 			byte[] sendData = new byte[1024];
 
-			byte[] receiveData = new byte[1024];
+//			byte[] receiveData = new byte[1024];
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
-			sendData = (UCEFGatewayparameter.VehicleControl_Wheel_Speed).getBytes();
+			sendData = (UCEFGatewayparameter.VehicleControl_Vehicle_Control_Speed).getBytes();
 
 			DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 8888);
 			clientSocket.send(sendPacket);
@@ -137,10 +138,10 @@ public class UCEFGateway extends UCEFGatewayBase {
 				float f = Float.valueOf(vehicleResponse.trim()).floatValue();
 				System.out.println("IGNITE response float = " + f);
 
-				UCEFGatewayparameter.Motor_Speed = Double.toString(f);
+				UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f);
 			} catch (NumberFormatException nfe) {
 
-				UCEFGatewayparameter.Motor_Speed = "0";
+				UCEFGatewayparameter.Vehicle_Speed_Response = "0";
 				// System.out.println("IGNITE response floated = " + 100*f);
 			}
 			//
@@ -156,7 +157,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 	public String Build_SPN() {
 
-		return UCEFGatewayparameter.UCEFGatewaySPNs = UCEFGatewayparameter.Motor_Speed + " "
+		return UCEFGatewayparameter.UCEFGatewaySPNs = UCEFGatewayparameter.Vehicle_Speed_Response + " "
 				+ UCEFGatewayparameter.Motor_Torque_cmd;
 	}
 
@@ -232,7 +233,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			// vCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 
 			checkReceivedSubscriptions();
-
+			
 			////////////////////////////////////////////////////////////////////
 			// TODO break here if ready to resign and break out of while loop //
 			////////////////////////////////////////////////////////////////////
@@ -241,19 +242,13 @@ public class UCEFGateway extends UCEFGatewayBase {
 			switch (osd) {
 
 			case 2:
-				log.info(" notif as received " + UCEFGatewayparameter.EventInjection_Obstacle_Presence_distance);
-				Send_Receive();
+				byte[] receiveData = new byte[1024];
+				Send_Receive(receiveData);
 				break;
 			case 3:
 				Build_and_Send_CAN_Frame(UCEFGatewayparameter.UCEFGatewayPGN, Build_SPN());
 				break;
-			case 7:
-				// AV_Log();
-				break;
-			case 8:
-				// Build_and_Send_CAN_Frame(
-				// UCEFGatewayparameter.UCEFGatewayPGN, Build_SPN());
-				break;
+
 			}
 
 			if (!exitCondition) {
@@ -288,7 +283,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			break;
 
 		case "VehicleControl":
-			UCEFGatewayparameter.VehicleControl_Wheel_Speed = CSPNs[0];
+			UCEFGatewayparameter.VehicleControl_Vehicle_Control_Speed = CSPNs[0];
 			UCEFGatewayparameter.VehicleControl_Event_Status = CSPNs[2];
 			UCEFGatewayparameter.messageTime = interaction.getTime();
 

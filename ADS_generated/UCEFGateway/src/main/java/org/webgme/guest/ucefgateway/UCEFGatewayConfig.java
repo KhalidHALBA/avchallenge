@@ -28,7 +28,7 @@ public class UCEFGatewayConfig extends FederateConfig {
 	@FederateParameter
 	public String Motor_Torque_cmd;
 	@FederateParameter
-	public String Motor_Speed;
+	public String Vehicle_Speed_Response;
 	@FederateParameter
 	public String Volt_Cmd;
 	@FederateParameter
@@ -44,7 +44,7 @@ public class UCEFGatewayConfig extends FederateConfig {
 	@FederateParameter
 	public String DataAnalytics_Inverter_Temperature;
 	@FederateParameter
-	public String DataAnalytics_Motor_Speed;
+	public String DataAnalytics_Vehicle_Speed_Response;
 	@FederateParameter
 	public String DataAnalytics_Motor_Power_Limits;
 	@FederateParameter
@@ -62,7 +62,7 @@ public class UCEFGatewayConfig extends FederateConfig {
 	@FederateParameter
 	public String EventInjection_Obstacle_Presence_distance;
 	@FederateParameter
-	public String VehicleControl_Wheel_Speed;
+	public String VehicleControl_Vehicle_Control_Speed;
 	@FederateParameter
 	public String VehicleControl_Vehicle_Speed;
 	@FederateParameter

@@ -11,7 +11,7 @@
   "Motor_Power_Limits":"0",  
   "Inverter_Temperature":"0", 
   "UCEFGateway_Torque_Commands" : "0",
-  "Motor_Speed":"0",
+  "Vehicle_Speed_Response":"0",
   "DataAnalyticsPGN" : "DataAnalytics",
   "DataAnalyticsSPNs" : "0"
 }
