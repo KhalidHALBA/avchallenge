@@ -128,22 +128,39 @@ public class UCEFGateway extends UCEFGatewayBase {
 			sendData = (UCEFGatewayparameter.VehicleControl_Vehicle_Control_Speed).getBytes();
 
 			DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 8888);
+			
+			
+//			sendPacket.setLength(1024);
+			
 			clientSocket.send(sendPacket);
 
+//			sendPacket.setLength(1024);
+			receivePacket.setLength(receiveData.length);
+			
 			clientSocket.receive(receivePacket);
+//			receivePacket.setLength(1024);
 			String vehicleResponse = new String(receivePacket.getData());
-			// String[] speeds = vehicleResponse.split(" ");
-
-			try {
-				float f = Float.valueOf(vehicleResponse.trim()).floatValue();
-				System.out.println("IGNITE response float = " + f);
-
-				UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f);
-			} catch (NumberFormatException nfe) {
-
-				UCEFGatewayparameter.Vehicle_Speed_Response = "0";
-				// System.out.println("IGNITE response floated = " + 100*f);
-			}
+			
+			
+			System.out.println(" hadik " + vehicleResponse);
+			
+//			
+//			
+//			String[] speeds = vehicleResponse.split(" ");
+//
+//			
+//			float[] values = vehicleResponse;
+			
+//			try {
+//				float f = Float.valueOf(vehicleResponse.trim()).floatValue();
+//				System.out.println("IGNITE response float = " + f);
+//
+//				UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f);
+//			} catch (NumberFormatException nfe) {
+//
+//				UCEFGatewayparameter.Vehicle_Speed_Response = "0";
+//				// System.out.println("IGNITE response floated = " + 100*f);
+//			}
 			//
 			//
 
