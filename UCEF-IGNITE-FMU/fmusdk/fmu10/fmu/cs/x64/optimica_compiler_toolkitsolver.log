@@ -1,0 +1,252 @@
+Executing Serial Solution
+JVM started.
+
+Starting solution (suv_electric_15.ignx OCT_1)
+----- Thu, 12 Sep 2019 23:56:29 -----
+WARNING: In dir name `C:/Users/KHALID HALBA/Desktop/avchallenge/UCEF-IGNITE-FMU/fmusdk/fmu10/fmu/cs/x64` there are spaces or special characters
+=== Running cases 1-1 ===
+=== Case 1 ===
+Compiling 'suv_electric_15.mo' to an FMU (in: OCT_1)
+WARNING: [VIS] Connection has been closed by the server (in: OCT_1)
+ModelicaCompiler: Modelica source parsed.
+ModelicaCompiler: Model instantiated.
+ModelicaCompiler: Model flattened.
+ModelicaCompiler: C-code generated.
+ModelicaCompiler: C-code compiled.
+ModelicaCompiler: FMU packed.
+Parsing variables took: 0.546999931335 seconds (in: OCT_1)
+There are : 871 variables 
+ Public: 525 
+ Private 346
+ Animation 0
+Took 9.16899991035 seconds to make FMU (in: OCT_1)
+OCT successfully compiled 'suv_electric_15.mo' (in: OCT_1)
+=== IGNITE Standard Library === (START)
+IStandard error!
+Ricardo License Manager:
+
+License for IGNITE_Standard will expire in 27 days.fmu_location = 'modelica://drivecycle.drivecycle/Resources' name = 'drivecycle'
+==== C:\Users\KHALID HALBA\RModel\packages\modelica/drivecycle/drivecycle/Resources ====
+=== IGNITE Powertrain Library === (START)
+IPowertrain error: Ricardo License Manager:
+
+License for IGNITE_Powertrain will expire in 27 days.
+fmu_location = 'modelica://drivecycle.drivecycle/Resources' name = 'drivecycle'
+==== C:\Users\KHALID HALBA\RModel\packages\modelica/drivecycle/drivecycle/Resources ====
+Bind done
+ Integrator time: 9.900011e-01 Integrator time: 1.000000e+00 Integrator time: 1.000001e+00 Integrator time: 1.010000e+00 Integrator time: 1.010001e+00 Integrator time: 1.020000e+00 Integrator time: 1.020001e+00concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+ Integrator time: 4.990002e+00concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+ Integrator time: 1.499000e+01concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 03 
+Bind done
+concat 08 
+Bind done
+ Integrator time: 2.560000e+01concat 012 
+Bind done
+concat 017 
+Bind done
+concat 022 
+Bind done
+concat 025 
+Bind done
+concat 025 
+Bind done
+concat 027 
+Bind done
+concat 031 
+Bind done
+concat 032 
+Bind done
+concat 034 
+Bind done
+concat 034 
+Bind done
+concat 033 
+Bind done
+ Integrator time: 3.599000e+01concat 032 
+Bind done
+concat 031 
+Bind done
+concat 030 
+Bind done
+concat 029 
+Bind done
+concat 025 
+Bind done
+concat 022 
+Bind done
+concat 022 
+Bind done
+concat 495 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+ Integrator time: 4.599000e+01concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 490 
+Bind done
+concat 016 
+Bind done
+concat 032 
+Bind done
+concat 028 
+Bind done
+concat 025 
+Bind done
+ Integrator time: 5.599000e+01concat 024 
+Bind done
+concat 024 
+Bind done
+concat 026 
+Bind done
+concat 029 
+Bind done
+concat 032 
+Bind done
+concat 035 
+Bind done
+concat 036 
+Bind done
+concat 037 
+Bind done
+concat 038 
+Bind done
+concat 038 
+Bind done
+ Integrator time: 6.599000e+01concat 037 
+Bind done
+concat 037 
+Bind done
+concat 037 
+Bind done
+concat 037 
+Bind done
+concat 037 
+Bind done
+concat 037 
+Bind done
+concat 037 
+Bind done
+concat 038 
+Bind done
+concat 039 
+Bind done
+concat 039 
+Bind done
+ Integrator time: 7.599000e+01concat 038 
+Bind done
+concat 038 
+Bind done
+concat 038 
+Bind done
+concat 038 
+Bind done
+concat 039 
+Bind done
+concat 039 
+Bind done
+concat 039 
+Bind done
+concat 040 
+Bind done
+concat 040 
+Bind done
+concat 042 
+Bind done
+ Integrator time: 8.599000e+01concat 044 
+Bind done
+concat 045 
+Bind done
+concat 045 
+Bind done
+concat 046 
+Bind done
+concat 046 
+Bind done
+concat 047 
+Bind done
+concat 047 
+Bind done
+concat 047 
+Bind done
+concat 045 
+Bind done
+concat 046 
+Bind done
+ Integrator time: 9.687000e+01concat 046 
+Bind done
+concat 047 
+Bind done
+concat 045 
+Bind done
+concat 046 
+Bind done
+concat 045 
+Bind done
+concat 045 
+Bind done
+concat 046 
+Bind done
+concat 047 
+Bind done
+concat 047 
+Bind done
+concat 047 
+Bind done
+concat 047 
+Bind done
+ Integrator time: 1.069900e+02concat 045 
+Bind done
+concat 045 
+Bind done

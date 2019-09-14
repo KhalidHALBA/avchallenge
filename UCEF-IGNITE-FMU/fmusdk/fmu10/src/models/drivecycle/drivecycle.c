@@ -6,12 +6,14 @@
 #define NUMBER_OF_STRINGS 0
 #define NUMBER_OF_STATES 0
 #define NUMBER_OF_EVENT_INDICATORS 0
-#define BUFLEN 200 //Max length of buffer
-#define BUFLEN1 100
+#define BUFLEN 1024 //Max length of buffer
+#define BUFLEN1 1024
 #define SIMTIME 400
 #define PORT 8888
+#define MAX_STUDENTS 3
 #include "fmuTemplate.h"
 #include <winsock2.h>
+#include <stdint.h>
 #include <wS2tcpip.h>
 #include <stdio.h>
 #include <windows.h>
@@ -27,7 +29,7 @@
 #define cycle_speed_ahead_kmph_ 3
 #define vehicle_velocity_ 4
 #define driver_brake_demand_ 5
-#define counter_ 6
+#define counter_ 0
 
 void setStartValues(ModelInstance *comp)
 {
@@ -64,9 +66,11 @@ void initialize(ModelInstance *comp, fmiEventInfo *eventInfo)
 	eventInfo->upcomingTimeEvent = fmiTrue;
 	eventInfo->nextEventTime = 1 + comp->time;
 }
+
+
 void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 {
-
+char *hello = "Hello from client"; 
 	SOCKET s;
 	struct sockaddr_in server, si_other;
 	int slen, recv_len;
@@ -105,7 +109,7 @@ void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 		// printf("Bind failed with error code : %d" , WSAGetLastError());
 		exit(EXIT_FAILURE);
 	}
-	puts("Bind done");
+	// puts("Bind done");
 
 	//keep listening for data
 	// try while(counter<value)
@@ -135,23 +139,45 @@ void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 			}
 
 			r(cycle_speed_kmph_) = (float)(atoi(buf));
-			int a = ((r(vehicle_velocity_)) * 3.6);
-			int b = 100 * r(driver_brake_demand_);
+			int a = 10*((r(vehicle_velocity_)) * 3.6);
+			int b = 1000 * r(driver_brake_demand_);
 
-			sprintf(bufra, "%d", a);
-			sprintf(bufrb, "%d", b);
 
-			strcat(bufr, bufra);
-			strcat(bufr, ".");
-			strcat(bufr, bufrb);
 
-			printf("DriveCycle %f VehicleResponse %f  braking  %d CycleTime %f concatenated and absoluuted %s \n", r(cycle_speed_kmph_), (((r(vehicle_velocity_)) / 1000) * (3600)), b, r(cycle_time_), bufr);
+int aa1 = a/100;
+int aa2 = ((a-(aa1*100))/10);
+int aa3 = a-(aa1*100)-(aa2*10);
 
-			if (sendto(s, bufr, recv_len, 0, (struct sockaddr *)&si_other, slen) == SOCKET_ERROR)
-			{
-				exit(EXIT_FAILURE);
-			}
 
+
+
+int bb1 = b/100;
+int bb2 = ((b-(bb1*100))/10);
+int bb3 = b-(bb1*100)-(bb2*10);
+
+
+
+char s1 = '0' + aa1;
+char s2 = '0' +  aa2;
+char s3 = '0' +  aa3;
+
+
+char b1 = '0' + bb1;
+char b2 = '0' + bb2;
+char b3 = '0' + bb3;
+
+ printf(" update aa1 %d  aa2 %d aa3 %d bb1 %d bb2 %d bb3 %d \n", aa1,aa2,aa3,bb1,bb2,bb3);
+
+char STUDENT[] = {s1, s2,  s3, (char)32 , b1,b2, b3 };
+
+// char STUDENT[] = {NULL,NULL," hello khalid" };
+
+ 
+
+		if (sendto(s, STUDENT, sizeof(STUDENT), 0, (struct sockaddr*) &si_other, slen) == SOCKET_ERROR)
+		{
+			exit(EXIT_FAILURE);
+		}
 			break;
 		}
 	}

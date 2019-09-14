@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session>
+    <info>
+        <description></description>
+        <typeId>RPost</typeId>
+        <version majorVersion="2018" minorVersion="1" buildId="131474" codeRevision="131474" platform="win64" flavour="rel"/>
+    </info>
+    <rpost-core formatVersion="1" requestSessionWizard="yes">
+        <provider id="{bd51fc98-866e-458b-a637-b2aa0ad40ec6}" filename="suv_electric_15_OCT_1.ignd" name="suv_electric_15_OCT_1" type="ignite">
+            <auto-reload enabled="no" interval="3000"/>
+        </provider>
+    </rpost-core>
+    <modeSwitch selected="1">
+        <mode id="1" visible="true">
+            <windowState version="4113">
+                <dockingsystem>
+                    <dockingManager format="65262" version="0">
+                        <moreSettings corners="4;4;1;2"/>
+                        <dockingAreas>
+                            <dockingAreaState id="leftArea" closed="false" docked="true" sized="0.160357518401682" sizef="0.25"/>
+                            <dockingAreaState id="rightArea" closed="false" docked="true" sized="0.25" sizef="0.25"/>
+                            <dockingAreaState id="topArea" closed="false" docked="true" sized="0.25" sizef="0.25"/>
+                            <dockingAreaState id="bottomArea" closed="false" docked="true" sized="0.25" sizef="0.25"/>
+                            <dockingAreaContents id="leftArea">
+                                <box count="1">
+                                    <box direction="vertical" size="301" count="1">
+                                        <stack size="1057">
+                                            <dockableWidget objectName="Files" selected="true"/>
+                                        </stack>
+                                    </box>
+                                </box>
+                            </dockingAreaContents>
+                            <dockingAreaContents id="rightArea">
+                                <box count="0"/>
+                            </dockingAreaContents>
+                            <dockingAreaContents id="topArea">
+                                <box count="0"/>
+                            </dockingAreaContents>
+                            <dockingAreaContents id="bottomArea">
+                                <box count="0"/>
+                            </dockingAreaContents>
+                        </dockingAreas>
+                        <dockableWidgets>
+                            <dockableWidget objectName="Messages" floating="false" checked="false">
+                                <position path="2;0;0;1;0" area="bottomArea"/>
+                            </dockableWidget>
+                            <dockableWidget objectName="Information" floating="false" checked="false">
+                                <position path="2;0;0;1;0" area="bottomArea"/>
+                            </dockableWidget>
+                            <dockableWidget objectName="Files" floating="false" checked="true"/>
+                            <dockableWidget objectName="Properties" floating="false" checked="false">
+                                <geometry left="0" top="0" right="99" bottom="49"/>
+                                <position path="2;0;0;1;0" area="rightArea"/>
+                            </dockableWidget>
+                            <dockableWidget objectName="Objects" floating="false" checked="false">
+                                <geometry left="0" top="0" right="99" bottom="49"/>
+                                <position path="2;0;1;1;0" area="leftArea"/>
+                            </dockableWidget>
+                            <dockableWidget objectName="Data sets" floating="false" checked="false">
+                                <geometry left="0" top="0" right="99" bottom="49"/>
+                                <position path="2;0;1;1;0" area="leftArea"/>
+                            </dockableWidget>
+                            <dockableWidget objectName="Cases" floating="false" checked="false">
+                                <geometry left="0" top="0" right="99" bottom="49"/>
+                                <position path="2;0;1;1;0" area="leftArea"/>
+                            </dockableWidget>
+                        </dockableWidgets>
+                    </dockingManager>
+                </dockingsystem>
+                <workspace>
+                    <organisation type="5"/>
+                    <subwindow viewportReference="RPOST" posX="0" posY="0" width="0" height="0" minimized="false" maximized="true" selected="false">
+                        <internalLayout mode="split" orientation="vertical" sizes="37.2917;60.8333"/>
+                    </subwindow>
+                </workspace>
+                <qtinfo><![CDATA[AAAA/wAAAAD9AAAAAAAAAAAAAAAAAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAQAAAAWAEYAaQBsAGUAVABvAG8AbABiAGEAcgEAAAAA/////wAAAAAAAAAAAAAAGABVAG4AZABvACAAdABvAG8AbABiAGEAcgEAAAAA/////wAAAAAAAAAAAAAAPgBSAHAAbwBzAHQAOgA6AFIAZQBwAG8AcgB0AEcAdQBpADoAOgBSAGUAcABvAHIAdABUAG8AbwBsAGIAYQByAQAAAAD/////AAAAAAAAAAAAAAAwAEMAbwB1AHAAbABlAGQAIABWAGkAZQB3AHAAbwByAHQAIABUAG8AbwBsAGIAYQByAQAAAAD/////AAAAAAAAAAA=]]></qtinfo>
+            </windowState>
+        </mode>
+    </modeSwitch>
+    <rpost-presentation>
+        <selection formatVersion="1">
+            <provider id="{9068f9f2-6c42-4a0b-b0fa-73977685ae09}" active="yes">
+                <datasetid core_id="{bd51fc98-866e-458b-a637-b2aa0ad40ec6}"/>
+            </provider>
+        </selection>
+        <selector-widget-state formatVersion="1">
+            <node type="TreeViewExpander" id="ignite_object">AAEAAAAAAAAAAA==</node>
+            <node type="TreeViewExpander" id="ignite_data">AAEAAAAAAAAAAA==</node>
+            <node type="TreeViewExpander" id="ignite_case">AAEAAAAAAAAAAA==</node>
+        </selector-widget-state>
+    </rpost-presentation>
+    <rpost-report formatVersion="1">
+        <report id="{8a37d3bb-e1b1-4ae4-985c-d634edb667af}">
+            <pages>
+                <page id="{984627e6-8ff5-461f-ba57-7625f8208cb2}" name="Page 1">
+                    <plots>
+                        <plot id="{e7d0b859-588c-4e96-ab24-fd5b0227622a}" hasAutoAxes="true">
+                            <curves>
+                                <curve id="{eaf3ec07-7956-4457-8f98-3f7ea6305bb1}">
+                                    <data>
+                                        <attributes ordering="1">
+                                            <scalar name="presentationMode" type="int">1</scalar>
+                                            <scalar name="name" type="string">{auto}</scalar>
+                                            <composite name="curve">
+                                                <scalar name="line" type="pen">
+                                                    <style>solid</style>
+                                                    <width>1</width>
+                                                    <color>#db363a</color>
+                                                </scalar>
+                                                <scalar name="symbolColor" type="color">#db363a</scalar>
+                                                <scalar name="symbolSize" type="int">9</scalar>
+                                                <scalar name="type" type="int">1</scalar>
+                                                <scalar name="symbol" type="int">0</scalar>
+                                            </composite>
+                                        </attributes>
+                                        <datasource id="{eaf3ec07-7956-4457-8f98-3f7ea6305bb1}-data.OwnedDataSource" type="rgraph/scalingProxy">
+                                            <attributes>
+                                                <scalar name="dataSourceType" type="string">rgraph/scalingProxy</scalar>
+                                                <composite name="dimensions">
+                                                    <composite name="x">
+                                                        <scalar name="scale" type="float">1</scalar>
+                                                        <scalar name="offset" type="float">0</scalar>
+                                                    </composite>
+                                                    <composite name="y">
+                                                        <scalar name="scale" type="float">1</scalar>
+                                                        <scalar name="offset" type="float">0</scalar>
+                                                    </composite>
+                                                </composite>
+                                            </attributes>
+                                            <datasource>{eaf3ec07-7956-4457-8f98-3f7ea6305bb1}-data-source</datasource>
+                                        </datasource>
+                                    </data>
+                                    <data-source>
+                                        <scalar name="dataSourceType" type="string">RPostDataSource</scalar>
+                                    </data-source>
+                                    <empty-data-set role="xId"/>
+                                    <empty-data-set role="yId"/>
+                                </curve>
+                            </curves>
+                            <title>
+                                <attributes ordering="1">
+                                    <scalar name="type" type="string">rgraph/text</scalar>
+                                    <composite name="placement">
+                                        <scalar name="row" type="int">-2</scalar>
+                                        <scalar name="column" type="int">0</scalar>
+                                        <scalar name="hAlign" type="int">1</scalar>
+                                    </composite>
+                                    <composite name="syncMargin">
+                                        <scalar name="auto" type="bool">true</scalar>
+                                    </composite>
+                                    <scalar name="text" type="string">{auto}</scalar>
+                                    <scalar name="elideMode" type="int">2</scalar>
+                                    <scalar name="font" type="font">
+                                        <family>Arial</family>
+                                        <size>12</size>
+                                        <bold/>
+                                    </scalar>
+                                    <scalar name="clipText" type="bool">true</scalar>
+                                    <scalar name="sizingOptions" type="int">1</scalar>
+                                    <scalar name="titleOf" type="ref">{e7d0b859-588c-4e96-ab24-fd5b0227622a}</scalar>
+                                </attributes>
+                            </title>
+                            <graph>
+                                <attributes ordering="1">
+                                    <scalar name="type" type="string">rgraph/planargraph</scalar>
+                                </attributes>
+                                <axis id="{e7d0b859-588c-4e96-ab24-fd5b0227622a}-graph.OwnedAxis0">
+                                    <attributes ordering="1">
+                                        <scalar name="dimension" type="int">1</scalar>
+                                        <scalar name="position" type="int">4</scalar>
+                                        <scalar name="label" type="string">{auto_data}</scalar>
+                                        <composite name="ticks">
+                                            <scalar name="labelFormat" type="int">1</scalar>
+                                        </composite>
+                                    </attributes>
+                                    <definition id="{e7d0b859-588c-4e96-ab24-fd5b0227622a}-graph.OwnedAxis0.OwnedAxisDefinition">
+                                        <composite name="range">
+                                            <scalar name="min" type="double">-1</scalar>
+                                            <scalar name="max" type="double">1</scalar>
+                                            <scalar name="from" type="double">-1</scalar>
+                                            <scalar name="to" type="double">1</scalar>
+                                            <scalar name="minAuto" type="bool">true</scalar>
+                                            <scalar name="maxAuto" type="bool">true</scalar>
+                                            <scalar name="fromAuto" type="bool">true</scalar>
+                                            <scalar name="toAuto" type="bool">true</scalar>
+                                            <scalar name="useDeviation" type="bool">true</scalar>
+                                            <composite name="div">
+                                                <scalar name="auto" type="bool">true</scalar>
+                                                <scalar name="step" type="double">0.5</scalar>
+                                                <scalar name="count" type="int">0</scalar>
+                                            </composite>
+                                        </composite>
+                                        <scalar name="type" type="int">1</scalar>
+                                        <scalar name="units" type="string"/>
+                                    </definition>
+                                </axis>
+                                <axis id="{e7d0b859-588c-4e96-ab24-fd5b0227622a}-graph.OwnedAxis1">
+                                    <attributes ordering="1">
+                                        <scalar name="dimension" type="int">2</scalar>
+                                        <scalar name="position" type="int">1</scalar>
+                                        <scalar name="label" type="string">{auto_data}</scalar>
+                                    </attributes>
+                                    <definition id="{e7d0b859-588c-4e96-ab24-fd5b0227622a}-graph.OwnedAxis1.OwnedAxisDefinition">
+                                        <composite name="range">
+                                            <scalar name="min" type="double">-1</scalar>
+                                            <scalar name="max" type="double">1</scalar>
+                                            <scalar name="from" type="double">-1</scalar>
+                                            <scalar name="to" type="double">1</scalar>
+                                            <scalar name="minAuto" type="bool">true</scalar>
+                                            <scalar name="maxAuto" type="bool">true</scalar>
+                                            <scalar name="fromAuto" type="bool">true</scalar>
+                                            <scalar name="toAuto" type="bool">true</scalar>
+                                            <scalar name="useDeviation" type="bool">true</scalar>
+                                            <composite name="div">
+                                                <scalar name="auto" type="bool">true</scalar>
+                                                <scalar name="step" type="double">0.5</scalar>
+                                                <scalar name="count" type="int">0</scalar>
+                                            </composite>
+                                        </composite>
+                                        <scalar name="type" type="int">1</scalar>
+                                        <scalar name="units" type="string"/>
+                                    </definition>
+                                </axis>
+                                <data>{eaf3ec07-7956-4457-8f98-3f7ea6305bb1}-data</data>
+                                <annotation>{e7d0b859-588c-4e96-ab24-fd5b0227622a}-title</annotation>
+                                <data_axes>
+                                    <data>{eaf3ec07-7956-4457-8f98-3f7ea6305bb1}-data</data>
+                                    <axis>{e7d0b859-588c-4e96-ab24-fd5b0227622a}-graph.OwnedAxis0</axis>
+                                    <axis>{e7d0b859-588c-4e96-ab24-fd5b0227622a}-graph.OwnedAxis1</axis>
+                                </data_axes>
+                            </graph>
+                            <axes>
+                                <axis ref="{e7d0b859-588c-4e96-ab24-fd5b0227622a}-graph.OwnedAxis1" units=""/>
+                            </axes>
+                        </plot>
+                    </plots>
+                    <layout mode="aligned" rowCount="1" columnCount="1" rowSpacing="5" columnSpacing="5">
+                        <plot id="{e7d0b859-588c-4e96-ab24-fd5b0227622a}" row="0" column="0"/>
+                    </layout>
+                </page>
+            </pages>
+        </report>
+        <report-gui>
+            <page_selection current="yes" id="{984627e6-8ff5-461f-ba57-7625f8208cb2}">
+                <plot id="{e7d0b859-588c-4e96-ab24-fd5b0227622a}"/>
+            </page_selection>
+        </report-gui>
+    </rpost-report>
+</session>
