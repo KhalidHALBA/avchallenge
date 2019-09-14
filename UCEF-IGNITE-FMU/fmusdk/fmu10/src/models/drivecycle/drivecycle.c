@@ -7,10 +7,8 @@
 #define NUMBER_OF_STATES 0
 #define NUMBER_OF_EVENT_INDICATORS 0
 #define BUFLEN 1024 //Max length of buffer
-#define BUFLEN1 1024
 #define SIMTIME 400
 #define PORT 8888
-#define MAX_STUDENTS 3
 #include "fmuTemplate.h"
 #include <winsock2.h>
 #include <stdint.h>
@@ -74,10 +72,8 @@ char *hello = "Hello from client";
 	SOCKET s;
 	struct sockaddr_in server, si_other;
 	int slen, recv_len;
-	char buf[BUFLEN1];
-	char bufr[BUFLEN];
-	char bufra[BUFLEN1];
-	char bufrb[BUFLEN1];
+	char buf[BUFLEN];
+
 	WSADATA wsa;
 
 	slen = sizeof(si_other);
@@ -128,10 +124,7 @@ char *hello = "Hello from client";
 		{
 
 			fflush(stdout);
-			memset(buf, 0, BUFLEN1);
-			memset(bufr, 0, BUFLEN);
-			memset(bufra, 0, BUFLEN1);
-			memset(bufrb, 0, BUFLEN1);
+			memset(buf, 0, BUFLEN);
 
 			if ((recv_len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *)&si_other, &slen)) == SOCKET_ERROR)
 			{
@@ -142,20 +135,20 @@ char *hello = "Hello from client";
 			int a = 10*((r(vehicle_velocity_)) * 3.6);
 			int b = 1000 * r(driver_brake_demand_);
 
-
+// extract speed decimal values
 
 int aa1 = a/100;
 int aa2 = ((a-(aa1*100))/10);
 int aa3 = a-(aa1*100)-(aa2*10);
 
-
+// extract braking decimal values
 
 
 int bb1 = b/100;
 int bb2 = ((b-(bb1*100))/10);
 int bb3 = b-(bb1*100)-(bb2*10);
 
-
+// convert to ascii
 
 char s1 = '0' + aa1;
 char s2 = '0' +  aa2;
@@ -168,13 +161,13 @@ char b3 = '0' + bb3;
 
  printf(" update aa1 %d  aa2 %d aa3 %d bb1 %d bb2 %d bb3 %d \n", aa1,aa2,aa3,bb1,bb2,bb3);
 
-char STUDENT[] = {s1, s2,  s3, (char)32 , b1,b2, b3 };
+char DYNAMICS[] = {s1, s2,  s3, (char)32 , b1,b2, b3 };
 
 // char STUDENT[] = {NULL,NULL," hello khalid" };
 
  
 
-		if (sendto(s, STUDENT, sizeof(STUDENT), 0, (struct sockaddr*) &si_other, slen) == SOCKET_ERROR)
+		if (sendto(s, DYNAMICS, sizeof(DYNAMICS), 0, (struct sockaddr*) &si_other, slen) == SOCKET_ERROR)
 		{
 			exit(EXIT_FAILURE);
 		}
