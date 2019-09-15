@@ -51,17 +51,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 		}
 	}
 
-	public void AV_Log()
 
-	{
-
-		String UCEFGateway_Torque_Message = "UCEFGateway_Torque_Commands : "
-				+ DataAnalyticsparameter.UCEFGateway_Torque_Commands + " & current time is  " + currentTime
-				+ "  message time is " + DataAnalyticsparameter.messageTime + " case "
-				+ (int) DataAnalyticsparameter.messageTime % 10;
-		log.info("UCEFGateway_Torque_Commands " + UCEFGateway_Torque_Message);
-
-	}
 
 	public void Build_and_Send_CAN_Frame(String pgn, String spn)
 
@@ -71,22 +61,40 @@ public class DataAnalytics extends DataAnalyticsBase {
 		DataAnalyticsCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 	}
 
-	public void update_chart(int ost, int speed, int speed1, XYChart chart, SwingWrapper<XYChart> sw, double[] xData,
-			double[] xData1, ArrayList<Integer> yData, ArrayList<Integer> yData1) throws Exception
+	public void update_chart(int ost, int speed, int speed1, int brake, XYChart chart, SwingWrapper<XYChart> sw, double[] xData,
+			double[] xData1, double[] xData2, ArrayList<Integer> yData, ArrayList<Integer> yData1 ,  ArrayList<Integer>  yData2) throws Exception
 
 	{
 
 		final ArrayList<Integer> data1 = fill_array(ost, speed1, xData, yData1);
 
-		System.out.println("Step Number : " + ost);
+//		System.out.println("Step Number : " + ost);
 
-		for (int i = 0; i < data1.size(); i++) {
-			System.out.println("Speed Array : " + i + " = " + data1.get(i));
-		}
+//		for (int i = 0; i < data1.size(); i++) {
+//			System.out.println("Speed Array : " + i + " = " + data1.get(i));
+//		}
 
+		
+		
+		final ArrayList<Integer> data2 = fill_array(ost, brake, xData2, yData2);
+
+//		System.out.println("Step Number : " + ost);
+
+//		for (int i = 0; i < data2.size(); i++) {
+//			System.out.println("Brake Array : " + i + " = " + data1.get(i));
+//		}
+//		
+		
+		
+		
+		
+		
+		
+		
+		
 		final ArrayList<Integer> data = fill_array(ost, speed, xData, yData);
 
-		System.out.println();
+//		System.out.println();
 
 		chart.getStyler().setYAxisMax((double) 100);
 		chart.getStyler().setYAxisMin(null, (double) 0);
@@ -94,16 +102,17 @@ public class DataAnalytics extends DataAnalyticsBase {
 		chart.getStyler().setXAxisMax((double) 350);
 		chart.getStyler().setXAxisMin((double) 0);
 
-		System.out.println("Step Number : " + ost);
+//		System.out.println("Step Number : " + ost);
 
-		for (int i = 0; i < data.size(); i++) {
-			System.out.println("Speed Array : " + i + " = " + data.get(i));
-		}
+//		for (int i = 0; i < data.size(); i++) {
+//			System.out.println("Speed Array : " + i + " = " + data.get(i));
+//		}
 
 		Thread.sleep(ost);
 
 		chart.updateXYSeries("Vehicle_Response", null, data, null);
 		chart.updateXYSeries("Speed_Control", null, data1, null);
+		chart.updateXYSeries("Brake_Pressure", null, data2, null);
 		sw.repaintChart();
 
 	}
@@ -120,7 +129,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 		ArrayList<Integer> initdata = new ArrayList<Integer>();
 		initdata.add(0);
 
-		XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time", "Speed", "Vehicle_Response", null,
+		XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time", "Speed[kmph] / braking_demand[0-100] ", "Vehicle_Response", null,
 				initdata);
 
 		SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
@@ -131,6 +140,22 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 		chart.addSeries("Speed_Control", initdata1);
 
+		
+		
+		
+		ArrayList<Integer> initdata2 = new ArrayList<Integer>();
+		initdata2.add(0);
+
+		chart.addSeries("Brake_Pressure", initdata2);
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		if (super.isLateJoiner()) {
 			log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
@@ -168,6 +193,12 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 		double[] xData1 = new double[350];
 		ArrayList<Integer> yData1 = new ArrayList<Integer>();
+		
+		
+		double[] xData2 = new double[350];
+		ArrayList<Integer> yData2 = new ArrayList<Integer>();
+		
+		
 
 		while (!exitCondition) {
 			atr.requestSyncStart();
@@ -204,13 +235,14 @@ public class DataAnalytics extends DataAnalyticsBase {
 			checkReceivedSubscriptions();
 
 			final int speed = (int) (Double.parseDouble(DataAnalyticsparameter.Motor_Power_Limits));
+			final int brake = (int) (Double.parseDouble(DataAnalyticsparameter.UCEFGateway_Torque_Commands));
 			final int speed1 = (int) (Double.parseDouble(DataAnalyticsparameter.Engine_Speed));
 
 
 			int osd = (int) (currentTime) % 20;
 			int time = (int) (currentTime / 20);
 
-			log.info("time   " + time + "   speed  " + speed + " speed1 " + speed1 + "  current_time " + currentTime);
+			System.out.println("time   " + time + "   control_speed  " + speed + " response_speed "  +  speed1 + " brake"  + brake + "  current_time " + currentTime);
 
 			switch (osd) {
 
@@ -220,7 +252,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 					public void run() {
 						try {
 
-							update_chart(time, speed, speed1, chart, sw, xData, xData1, yData, yData1);
+							update_chart(time, speed, speed1, brake, chart, sw, xData, xData1, xData2, yData, yData1 , yData2);
 							// update_chart1(time , speed1, chart1, sw1, xData1,
 							// yData1);
 						} catch (Exception e) {

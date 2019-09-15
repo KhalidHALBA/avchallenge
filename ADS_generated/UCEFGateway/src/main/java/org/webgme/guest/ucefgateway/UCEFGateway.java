@@ -142,11 +142,36 @@ public class UCEFGateway extends UCEFGatewayBase {
 			String vehicleResponse = new String(receivePacket.getData());
 			
 			
-			System.out.println(" hadik " + vehicleResponse);
+			System.out.println(" vehicle dynamics " + vehicleResponse);
+
+			
+			
 			
 //			
 //			
-//			String[] speeds = vehicleResponse.split(" ");
+			String[] speeds = vehicleResponse.split(" ");
+			
+			float f = Float.valueOf(speeds[0].trim()).floatValue();
+			float f1 = f/10;
+			System.out.println("IGNITE speed response float = " + f1);
+			
+			UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f1);
+			
+			
+			
+			float b = Float.valueOf(speeds[1].trim()).floatValue();
+			float b1 = b/10;
+			System.out.println("IGNITE braking response float = " + b1);
+			
+			UCEFGatewayparameter.Brake_Pressure = Double.toString(b1);
+			
+			
+			
+			
+			
+			
+			
+			
 //
 //			
 //			float[] values = vehicleResponse;
@@ -175,7 +200,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 	public String Build_SPN() {
 
 		return UCEFGatewayparameter.UCEFGatewaySPNs = UCEFGatewayparameter.Vehicle_Speed_Response + " "
-				+ UCEFGatewayparameter.Motor_Torque_cmd;
+				+ UCEFGatewayparameter.Brake_Pressure;
 	}
 
 	public void Build_and_Send_CAN_Frame(String pgn, String spn) {
