@@ -86,6 +86,8 @@ public class UCEFGateway extends UCEFGatewayBase {
 		UCEFGatewayparameter.Brake_Pressure = params.Brake_Pressure;
 
 		UCEFGatewayparameter.messageTime = params.messageTime;
+		
+		UCEFGatewayparameter.IGNITE_IP = params.IGNITE_IP;
 
 	}
 
@@ -119,7 +121,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 		try {
 			DatagramSocket clientSocket = new DatagramSocket();
 
-			InetAddress IPAddress = InetAddress.getByName("192.168.78.1");
+			InetAddress IPAddress = InetAddress.getByName(UCEFGatewayparameter.IGNITE_IP);
 			byte[] sendData = new byte[1024];
 
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);

@@ -75,5 +75,7 @@ public class UCEFGatewayConfig extends FederateConfig {
 	public double messageTime;
 	@FederateParameter
 	public String COA_Message;
+	@FederateParameter
+	public String IGNITE_IP;
 
 }
