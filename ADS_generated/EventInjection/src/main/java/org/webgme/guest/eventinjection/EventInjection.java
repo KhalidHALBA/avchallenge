@@ -32,6 +32,7 @@ public class EventInjection extends EventInjectionBase {
 		EventInjectionparameter.Peak_Current_Limit = params.Peak_Current_Limit;
 		EventInjectionparameter.EventInjectionPGN = params.EventInjectionPGN;
 		EventInjectionparameter.EventInjectionSPNs = params.EventInjectionSPNs;
+	
 
 	}
 

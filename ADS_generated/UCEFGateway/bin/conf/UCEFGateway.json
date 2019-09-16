@@ -40,7 +40,7 @@
   "EventInjection_Obstacle_Presence_distance" : "0",      
   
 <<<<<<< HEAD
-  "VehicleControl_Vehicle_Control_Speed" : "0",
+  "UCEF_Vehicle_Speed_Control" : "0",
 =======
   "VehicleControl_Wheel_Speed" : "0",
 >>>>>>> 6e1362504b16dd5b436837cbe7d96230d61b1801

@@ -13,8 +13,6 @@ import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 
-// Define the DataAnalytics type of federate for the federation.
-
 public class DataAnalytics extends DataAnalyticsBase {
 
 	ExecutorService myExecutor = Executors.newCachedThreadPool();
@@ -51,8 +49,6 @@ public class DataAnalytics extends DataAnalyticsBase {
 		}
 	}
 
-
-
 	public void Build_and_Send_CAN_Frame(String pgn, String spn)
 
 	{
@@ -67,46 +63,16 @@ public class DataAnalytics extends DataAnalyticsBase {
 	{
 
 		final ArrayList<Integer> data1 = fill_array(ost, speed1, xData, yData1);
-
-//		System.out.println("Step Number : " + ost);
-
-//		for (int i = 0; i < data1.size(); i++) {
-//			System.out.println("Speed Array : " + i + " = " + data1.get(i));
-//		}
-
-		
 		
 		final ArrayList<Integer> data2 = fill_array(ost, brake, xData2, yData2);
-
-//		System.out.println("Step Number : " + ost);
-
-//		for (int i = 0; i < data2.size(); i++) {
-//			System.out.println("Brake Array : " + i + " = " + data1.get(i));
-//		}
-//		
-		
-		
-		
-		
-		
-		
-		
 		
 		final ArrayList<Integer> data = fill_array(ost, speed, xData, yData);
-
-//		System.out.println();
 
 		chart.getStyler().setYAxisMax((double) 100);
 		chart.getStyler().setYAxisMin(null, (double) 0);
 
 		chart.getStyler().setXAxisMax((double) 350);
 		chart.getStyler().setXAxisMin((double) 0);
-
-//		System.out.println("Step Number : " + ost);
-
-//		for (int i = 0; i < data.size(); i++) {
-//			System.out.println("Speed Array : " + i + " = " + data.get(i));
-//		}
 
 		Thread.sleep(ost);
 
@@ -140,20 +106,10 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 		chart.addSeries("Speed_Control", initdata1);
 
-		
-		
-		
 		ArrayList<Integer> initdata2 = new ArrayList<Integer>();
 		initdata2.add(0);
 
 		chart.addSeries("Brake_Pressure", initdata2);
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		if (super.isLateJoiner()) {
@@ -247,25 +203,20 @@ public class DataAnalytics extends DataAnalyticsBase {
 			switch (osd) {
 
 			case 1:
-
 				myExecutor.execute(new Runnable() {
 					public void run() {
 						try {
-
 							update_chart(time, speed, speed1, brake, chart, sw, xData, xData1, xData2, yData, yData1 , yData2);
-							// update_chart1(time , speed1, chart1, sw1, xData1,
-							// yData1);
+
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
+
 							e.printStackTrace();
 						}
 					}
 				});
-
 				break;
 
 			}
-
 			////////////////////////////////////////////////////////////////////
 			// TODO break here if ready to resign and break out of while loop //
 			////////////////////////////////////////////////////////////////////

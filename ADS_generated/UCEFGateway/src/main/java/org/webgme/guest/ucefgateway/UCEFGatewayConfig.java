@@ -62,7 +62,7 @@ public class UCEFGatewayConfig extends FederateConfig {
 	@FederateParameter
 	public String EventInjection_Obstacle_Presence_distance;
 	@FederateParameter
-	public String VehicleControl_Vehicle_Control_Speed;
+	public String UCEF_Vehicle_Speed_Control;
 	@FederateParameter
 	public String VehicleControl_Vehicle_Speed;
 	@FederateParameter

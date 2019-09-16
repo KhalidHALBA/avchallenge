@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.lang3.RandomStringUtils;
-// Define the VehicleControl type of federate for the federation.
 
 public class VehicleControl extends VehicleControlBase {
 	private final static Logger log = LogManager.getLogger();
@@ -38,8 +37,6 @@ public class VehicleControl extends VehicleControlBase {
 		VehicleControlparameter.Vehicle_Control_Speed = params.Vehicle_Control_Speed;
 		VehicleControlparameter.VehicleControl_Event_Status = params.VehicleControl_Event_Status;
 		VehicleControlparameter.Traction_Stability_Torque_Request = params.Traction_Stability_Torque_Request;
-		// VehicleControlparameter.UCEFGateway_Motor_Torque=
-		// params.UCEFGateway_Motor_Torque;
 		VehicleControlparameter.UCEFGateway_PGN = params.UCEFGateway_PGN;
 		VehicleControlparameter.UCEF_Control_Speed = params.UCEF_Control_Speed;
 		VehicleControlparameter.Hydraulic_Valve_Commands = params.Hydraulic_Valve_Commands;
@@ -47,6 +44,7 @@ public class VehicleControl extends VehicleControlBase {
 		VehicleControlparameter.VehicleControlSPNs = params.VehicleControlSPNs;
 		VehicleControlparameter.Vehicle_Speed = params.Vehicle_Speed;
 		VehicleControlparameter.EventInjection_Obstacle_Presence_distance = params.EventInjection_Obstacle_Presence_distance;
+		VehicleControlparameter.Drive_Cycle = params.Drive_Cycle;
 
 	}
 
@@ -82,7 +80,7 @@ public class VehicleControl extends VehicleControlBase {
 			if (speedline - 1 >= 0) {
 				Drive_Cycle_Speed = Files
 						.readAllLines(Paths
-								.get("/home/vagrant/avchallenge/ADS_generated/VehicleControl/src/main/java/org/webgme/guest/vehiclecontrol/FTP75.txt"))
+								.get(VehicleControlparameter.Drive_Cycle))
 						.get(speedline);
 			}
 
@@ -206,19 +204,10 @@ public class VehicleControl extends VehicleControlBase {
 
 			switch (osd) {
 
-			case 0:
-
-				break;
-
 			case 1:
 				Control((int) (currentTime / 20));
 
 				Build_and_Send_CAN_Frame(VehicleControlparameter.VehicleControlPGN, Build_SPN());
-
-				break;
-
-			case 6:
-
 
 				break;
 			}

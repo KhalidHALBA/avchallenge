@@ -75,7 +75,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 		UCEFGatewayparameter.EventInjection_Battery_Pack_Power_limit = params.EventInjection_Battery_Pack_Power_limit;
 
-		UCEFGatewayparameter.VehicleControl_Vehicle_Control_Speed = params.VehicleControl_Vehicle_Control_Speed;
+		UCEFGatewayparameter.UCEF_Vehicle_Speed_Control = params.UCEF_Vehicle_Speed_Control;
 
 		UCEFGatewayparameter.VehicleControl_Vehicle_Speed = params.VehicleControl_Vehicle_Speed;
 
@@ -122,33 +122,23 @@ public class UCEFGateway extends UCEFGatewayBase {
 			InetAddress IPAddress = InetAddress.getByName("192.168.78.1");
 			byte[] sendData = new byte[1024];
 
-//			byte[] receiveData = new byte[1024];
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
-			sendData = (UCEFGatewayparameter.VehicleControl_Vehicle_Control_Speed).getBytes();
+			sendData = (UCEFGatewayparameter.UCEF_Vehicle_Speed_Control).getBytes();
 
 			DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 8888);
-			
-			
-//			sendPacket.setLength(1024);
+
 			
 			clientSocket.send(sendPacket);
 
-//			sendPacket.setLength(1024);
 			receivePacket.setLength(receiveData.length);
 			
 			clientSocket.receive(receivePacket);
-//			receivePacket.setLength(1024);
+
 			String vehicleResponse = new String(receivePacket.getData());
 			
-			
 			System.out.println(" vehicle dynamics " + vehicleResponse);
-
-			
-			
-			
-//			
-//			
+	
 			String[] speeds = vehicleResponse.split(" ");
 			
 			float f = Float.valueOf(speeds[0].trim()).floatValue();
@@ -157,37 +147,11 @@ public class UCEFGateway extends UCEFGatewayBase {
 			
 			UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f1);
 			
-			
-			
 			float b = Float.valueOf(speeds[1].trim()).floatValue();
 			float b1 = b/10;
 			System.out.println("IGNITE braking response float = " + b1);
 			
 			UCEFGatewayparameter.Brake_Pressure = Double.toString(b1);
-			
-			
-			
-			
-			
-			
-			
-			
-//
-//			
-//			float[] values = vehicleResponse;
-			
-//			try {
-//				float f = Float.valueOf(vehicleResponse.trim()).floatValue();
-//				System.out.println("IGNITE response float = " + f);
-//
-//				UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f);
-//			} catch (NumberFormatException nfe) {
-//
-//				UCEFGatewayparameter.Vehicle_Speed_Response = "0";
-//				// System.out.println("IGNITE response floated = " + 100*f);
-//			}
-			//
-			//
 
 			clientSocket.close();
 
@@ -325,7 +289,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			break;
 
 		case "VehicleControl":
-			UCEFGatewayparameter.VehicleControl_Vehicle_Control_Speed = CSPNs[0];
+			UCEFGatewayparameter.UCEF_Vehicle_Speed_Control = CSPNs[0];
 			UCEFGatewayparameter.VehicleControl_Event_Status = CSPNs[2];
 			UCEFGatewayparameter.messageTime = interaction.getTime();
 

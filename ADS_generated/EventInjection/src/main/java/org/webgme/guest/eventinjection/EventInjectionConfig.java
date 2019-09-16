@@ -39,6 +39,7 @@ public class EventInjectionConfig extends FederateConfig {
 	@FederateParameter
 	public String Peak_Current_Limit;
 
+
 	// J1931-71 compliant external Messages
 	// Messages sent/received to/from actuators/sensors
 

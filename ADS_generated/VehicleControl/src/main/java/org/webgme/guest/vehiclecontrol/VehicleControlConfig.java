@@ -57,5 +57,6 @@ public class VehicleControlConfig extends FederateConfig {
 	public String UCEFGateway_Volt_Cmd;
 	@FederateParameter
 	public String EventInjection_Obstacle_Presence_distance;
-
+	@FederateParameter
+	public String Drive_Cycle;
 }

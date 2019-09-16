@@ -31,7 +31,7 @@
   "EventInjection_Battery_Pack_Power_limit" : "0",
   "EventInjection_Obstacle_Presence_distance" : "0",      
   
-  "VehicleControl_Vehicle_Control_Speed" : "0",
+  "UCEF_Vehicle_Speed_Control" : "0",
   "VehicleControl_Vehicle_Speed" : "0",
   "VehicleControl_Event_Status" : "0",
 
