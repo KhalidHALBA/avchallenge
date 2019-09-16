@@ -18,7 +18,6 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
-
 #include <stdlib.h>
 #include <string.h>
 #define cycle_speed_kmph_ 0
@@ -66,9 +65,10 @@ void initialize(ModelInstance *comp, fmiEventInfo *eventInfo)
 }
 
 
+
 void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 {
-char *hello = "Hello from client"; 
+
 	SOCKET s;
 	struct sockaddr_in server, si_other;
 	int slen, recv_len;
@@ -106,10 +106,6 @@ char *hello = "Hello from client";
 		exit(EXIT_FAILURE);
 	}
 	// puts("Bind done");
-
-	//keep listening for data
-	// try while(counter<value)
-
 	i(counter_) += 1;
 
 	if (i(counter_) > SIMTIME)
@@ -120,58 +116,47 @@ char *hello = "Hello from client";
 		eventInfo->upcomingTimeEvent = fmiTrue;
 		eventInfo->nextEventTime = 1 + comp->time;
 
-		while (SIMTIME)
-		{
+		fflush(stdout);
+		memset(buf, 0, BUFLEN);
 
-			fflush(stdout);
-			memset(buf, 0, BUFLEN);
-
-			if ((recv_len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *)&si_other, &slen)) == SOCKET_ERROR)
-			{
-				exit(EXIT_FAILURE);
-			}
-
-			r(cycle_speed_kmph_) = (float)(atoi(buf));
-			int a = 10*((r(vehicle_velocity_)) * 3.6);
-			int b = 1000 * r(driver_brake_demand_);
-
-// extract speed decimal values
-
-int aa1 = a/100;
-int aa2 = ((a-(aa1*100))/10);
-int aa3 = a-(aa1*100)-(aa2*10);
-
-// extract braking decimal values
-
-
-int bb1 = b/100;
-int bb2 = ((b-(bb1*100))/10);
-int bb3 = b-(bb1*100)-(bb2*10);
-
-// convert to ascii
-
-char s1 = '0' + aa1;
-char s2 = '0' +  aa2;
-char s3 = '0' +  aa3;
-
-
-char b1 = '0' + bb1;
-char b2 = '0' + bb2;
-char b3 = '0' + bb3;
-
- printf(" update aa1 %d  aa2 %d aa3 %d bb1 %d bb2 %d bb3 %d \n", aa1,aa2,aa3,bb1,bb2,bb3);
-
-char DYNAMICS[] = {s1, s2,  s3, (char)32 , b1,b2, b3 };
-
-// char STUDENT[] = {NULL,NULL," hello khalid" };
-
- 
-
-		if (sendto(s, DYNAMICS, sizeof(DYNAMICS), 0, (struct sockaddr*) &si_other, slen) == SOCKET_ERROR)
+		if ((recv_len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *)&si_other, &slen)) == SOCKET_ERROR)
 		{
 			exit(EXIT_FAILURE);
 		}
-			break;
+
+		r(cycle_speed_kmph_) = (float)(atoi(buf));
+		int a = 10 * ((r(vehicle_velocity_)) * 3.6);
+		int b = 1000 * r(driver_brake_demand_);
+
+		// extract speed decimal values
+
+		int aa1 = a / 100;
+		int aa2 = ((a - (aa1 * 100)) / 10);
+		int aa3 = a - (aa1 * 100) - (aa2 * 10);
+
+		// extract braking decimal values
+
+		int bb1 = b / 100;
+		int bb2 = ((b - (bb1 * 100)) / 10);
+		int bb3 = b - (bb1 * 100) - (bb2 * 10);
+
+		// convert to ascii
+
+		char s1 = '0' + aa1;
+		char s2 = '0' + aa2;
+		char s3 = '0' + aa3;
+
+		char b1 = '0' + bb1;
+		char b2 = '0' + bb2;
+		char b3 = '0' + bb3;
+
+		printf(" update aa1 %d  aa2 %d aa3 %d bb1 %d bb2 %d bb3 %d \n", aa1, aa2, aa3, bb1, bb2, bb3);
+
+		char DYNAMICS[] = {s1, s2, s3, (char)32, b1, b2, b3};
+
+		if (sendto(s, DYNAMICS, sizeof(DYNAMICS), 0, (struct sockaddr *)&si_other, slen) == SOCKET_ERROR)
+		{
+			exit(EXIT_FAILURE);
 		}
 	}
 	closesocket(s);
