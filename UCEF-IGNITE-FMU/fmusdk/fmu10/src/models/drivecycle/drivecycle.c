@@ -7,7 +7,6 @@
 #define NUMBER_OF_STATES 0
 #define NUMBER_OF_EVENT_INDICATORS 0
 #define BUFLEN 1024 //Max length of buffer
-#define SIMTIME 400
 #define PORT 8888
 #include "fmuTemplate.h"
 #include <winsock2.h>
@@ -108,10 +107,7 @@ void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 	// puts("Bind done");
 	i(counter_) += 1;
 
-	if (i(counter_) > SIMTIME)
-		eventInfo->terminateSimulation = fmiTrue;
-	else
-	{
+
 
 		eventInfo->upcomingTimeEvent = fmiTrue;
 		eventInfo->nextEventTime = 1 + comp->time;
@@ -158,7 +154,7 @@ void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 		{
 			exit(EXIT_FAILURE);
 		}
-	}
+
 	closesocket(s);
 	WSACleanup();
 
