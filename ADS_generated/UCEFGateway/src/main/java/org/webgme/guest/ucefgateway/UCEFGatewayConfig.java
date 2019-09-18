@@ -42,7 +42,7 @@ public class UCEFGatewayConfig extends FederateConfig {
 	@FederateParameter
 	public String DataAnalytics_Motor_Temperature;
 	@FederateParameter
-	public String DataAnalytics_Inverter_Temperature;
+	public String IGNITE_Cycle_Time;
 	@FederateParameter
 	public String DataAnalytics_Vehicle_Speed_Response;
 	@FederateParameter

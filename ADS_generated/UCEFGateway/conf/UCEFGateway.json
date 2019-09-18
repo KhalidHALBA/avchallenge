@@ -16,7 +16,7 @@
   "Motor_Cooling_Heating_Commands":"0", 
   "Inverter_Cooling_Heating_Commands":"0", 
   "DataAnalytics_Motor_Temperature" : "0",
-  "DataAnalytics_Inverter_Temperature" : "0",
+  "IGNITE_Cycle_Time" : "0",
   "DataAnalytics_Vehicle_Speed_Response" : "0",
   "DataAnalytics_Motor_Power_Limits" : "0",
   "EventInjection_Battery_Peak_Current" : "0",

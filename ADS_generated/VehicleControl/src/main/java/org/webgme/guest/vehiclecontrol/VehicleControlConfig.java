@@ -37,7 +37,7 @@ public class VehicleControlConfig extends FederateConfig {
 	@FederateParameter
 	public String UCEF_Control_Speed; // see graph i`n slide 3
 	@FederateParameter
-	public String Hydraulic_Valve_Commands; // see graph in slide 3
+	public String IGNITE_TIME; // see graph in slide 3
 	// PGN : multiple PGNs per Federate are possible. we use the Federate name
 	// as a placeholder for now.
 	@FederateParameter

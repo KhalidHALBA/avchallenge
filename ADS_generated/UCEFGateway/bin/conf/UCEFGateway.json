@@ -22,7 +22,7 @@
   
 
   "DataAnalytics_Motor_Temperature" : "0",
-  "DataAnalytics_Inverter_Temperature" : "0",
+  "IGNITE_Cycle_Time" : "0",
 <<<<<<< HEAD
   "DataAnalytics_Vehicle_Speed_Response" : "0",
 =======

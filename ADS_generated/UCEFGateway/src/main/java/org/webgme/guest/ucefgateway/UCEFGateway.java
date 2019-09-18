@@ -55,7 +55,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 		UCEFGatewayparameter.DataAnalytics_Motor_Temperature = params.DataAnalytics_Motor_Temperature;
 
-		UCEFGatewayparameter.DataAnalytics_Inverter_Temperature = params.DataAnalytics_Inverter_Temperature;
+		UCEFGatewayparameter.IGNITE_Cycle_Time = params.IGNITE_Cycle_Time;
 
 		UCEFGatewayparameter.DataAnalytics_Vehicle_Speed_Response = params.DataAnalytics_Vehicle_Speed_Response;
 
@@ -154,6 +154,14 @@ public class UCEFGateway extends UCEFGatewayBase {
 			System.out.println("IGNITE braking response float = " + b1);
 			
 			UCEFGatewayparameter.Brake_Pressure = Double.toString(b1);
+			
+			
+			
+			float t = Float.valueOf(speeds[2].trim()).floatValue();
+			System.out.println("IGNITE Time response float = " + t);
+			
+			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t);
+			
 
 			clientSocket.close();
 
@@ -166,7 +174,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 	public String Build_SPN() {
 
 		return UCEFGatewayparameter.UCEFGatewaySPNs = UCEFGatewayparameter.Vehicle_Speed_Response + " "
-				+ UCEFGatewayparameter.Brake_Pressure;
+				+ UCEFGatewayparameter.Brake_Pressure +" "+ UCEFGatewayparameter.IGNITE_Cycle_Time;
 	}
 
 	public void Build_and_Send_CAN_Frame(String pgn, String spn) {
