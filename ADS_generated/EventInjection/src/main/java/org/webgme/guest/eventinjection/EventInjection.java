@@ -51,7 +51,7 @@ public class EventInjection extends EventInjectionBase {
 
 	{
 
-		if ((((currentTime / 20) > 249) && ((currentTime / 20) < 276)) || (((currentTime / 20) > 40) && ((currentTime / 20) < 50))   ) {
+		if ((((currentTime / 3) > 2490) && ((currentTime / 3) < 2760)) || (((currentTime / 3) > 400) && ((currentTime / 3) < 500))   ) {
 			d = true;
 
 			EventInjectionparameter.Obstacle_Presence_distance = Boolean.toString(d);
@@ -151,7 +151,7 @@ public class EventInjection extends EventInjectionBase {
 			// vCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 
 			checkReceivedSubscriptions();
-			int osd = (int) (currentTime) % 20;
+			int osd = (int) (currentTime) % 3;
 
 			switch (osd) {
 

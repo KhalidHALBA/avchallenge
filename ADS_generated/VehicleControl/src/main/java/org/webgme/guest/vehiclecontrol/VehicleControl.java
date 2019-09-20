@@ -200,11 +200,11 @@ public class VehicleControl extends VehicleControlBase {
 			// vCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 
 			checkReceivedSubscriptions();
-			int osd = (int) (currentTime) % 20;
+			int osd = (int) (currentTime) % 3;
 
 			int IGNITE_TIME_d = (int)Double.parseDouble( VehicleControlparameter.IGNITE_TIME );
 
-			log.info("ucef time " + (int) (currentTime / 20) + "  ignite time "+ IGNITE_TIME_d + "  logical time " + currentTime );
+			log.info("ucef time " + (int) (currentTime / 3) + "  ignite time "+ IGNITE_TIME_d + "  logical time " + currentTime );
 			
 			
 			switch (osd) {

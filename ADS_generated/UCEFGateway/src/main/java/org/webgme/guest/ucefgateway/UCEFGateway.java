@@ -144,23 +144,25 @@ public class UCEFGateway extends UCEFGatewayBase {
 			String[] speeds = vehicleResponse.split(" ");
 			
 			float f = Float.valueOf(speeds[0].trim()).floatValue();
-			float f1 = f/10;
+			float f1 = f/100;
 			System.out.println("IGNITE speed response float = " + f1);
 			
 			UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f1);
 			
 			float b = Float.valueOf(speeds[1].trim()).floatValue();
-			float b1 = b/10;
+			float b1 = b/100;
 			System.out.println("IGNITE braking response float = " + b1);
 			
 			UCEFGatewayparameter.Brake_Pressure = Double.toString(b1);
 			
 			
-			
 			float t = Float.valueOf(speeds[2].trim()).floatValue();
-			System.out.println("IGNITE Time response float = " + t);
 			
-			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t);
+			float t1 = t/100;
+			
+			System.out.println("IGNITE Time response float = " + t1);
+			
+			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t1);
 			
 
 			clientSocket.close();
@@ -254,14 +256,12 @@ public class UCEFGateway extends UCEFGatewayBase {
 			// TODO break here if ready to resign and break out of while loop //
 			////////////////////////////////////////////////////////////////////
 
-			int osd = (int) (currentTime) % 20;
+			int osd = (int) (currentTime) % 3;
 			switch (osd) {
 
 			case 2:
 				byte[] receiveData = new byte[1024];
 				Send_Receive(receiveData);
-				break;
-			case 3:
 				Build_and_Send_CAN_Frame(UCEFGatewayparameter.UCEFGatewayPGN, Build_SPN());
 				break;
 
