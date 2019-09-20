@@ -6,14 +6,18 @@ import org.cpswt.hla.InteractionRoot;
 import org.cpswt.hla.base.AdvanceTimeRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.awt.BasicStroke;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
-
-// Define the DataAnalytics type of federate for the federation.
+import org.knowm.xchart.style.Styler.YAxisPosition;
+import org.knowm.xchart.style.colors.XChartSeriesColors;
+import org.knowm.xchart.style.lines.SeriesLines;
+import org.knowm.xchart.style.markers.SeriesMarkers;
 
 public class DataAnalytics extends DataAnalyticsBase {
 
@@ -51,8 +55,6 @@ public class DataAnalytics extends DataAnalyticsBase {
 		}
 	}
 
-
-
 	public void Build_and_Send_CAN_Frame(String pgn, String spn)
 
 	{
@@ -61,63 +63,33 @@ public class DataAnalytics extends DataAnalyticsBase {
 		DataAnalyticsCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 	}
 
-	public void update_chart(int ost, int speed, int speed1, int brake, XYChart chart, SwingWrapper<XYChart> sw, double[] xData,
-			double[] xData1, double[] xData2, ArrayList<Integer> yData, ArrayList<Integer> yData1 ,  ArrayList<Integer>  yData2) throws Exception
+	public void update_chart(int ost, double speed, double speed1, double brake, XYChart chart, SwingWrapper<XYChart> sw, double[] xData,
+			double[] xData1, double[] xData2, ArrayList<Double> yData, ArrayList<Double> yData1 ,  ArrayList<Double>  yData2) throws Exception
 
 	{
 
-		final ArrayList<Integer> data1 = fill_array(ost, speed1, xData, yData1);
-
-//		System.out.println("Step Number : " + ost);
-
-//		for (int i = 0; i < data1.size(); i++) {
-//			System.out.println("Speed Array : " + i + " = " + data1.get(i));
-//		}
-
+		final ArrayList<Double> data1 = fill_array(ost, speed1, xData, yData1);
 		
+		final ArrayList<Double> data2 = fill_array(ost, brake, xData2, yData2);
 		
-		final ArrayList<Integer> data2 = fill_array(ost, brake, xData2, yData2);
-
-//		System.out.println("Step Number : " + ost);
-
-//		for (int i = 0; i < data2.size(); i++) {
-//			System.out.println("Brake Array : " + i + " = " + data1.get(i));
-//		}
-//		
-		
-		
-		
-		
-		
-		
-		
-		
-		final ArrayList<Integer> data = fill_array(ost, speed, xData, yData);
-
-//		System.out.println();
+		final ArrayList<Double> data = fill_array(ost, speed, xData, yData);
 
 		chart.getStyler().setYAxisMax((double) 100);
 		chart.getStyler().setYAxisMin(null, (double) 0);
 
-		chart.getStyler().setXAxisMax((double) 350);
+		chart.getStyler().setXAxisMax((double) 3500);
 		chart.getStyler().setXAxisMin((double) 0);
-
-//		System.out.println("Step Number : " + ost);
-
-//		for (int i = 0; i < data.size(); i++) {
-//			System.out.println("Speed Array : " + i + " = " + data.get(i));
-//		}
 
 		Thread.sleep(ost);
 
 		chart.updateXYSeries("Vehicle_Response", null, data, null);
-		chart.updateXYSeries("Speed_Control", null, data1, null);
-		chart.updateXYSeries("Brake_Pressure", null, data2, null);
+		chart.updateXYSeries("Speed_Control", null, data1, null).setMarker(SeriesMarkers.NONE).setLineColor(XChartSeriesColors.RED).setLineStyle(SeriesLines.SOLID).setLineWidth(2);
+		chart.updateXYSeries("Brake_Pressure", null, data2, null).setMarker(SeriesMarkers.NONE).setLineColor(XChartSeriesColors.BLACK).setLineStyle(SeriesLines.DASH_DOT).setLineWidth(2);
 		sw.repaintChart();
 
 	}
 
-	private static ArrayList<Integer> fill_array(int time, int speed, double[] xData, ArrayList<Integer> yData)
+	private static ArrayList<Double> fill_array(int time, double speed, double[] xData, ArrayList<Double> yData)
 			throws Exception {
 		xData[time] = time;
 		yData.add(time, speed);
@@ -126,34 +98,24 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 	private void execute() throws Exception {
 
-		ArrayList<Integer> initdata = new ArrayList<Integer>();
-		initdata.add(0);
+		ArrayList<Double> initdata = new ArrayList<Double>();
+		initdata.add(0.0);
 
-		XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time", "Speed[kmph] / braking_demand[0-100] ", "Vehicle_Response", null,
+		XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time", "Speed[kph] / braking_demand[0-100] ", "Vehicle_Response", null,
 				initdata);
 
 		SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
 		sw.displayChart();
 
-		ArrayList<Integer> initdata1 = new ArrayList<Integer>();
-		initdata1.add(0);
+		ArrayList<Double> initdata1 = new ArrayList<Double>();
+		initdata1.add(0.0);
 
 		chart.addSeries("Speed_Control", initdata1);
 
-		
-		
-		
-		ArrayList<Integer> initdata2 = new ArrayList<Integer>();
-		initdata2.add(0);
+		ArrayList<Double> initdata2 = new ArrayList<Double>();
+		initdata2.add(0.0);
 
 		chart.addSeries("Brake_Pressure", initdata2);
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		if (super.isLateJoiner()) {
@@ -188,15 +150,15 @@ public class DataAnalytics extends DataAnalyticsBase {
 		startAdvanceTimeThread();
 		log.info("started logical time progression");
 
-		double[] xData = new double[350];
-		ArrayList<Integer> yData = new ArrayList<Integer>();
+		double[] xData = new double[3500];
+		ArrayList<Double> yData = new ArrayList<Double>();
 
-		double[] xData1 = new double[350];
-		ArrayList<Integer> yData1 = new ArrayList<Integer>();
+		double[] xData1 = new double[3500];
+		ArrayList<Double> yData1 = new ArrayList<Double>();
 		
 		
-		double[] xData2 = new double[350];
-		ArrayList<Integer> yData2 = new ArrayList<Integer>();
+		double[] xData2 = new double[3500];
+		ArrayList<Double> yData2 = new ArrayList<Double>();
 		
 		
 
@@ -234,38 +196,33 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 			checkReceivedSubscriptions();
 
-			final int speed = (int) (Double.parseDouble(DataAnalyticsparameter.Motor_Power_Limits));
-			final int brake = (int) (Double.parseDouble(DataAnalyticsparameter.UCEFGateway_Torque_Commands));
-			final int speed1 = (int) (Double.parseDouble(DataAnalyticsparameter.Engine_Speed));
+			final double speed = Double.parseDouble(DataAnalyticsparameter.Motor_Power_Limits);
+			final double brake = Double.parseDouble(DataAnalyticsparameter.UCEFGateway_Torque_Commands);
+			final double speed1 =  Double.parseDouble(DataAnalyticsparameter.Engine_Speed);
 
 
-			int osd = (int) (currentTime) % 20;
-			int time = (int) (currentTime / 20);
+			int osd = (int) (currentTime) % 3;
+			int time = (int) (currentTime / 3);
 
 			System.out.println("time   " + time + "   control_speed  " + speed + " response_speed "  +  speed1 + " brake"  + brake + "  current_time " + currentTime);
 
 			switch (osd) {
 
-			case 1:
-
+			case 0:
 				myExecutor.execute(new Runnable() {
 					public void run() {
 						try {
-
 							update_chart(time, speed, speed1, brake, chart, sw, xData, xData1, xData2, yData, yData1 , yData2);
-							// update_chart1(time , speed1, chart1, sw1, xData1,
-							// yData1);
+
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
+
 							e.printStackTrace();
 						}
 					}
 				});
-
 				break;
 
 			}
-
 			////////////////////////////////////////////////////////////////////
 			// TODO break here if ready to resign and break out of while loop //
 			////////////////////////////////////////////////////////////////////

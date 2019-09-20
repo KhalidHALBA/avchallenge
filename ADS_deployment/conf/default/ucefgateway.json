@@ -5,7 +5,7 @@
   "isLateJoiner": false,
   "lookAhead": 0.2,
   "stepSize": 1.0,
-"UCEFGatewayPGN" : "UCEFGateway",
+  "UCEFGatewayPGN" : "UCEFGateway",
   "UCEFGatewaySPNs" : "0",
   "Motor_Operating_Mode":"0",
   "Motor_Torque_cmd":"0",
@@ -15,14 +15,10 @@
   "Battery_Cooling_Heating_Commands":"0", 
   "Motor_Cooling_Heating_Commands":"0", 
   "Inverter_Cooling_Heating_Commands":"0", 
-  
-
   "DataAnalytics_Motor_Temperature" : "0",
-  "DataAnalytics_Inverter_Temperature" : "0",
+  "IGNITE_Cycle_Time" : "0",
   "DataAnalytics_Vehicle_Speed_Response" : "0",
   "DataAnalytics_Motor_Power_Limits" : "0",
-  
-  
   "EventInjection_Battery_Peak_Current" : "0",
   "EventInjection_Battery_Peak_Voltage" : "0",
   "EventInjection_Battery_State_of_charge_and_Health" : "0",
@@ -30,15 +26,12 @@
   "EventInjection_Battery_Max_Min_Cell_Temperature" : "0",
   "EventInjection_Battery_Pack_Power_limit" : "0",
   "EventInjection_Obstacle_Presence_distance" : "0",      
-  
-  "VehicleControl_Vehicle_Control_Speed" : "0",
+  "UCEF_Vehicle_Speed_Control" : "0",
   "VehicleControl_Vehicle_Speed" : "0",
   "VehicleControl_Event_Status" : "0",
-
-  
   "Accel_Pedal_Position":"0",
   "Brake_Pressure":"0",
-
+  "IGNITE_IP":"192.168.78.1",
   "messageTime" : 0,
   "COA_Message" : "0"
 }

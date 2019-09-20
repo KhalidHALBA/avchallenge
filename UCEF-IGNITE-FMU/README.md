@@ -1,23 +1,28 @@
 # FMU-IGNITE
-This is an FMU that implements a UDP client, enabling external simulators to send custom Drive Cycles to IGNITE's Cycle Driver.
-## UDP server source code : 
-* UDP-sockets/server.c
-## Building UDP Server 
 
-* gcc server.c -o server -lws2_32
+* Role: 
 
-## running the UDP Server : 
+This is an FMU that implements a UDP client, enabling UCEF to send custom Drive Cycles to IGNITE's Cycle Driver.
 
-UDP-sockets>server.exe
+# Building the FMU
 
-## FMU source code : 
+C:\Users\USER\avchallenge\UCEF-IGNITE-FMU\fmusdk\fmu10\src\models>build_fmu cs drivecycle -win64
 
-* fmusdk/fmu10/src/cs/models/drivecycle
+# Portability instructions
 
-## Building the FMU
 
-* build_fmu cs drivecycle -win64
+## ADS_DEMO (UCEF MACHINE)
 
-## simulating the FMU with fmusim:
+* copy VM to your machine
+* make sure it has 2 network interfaces : a NAT interface for internet connectivity and a Host-ONLY interface for communication with IGNITE  (For Mac OS you must add the host only interface manually).
+* using ifconfig on ADS_demo and ipconfig on WINDOWS2012VM_default make sure the "IGNITE_IP" parameter corresponds to IGNITE's VM.
 
-fmusdk>fmusim cs10 fmu10\fmu\cs\x64\drivecycle.fmu 1500 1 0 s
+## WINDOWS2012VM_default (IGNITE MACHINE)
+
+* copy VM to your machine
+* make sure UDP ports are enabled. (disabled by default)
+
+## How to run
+
+* Once Portability instructions above are respected : 
+- Run IGNITE's solver first, when the Solver is up and running then run UCEF.  

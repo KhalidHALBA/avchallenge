@@ -42,7 +42,7 @@ public class UCEFGatewayConfig extends FederateConfig {
 	@FederateParameter
 	public String DataAnalytics_Motor_Temperature;
 	@FederateParameter
-	public String DataAnalytics_Inverter_Temperature;
+	public String IGNITE_Cycle_Time;
 	@FederateParameter
 	public String DataAnalytics_Vehicle_Speed_Response;
 	@FederateParameter
@@ -62,7 +62,7 @@ public class UCEFGatewayConfig extends FederateConfig {
 	@FederateParameter
 	public String EventInjection_Obstacle_Presence_distance;
 	@FederateParameter
-	public String VehicleControl_Vehicle_Control_Speed;
+	public String UCEF_Vehicle_Speed_Control;
 	@FederateParameter
 	public String VehicleControl_Vehicle_Speed;
 	@FederateParameter
@@ -75,5 +75,7 @@ public class UCEFGatewayConfig extends FederateConfig {
 	public double messageTime;
 	@FederateParameter
 	public String COA_Message;
+	@FederateParameter
+	public String IGNITE_IP;
 
 }

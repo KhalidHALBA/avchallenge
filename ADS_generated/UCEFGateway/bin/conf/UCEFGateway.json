@@ -22,7 +22,7 @@
   
 
   "DataAnalytics_Motor_Temperature" : "0",
-  "DataAnalytics_Inverter_Temperature" : "0",
+  "IGNITE_Cycle_Time" : "0",
 <<<<<<< HEAD
   "DataAnalytics_Vehicle_Speed_Response" : "0",
 =======
@@ -40,7 +40,7 @@
   "EventInjection_Obstacle_Presence_distance" : "0",      
   
 <<<<<<< HEAD
-  "VehicleControl_Vehicle_Control_Speed" : "0",
+  "UCEF_Vehicle_Speed_Control" : "0",
 =======
   "VehicleControl_Wheel_Speed" : "0",
 >>>>>>> 6e1362504b16dd5b436837cbe7d96230d61b1801

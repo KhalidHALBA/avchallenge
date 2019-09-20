@@ -19,7 +19,7 @@
 "UCEFGateway_PGN" : "placeholder",
 "EventInjection_Obstacle_Presence_distance" : "0",
 "Wheel_Speed_Sensors":"placeholder", 
-"Hydraulic_Valve_Commands":"placeholder",
+"IGNITE_TIME":"placeholder",
 "VehicleControlPGN" : "VehicleControl",
 "VehicleControlSPNs" :   "0",
 "messageTime":0.0
