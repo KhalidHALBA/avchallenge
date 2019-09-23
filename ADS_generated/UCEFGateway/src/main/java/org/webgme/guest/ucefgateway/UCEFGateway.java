@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import java.net.*;
 import java.util.Queue;
 
-
 // Define the UCEFGateway type of federate for the federation.
 
 public class UCEFGateway extends UCEFGatewayBase {
@@ -86,7 +85,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 		UCEFGatewayparameter.Brake_Pressure = params.Brake_Pressure;
 
 		UCEFGatewayparameter.messageTime = params.messageTime;
-		
+
 		UCEFGatewayparameter.IGNITE_IP = params.IGNITE_IP;
 
 	}
@@ -115,8 +114,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 		}
 	}
 
-	public void Send_Receive(byte[] receiveData ) {
-
+	public void Send_Receive(byte[] receiveData) {
 
 		try {
 			DatagramSocket clientSocket = new DatagramSocket();
@@ -130,45 +128,42 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 			DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 8888);
 
-			
 			clientSocket.send(sendPacket);
 
 			receivePacket.setLength(receiveData.length);
-			
+
 			clientSocket.receive(receivePacket);
 
 			String vehicleResponse = new String(receivePacket.getData());
-			
-			//  System.out.println(" vehicle dynamics " + vehicleResponse);
-	
+
+			// System.out.println(" vehicle dynamics " + vehicleResponse);
+
 			String[] speeds = vehicleResponse.split(" ");
-			
+
 			float f = Float.valueOf(speeds[0].trim()).floatValue();
-			float f1 = f/100;
-			//  System.out.println("IGNITE speed response float = " + f1);
-			
+			float f1 = f / 100;
+			// System.out.println("IGNITE speed response float = " + f1);
+
 			UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f1);
-			
+
 			float b = Float.valueOf(speeds[1].trim()).floatValue();
-			float b1 = b/100;
-			//  System.out.println("IGNITE braking response float = " + b1);
-			
+			float b1 = b / 100;
+			// System.out.println("IGNITE braking response float = " + b1);
+
 			UCEFGatewayparameter.Brake_Pressure = Double.toString(b1);
-			
-			
+
 			float t = Float.valueOf(speeds[2].trim()).floatValue();
-			
-			float t1 = t/100;
-			
-			//  System.out.println("IGNITE Time response float = " + t1);
-			
+
+			float t1 = t / 100;
+
+			// System.out.println("IGNITE Time response float = " + t1);
+
 			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t1);
-			
 
 			clientSocket.close();
 
 		} catch (Exception e) {
-			//  System.out.println(e);
+			// System.out.println(e);
 		}
 
 	}
@@ -176,7 +171,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 	public String Build_SPN() {
 
 		return UCEFGatewayparameter.UCEFGatewaySPNs = UCEFGatewayparameter.Vehicle_Speed_Response + " "
-				+ UCEFGatewayparameter.Brake_Pressure +" "+ UCEFGatewayparameter.IGNITE_Cycle_Time;
+				+ UCEFGatewayparameter.Brake_Pressure + " " + UCEFGatewayparameter.IGNITE_Cycle_Time;
 	}
 
 	public void Build_and_Send_CAN_Frame(String pgn, String spn) {
@@ -251,7 +246,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			// vCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 
 			checkReceivedSubscriptions();
-			
+
 			////////////////////////////////////////////////////////////////////
 			// TODO break here if ready to resign and break out of while loop //
 			////////////////////////////////////////////////////////////////////

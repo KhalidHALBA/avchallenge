@@ -63,15 +63,16 @@ public class DataAnalytics extends DataAnalyticsBase {
 		DataAnalyticsCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 	}
 
-	public void update_chart(int ost, double speed, double speed1, double brake, XYChart chart, SwingWrapper<XYChart> sw, double[] xData,
-			double[] xData1, double[] xData2, ArrayList<Double> yData, ArrayList<Double> yData1 ,  ArrayList<Double>  yData2) throws Exception
+	public void update_chart(int ost, double speed, double speed1, double brake, XYChart chart,
+			SwingWrapper<XYChart> sw, double[] xData, double[] xData1, double[] xData2, ArrayList<Double> yData,
+			ArrayList<Double> yData1, ArrayList<Double> yData2) throws Exception
 
 	{
 
 		final ArrayList<Double> data1 = fill_array(ost, speed1, xData, yData1);
-		
+
 		final ArrayList<Double> data2 = fill_array(ost, brake, xData2, yData2);
-		
+
 		final ArrayList<Double> data = fill_array(ost, speed, xData, yData);
 
 		chart.getStyler().setYAxisMax((double) 100);
@@ -82,9 +83,11 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 		Thread.sleep(ost);
 
-		chart.updateXYSeries("Vehicle_Response", null, data, null);
-		chart.updateXYSeries("Speed_Control", null, data1, null).setMarker(SeriesMarkers.NONE).setLineColor(XChartSeriesColors.RED).setLineStyle(SeriesLines.SOLID).setLineWidth(2);
-		chart.updateXYSeries("Brake_Pressure", null, data2, null).setMarker(SeriesMarkers.NONE).setLineColor(XChartSeriesColors.BLACK).setLineStyle(SeriesLines.DASH_DOT).setLineWidth(2);
+		chart.updateXYSeries("Vehicle_Velocity", null, data, null);
+		chart.updateXYSeries("FTP75_DC_Speed_Control", null, data1, null).setMarker(SeriesMarkers.NONE)
+				.setLineColor(XChartSeriesColors.RED).setLineStyle(SeriesLines.SOLID).setLineWidth(2);
+		chart.updateXYSeries("Driver_Brake_demand", null, data2, null).setMarker(SeriesMarkers.NONE)
+				.setLineColor(XChartSeriesColors.BLACK).setLineStyle(SeriesLines.DASH_DOT).setLineWidth(2);
 		sw.repaintChart();
 
 	}
@@ -101,8 +104,8 @@ public class DataAnalytics extends DataAnalyticsBase {
 		ArrayList<Double> initdata = new ArrayList<Double>();
 		initdata.add(0.0);
 
-		XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time", "Speed[kph] / braking_demand[0-100] ", "Vehicle_Response", null,
-				initdata);
+		XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time [0.1 second]", "Speed [kph] / Driver_Brake_demand [0-100] ",
+				"Vehicle_Velocity", null, initdata);
 
 		SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
 		sw.displayChart();
@@ -110,16 +113,15 @@ public class DataAnalytics extends DataAnalyticsBase {
 		ArrayList<Double> initdata1 = new ArrayList<Double>();
 		initdata1.add(0.0);
 
-		chart.addSeries("Speed_Control", initdata1);
+		chart.addSeries("FTP75_DC_Speed_Control", initdata1);
 
 		ArrayList<Double> initdata2 = new ArrayList<Double>();
 		initdata2.add(0.0);
 
-		chart.addSeries("Brake_Pressure", initdata2);
-		
-		
+		chart.addSeries("Driver_Brake_demand", initdata2);
+
 		if (super.isLateJoiner()) {
-			//  log.info("turning off time regulation (late joiner)");
+			// log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
@@ -132,9 +134,9 @@ public class DataAnalytics extends DataAnalyticsBase {
 		putAdvanceTimeRequest(atr);
 
 		if (!super.isLateJoiner()) {
-			//  log.info("waiting on readyToPopulate...");
+			// log.info("waiting on readyToPopulate...");
 			readyToPopulate();
-			//  log.info("...synchronized on readyToPopulate");
+			// log.info("...synchronized on readyToPopulate");
 		}
 
 		///////////////////////////////////////////////////////////////////////
@@ -142,25 +144,22 @@ public class DataAnalytics extends DataAnalyticsBase {
 		///////////////////////////////////////////////////////////////////////
 
 		if (!super.isLateJoiner()) {
-			//  log.info("waiting on readyToRun...");
+			// log.info("waiting on readyToRun...");
 			readyToRun();
-			//  log.info("...synchronized on readyToRun");
+			// log.info("...synchronized on readyToRun");
 		}
 
 		startAdvanceTimeThread();
-		//  log.info("started logical time progression");
+		// log.info("started logical time progression");
 
 		double[] xData = new double[3500];
 		ArrayList<Double> yData = new ArrayList<Double>();
 
 		double[] xData1 = new double[3500];
 		ArrayList<Double> yData1 = new ArrayList<Double>();
-		
-		
+
 		double[] xData2 = new double[3500];
 		ArrayList<Double> yData2 = new ArrayList<Double>();
-		
-		
 
 		while (!exitCondition) {
 			atr.requestSyncStart();
@@ -198,13 +197,14 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 			final double speed = Double.parseDouble(DataAnalyticsparameter.Motor_Power_Limits);
 			final double brake = Double.parseDouble(DataAnalyticsparameter.UCEFGateway_Torque_Commands);
-			final double speed1 =  Double.parseDouble(DataAnalyticsparameter.Engine_Speed);
-
+			final double speed1 = Double.parseDouble(DataAnalyticsparameter.Engine_Speed);
 
 			int osd = (int) (currentTime) % 3;
 			int time = (int) (currentTime / 3);
 
-			//  System.out.println("time   " + time + "   control_speed  " + speed + " response_speed "  +  speed1 + " brake"  + brake + "  current_time " + currentTime);
+			// System.out.println("time " + time + " control_speed " + speed + "
+			// response_speed " + speed1 + " brake" + brake + " current_time " +
+			// currentTime);
 
 			switch (osd) {
 
@@ -212,7 +212,8 @@ public class DataAnalytics extends DataAnalyticsBase {
 				myExecutor.execute(new Runnable() {
 					public void run() {
 						try {
-							update_chart(time, speed, speed1, brake, chart, sw, xData, xData1, xData2, yData, yData1 , yData2);
+							update_chart(time, speed, speed1, brake, chart, sw, xData, xData1, xData2, yData, yData1,
+									yData2);
 
 						} catch (Exception e) {
 
@@ -273,7 +274,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 			DataAnalyticsConfig federateConfig = federateConfigParser.parseArgs(args, DataAnalyticsConfig.class);
 			DataAnalytics federate = new DataAnalytics(federateConfig);
 			federate.execute();
-			//  log.info("Done.");
+			// log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
 			log.error(e);

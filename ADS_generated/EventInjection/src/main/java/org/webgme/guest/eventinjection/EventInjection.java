@@ -6,6 +6,7 @@ import org.cpswt.hla.InteractionRoot;
 import org.cpswt.hla.base.AdvanceTimeRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 // Define the EventInjection type of federate for the federation.
 public class EventInjection extends EventInjectionBase {
 	private final static Logger log = LogManager.getLogger();
@@ -13,6 +14,7 @@ public class EventInjection extends EventInjectionBase {
 	boolean obstacle_presence = false;
 	public EventInjectionConfig EventInjectionparameter = new EventInjectionConfig();
 	CAN EventInjectionCAN = create_CAN();
+
 	public EventInjection(EventInjectionConfig params) throws Exception {
 		super(params);
 		EventInjectionparameter.Obstacle_Presence_notification = params.Obstacle_Presence_notification;
@@ -27,46 +29,56 @@ public class EventInjection extends EventInjectionBase {
 		EventInjectionparameter.EventInjectionPGN = params.EventInjectionPGN;
 		EventInjectionparameter.EventInjectionSPNs = params.EventInjectionSPNs;
 	}
+
 	private void checkReceivedSubscriptions() {
 		InteractionRoot interaction = null;
 		while ((interaction = getNextInteractionNoWait()) != null) {
 			if (interaction instanceof CAN) {
 				handleInteractionClass((CAN) interaction);
 			} else {
-				// log.debug("unhandled interaction: {}", interaction.getClassName());
+				// log.debug("unhandled interaction: {}",
+				// interaction.getClassName());
 			}
 		}
 	}
-	public void Send_Obstacle_Notification(int ignite_t)
-	{
-		
-		
-	//	//  System.out.println(" ignite_t " + 		ignite_t +" currentTime/3 "+ (int)(currentTime/3) ) ;
-		
-		
-		if ((ignite_t > Integer.parseInt(EventInjectionparameter.sts1)) && (ignite_t < Integer.parseInt(EventInjectionparameter.ste1)) || (ignite_t > Integer.parseInt(EventInjectionparameter.sts2)) && (ignite_t < Integer.parseInt(EventInjectionparameter.ste2))) {
+
+	public void Send_Obstacle_Notification(int ignite_t) {
+
+		// // System.out.println(" ignite_t " + ignite_t +" currentTime/3 "+
+		// (int)(currentTime/3) ) ;
+
+		if ((ignite_t > Integer.parseInt(EventInjectionparameter.sts1))
+				&& (ignite_t < Integer.parseInt(EventInjectionparameter.ste1))
+				|| (ignite_t > Integer.parseInt(EventInjectionparameter.sts2))
+						&& (ignite_t < Integer.parseInt(EventInjectionparameter.ste2))) {
 			obstacle_presence = true;
 			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(obstacle_presence);
-			//  System.out.println("obstacle detected");
-			// // log.info("obstacle distance " + Boolean.toString(obstacle_presence) + " currenttime " + Double.toString(currentTime));
-			//  System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_notification);
-		}
-		else {
+			// System.out.println("obstacle detected");
+			// // log.info("obstacle distance " +
+			// Boolean.toString(obstacle_presence) + " currenttime " +
+			// Double.toString(currentTime));
+			// System.out.println("print string boolean " +
+			// EventInjectionparameter.Obstacle_Presence_notification);
+		} else {
 			obstacle_presence = false;
 			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(obstacle_presence);
-			//  System.out.println("obstacle not detected currenttime " + Double.toString(currentTime));
-			//  System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_notification);
+			// System.out.println("obstacle not detected currenttime " +
+			// Double.toString(currentTime));
+			// System.out.println("print string boolean " +
+			// EventInjectionparameter.Obstacle_Presence_notification);
 		}
 	}
+
 	public String Build_SPN() {
 		return EventInjectionparameter.EventInjectionSPNs = EventInjectionparameter.Obstacle_Presence_notification;
 	}
-	public void Build_and_Send_CAN_Frame(String pgn, String spn)
-	{
+
+	public void Build_and_Send_CAN_Frame(String pgn, String spn) {
 		EventInjectionCAN.set_ID18B(pgn);
 		EventInjectionCAN.set_DataField(spn);
 		EventInjectionCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 	}
+
 	private void execute() throws Exception {
 		if (super.isLateJoiner()) {
 			// log.info("turning off time regulation (late joiner)");
@@ -123,13 +135,15 @@ public class EventInjection extends EventInjectionBase {
 			// vCAN.set_sourceFed( < YOUR VALUE HERE > );
 			// vCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 			checkReceivedSubscriptions();
-			double ignite_time = Double.parseDouble(EventInjectionparameter.IGNITE_TIME_1); 
+			double ignite_time = Double.parseDouble(EventInjectionparameter.IGNITE_TIME_1);
 			int osd = (int) (currentTime) % 3;
 			switch (osd) {
 			case 0:
-				Send_Obstacle_Notification((int)ignite_time);
+				Send_Obstacle_Notification((int) ignite_time);
 				Build_and_Send_CAN_Frame(EventInjectionparameter.EventInjectionPGN, Build_SPN());
-				//  System.out.println(" OSD " + Integer.toString(osd) + " currentime " + Double.toString(currentTime)+ " ignite_time " + ignite_time );
+				// System.out.println(" OSD " + Integer.toString(osd) + "
+				// currentime " + Double.toString(currentTime)+ " ignite_time "
+				// + ignite_time );
 				break;
 			}
 			if (!exitCondition) {
@@ -143,6 +157,7 @@ public class EventInjection extends EventInjectionBase {
 		// call exitGracefully to shut down federate
 		exitGracefully();
 	}
+
 	private void handleInteractionClass(CAN interaction) {
 		///////////////////////////////////////////////////////////////
 		// TODO implement how to handle reception of the interaction //
@@ -155,6 +170,7 @@ public class EventInjection extends EventInjectionBase {
 			break;
 		}
 	}
+
 	public static void main(String[] args) {
 		try {
 			FederateConfigParser federateConfigParser = new FederateConfigParser();
