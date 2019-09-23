@@ -72,7 +72,7 @@ fi
 
 # run the federation manager
 cd $root_directory
-xterm -fg white -bg black -l -lf $logs_directory/federation-manager-${timestamp}.log -T "Federation Manager" -geometry 140x40+0+30 -e "export CPSWT_ROOT=`pwd` && mvn exec:java -P FederationManager" &
+xterm -fg white -fa 'Monospace' -fs 25 -bg black -l -lf $logs_directory/federation-manager-${timestamp}.log -T "Federation Manager" -geometry 140x40+0+30 -e "export CPSWT_ROOT=`pwd` && mvn exec:java -P FederationManager" &
 
 printf "Waiting for the federation manager to come online.."
 until $(curl -o /dev/null -s -f -X GET http://$fedmgr_host:$fedmgr_port/fedmgr); do
@@ -89,7 +89,7 @@ curl -o /dev/null -s -X POST http://$fedmgr_host:$fedmgr_port/fedmgr --data '{"a
 
 
 cd /home/vagrant/Desktop/ADS/ucef-database/target
-xterm -fg yellow -bg black -l -lf  /home/vagrant/Desktop/ADS/ucef-database/target/log/Database-${timestamp}.log -T "Database" -geometry 140x40+180+60 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar Database-0.0.1-SNAPSHOT.jar conf/Database.json" &
+xterm -fg yellow -fa 'Monospace' -fs 25 -bg black -l -lf  /home/vagrant/Desktop/ADS/ucef-database/target/log/Database-${timestamp}.log -T "Database" -geometry 140x40+180+60 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar Database-0.0.1-SNAPSHOT.jar conf/Database.json" &
 waitUntilJoined Database 1
 
 
@@ -102,17 +102,17 @@ waitUntilJoined Database 1
 
 
 cd $root_directory
-xterm -fg white -bg black -l -lf $logs_directory/UCEFGateway-${timestamp}.log -T "UCEFGateway" -geometry 140x40+120+150 -e "mvn exec:java -P ExecJava,UCEFGateway" &
+xterm -fg white -fa 'Monospace' -fs  25 -bg black -l -lf $logs_directory/UCEFGateway-${timestamp}.log -T "UCEFGateway" -geometry 140x40+120+150 -e "mvn exec:java -P ExecJava,UCEFGateway" &
 waitUntilJoined UCEFGateway 1
 
 
 cd $root_directory
-xterm -fg white -bg black -l -lf $logs_directory/EventInjection-${timestamp}.log -T "EventInjection" -geometry 140x40+90+120 -e "mvn exec:java -P ExecJava,EventInjection" &
+xterm -fg white -fa 'Monospace' -fs 25 -bg black -l -lf $logs_directory/EventInjection-${timestamp}.log -T "EventInjection" -geometry 140x40+90+120 -e "mvn exec:java -P ExecJava,EventInjection" &
 waitUntilJoined EventInjection 1
 
 
 cd $root_directory
-xterm -fg white -bg black -l -lf $logs_directory/VehicleControl-${timestamp}.log -T "VehicleControl" -geometry 140x40+150+180 -e "mvn exec:java -P ExecJava,VehicleControl" &
+xterm -fg white -fa 'Monospace' -fs 25 -bg black -l -lf $logs_directory/VehicleControl-${timestamp}.log -T "VehicleControl" -geometry 140x40+150+180 -e "mvn exec:java -P ExecJava,VehicleControl" &
 waitUntilJoined VehicleControl 1
 
 
@@ -120,7 +120,7 @@ waitUntilJoined VehicleControl 1
 
 
 cd $root_directory
-xterm -fg white -bg black -l -lf $logs_directory/DataAnalytics-${timestamp}.log -T "DataAnalytics" -geometry 140x40+30+60 -e "mvn exec:java -P ExecJava,DataAnalytics" &
+xterm -fg white -fa 'Monospace' -fs 25 -bg black -l -lf $logs_directory/DataAnalytics-${timestamp}.log -T "DataAnalytics" -geometry 140x40+30+60 -e "mvn exec:java -P ExecJava,DataAnalytics" &
 waitUntilJoined DataAnalytics 1
 
 

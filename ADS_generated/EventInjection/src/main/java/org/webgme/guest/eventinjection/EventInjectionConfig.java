@@ -31,7 +31,7 @@ public class EventInjectionConfig extends FederateConfig {
 	@FederateParameter
 	public String State_Of_Health; // pgn ? SPN ?
 	@FederateParameter
-	public String Remaining_Capacity; // pgn ? SPN ?
+	public String IGNITE_TIME_1; // pgn ? SPN ?
 	@FederateParameter
 	public String Max_Temperature;
 	@FederateParameter
@@ -54,7 +54,7 @@ public class EventInjectionConfig extends FederateConfig {
 	public String EventInjectionSPNs;
 
 	// String BMSSPNs = Peak_Voltage + Peak_Current + State_Of_Charge +
-	// State_Of_Health + Remaining_Capacity + Max_Temperature +Min_Temperature +
+	// State_Of_Health + IGNITE_TIME_1 + Max_Temperature +Min_Temperature +
 	// Peak_Current_Limit ;
 
 }

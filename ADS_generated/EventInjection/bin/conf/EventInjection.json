@@ -10,7 +10,7 @@
   "State_Of_Charge":"0", 
   "State_Of_Health":"0",
   "Obstacle_Presence_distance":"0",
-  "Remaining_Capacity":"0", 
+  "IGNITE_TIME_1":"0", 
   "Max_Temperature":"0",
   "Min_Temperature":"0",
   "Peak_Current_Limit":"0",
