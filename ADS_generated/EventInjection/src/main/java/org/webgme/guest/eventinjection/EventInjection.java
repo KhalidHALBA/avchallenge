@@ -15,15 +15,15 @@ public class EventInjection extends EventInjectionBase {
 	CAN EventInjectionCAN = create_CAN();
 	public EventInjection(EventInjectionConfig params) throws Exception {
 		super(params);
-		EventInjectionparameter.Peak_Voltage = params.Peak_Voltage;
-		EventInjectionparameter.Obstacle_Presence_distance = params.Obstacle_Presence_distance;
-		EventInjectionparameter.Peak_Current = params.Peak_Current;
-		EventInjectionparameter.State_Of_Charge = params.State_Of_Charge;
-		EventInjectionparameter.State_Of_Health = params.State_Of_Health;
+		EventInjectionparameter.Obstacle_Presence_notification = params.Obstacle_Presence_notification;
+		EventInjectionparameter.sts1 = params.sts1;
+		EventInjectionparameter.ste1 = params.ste1;
+		EventInjectionparameter.sts2 = params.sts2;
+		EventInjectionparameter.ste2 = params.ste2;
 		EventInjectionparameter.IGNITE_TIME_1 = params.IGNITE_TIME_1;
 		EventInjectionparameter.Max_Temperature = params.Max_Temperature;
 		EventInjectionparameter.Min_Temperature = params.Min_Temperature;
-		EventInjectionparameter.Peak_Current_Limit = params.Peak_Current_Limit;
+		EventInjectionparameter.ste1_Limit = params.ste1_Limit;
 		EventInjectionparameter.EventInjectionPGN = params.EventInjectionPGN;
 		EventInjectionparameter.EventInjectionSPNs = params.EventInjectionSPNs;
 	}
@@ -43,22 +43,23 @@ public class EventInjection extends EventInjectionBase {
 		
 		System.out.println(" ignite_t " + 		ignite_t +" currentTime/3 "+ (int)(currentTime/3) ) ;
 		
-				if ((((ignite_t) > 249) && ((ignite_t) < 276)) || (((ignite_t) > 40) && ((ignite_t) < 50))   ) {
+		
+		if ((ignite_t > Integer.parseInt(EventInjectionparameter.sts1)) && (ignite_t < Integer.parseInt(EventInjectionparameter.ste1)) || (ignite_t > Integer.parseInt(EventInjectionparameter.sts2)) && (ignite_t < Integer.parseInt(EventInjectionparameter.ste2))) {
 			d = true;
-			EventInjectionparameter.Obstacle_Presence_distance = Boolean.toString(d);
+			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(d);
 			System.out.println("obstacle detected");
 			log.info("obstacle distance " + Boolean.toString(d) + " currenttime " + Double.toString(currentTime));
-			System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_distance);
+			System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_notification);
 		}
 		else {
 			d = false;
-			EventInjectionparameter.Obstacle_Presence_distance = Boolean.toString(d);
+			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(d);
 			System.out.println("obstacle not detected currenttime " + Double.toString(currentTime));
-			System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_distance);
+			System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_notification);
 		}
 	}
 	public String Build_SPN() {
-		return EventInjectionparameter.EventInjectionSPNs = EventInjectionparameter.Obstacle_Presence_distance;
+		return EventInjectionparameter.EventInjectionSPNs = EventInjectionparameter.Obstacle_Presence_notification;
 	}
 	public void Build_and_Send_CAN_Frame(String pgn, String spn)
 	{
