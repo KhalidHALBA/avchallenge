@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 public class EventInjection extends EventInjectionBase {
 	private final static Logger log = LogManager.getLogger();
 	private double currentTime = 0;
-	boolean d = false;
+	boolean obstacle_presence = false;
 	public EventInjectionConfig EventInjectionparameter = new EventInjectionConfig();
 	CAN EventInjectionCAN = create_CAN();
 	public EventInjection(EventInjectionConfig params) throws Exception {
@@ -45,15 +45,15 @@ public class EventInjection extends EventInjectionBase {
 		
 		
 		if ((ignite_t > Integer.parseInt(EventInjectionparameter.sts1)) && (ignite_t < Integer.parseInt(EventInjectionparameter.ste1)) || (ignite_t > Integer.parseInt(EventInjectionparameter.sts2)) && (ignite_t < Integer.parseInt(EventInjectionparameter.ste2))) {
-			d = true;
-			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(d);
+			obstacle_presence = true;
+			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(obstacle_presence);
 			//  System.out.println("obstacle detected");
-			// // log.info("obstacle distance " + Boolean.toString(d) + " currenttime " + Double.toString(currentTime));
+			// // log.info("obstacle distance " + Boolean.toString(obstacle_presence) + " currenttime " + Double.toString(currentTime));
 			//  System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_notification);
 		}
 		else {
-			d = false;
-			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(d);
+			obstacle_presence = false;
+			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(obstacle_presence);
 			//  System.out.println("obstacle not detected currenttime " + Double.toString(currentTime));
 			//  System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_notification);
 		}
