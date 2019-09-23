@@ -33,7 +33,7 @@ public class EventInjection extends EventInjectionBase {
 			if (interaction instanceof CAN) {
 				handleInteractionClass((CAN) interaction);
 			} else {
-				log.debug("unhandled interaction: {}", interaction.getClassName());
+				// log.debug("unhandled interaction: {}", interaction.getClassName());
 			}
 		}
 	}
@@ -41,21 +41,21 @@ public class EventInjection extends EventInjectionBase {
 	{
 		
 		
-		System.out.println(" ignite_t " + 		ignite_t +" currentTime/3 "+ (int)(currentTime/3) ) ;
+	//	//  System.out.println(" ignite_t " + 		ignite_t +" currentTime/3 "+ (int)(currentTime/3) ) ;
 		
 		
 		if ((ignite_t > Integer.parseInt(EventInjectionparameter.sts1)) && (ignite_t < Integer.parseInt(EventInjectionparameter.ste1)) || (ignite_t > Integer.parseInt(EventInjectionparameter.sts2)) && (ignite_t < Integer.parseInt(EventInjectionparameter.ste2))) {
 			d = true;
 			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(d);
-			System.out.println("obstacle detected");
-			log.info("obstacle distance " + Boolean.toString(d) + " currenttime " + Double.toString(currentTime));
-			System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_notification);
+			//  System.out.println("obstacle detected");
+			// // log.info("obstacle distance " + Boolean.toString(d) + " currenttime " + Double.toString(currentTime));
+			//  System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_notification);
 		}
 		else {
 			d = false;
 			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(d);
-			System.out.println("obstacle not detected currenttime " + Double.toString(currentTime));
-			System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_notification);
+			//  System.out.println("obstacle not detected currenttime " + Double.toString(currentTime));
+			//  System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_notification);
 		}
 	}
 	public String Build_SPN() {
@@ -69,7 +69,7 @@ public class EventInjection extends EventInjectionBase {
 	}
 	private void execute() throws Exception {
 		if (super.isLateJoiner()) {
-			log.info("turning off time regulation (late joiner)");
+			// log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
@@ -79,20 +79,20 @@ public class EventInjection extends EventInjectionBase {
 		AdvanceTimeRequest atr = new AdvanceTimeRequest(currentTime);
 		putAdvanceTimeRequest(atr);
 		if (!super.isLateJoiner()) {
-			log.info("waiting on readyToPopulate...");
+			// log.info("waiting on readyToPopulate...");
 			readyToPopulate();
-			log.info("...synchronized on readyToPopulate");
+			// log.info("...synchronized on readyToPopulate");
 		}
 		///////////////////////////////////////////////////////////////////////
 		// TODO perform initialization that depends on other federates below //
 		///////////////////////////////////////////////////////////////////////
 		if (!super.isLateJoiner()) {
-			log.info("waiting on readyToRun...");
+			// log.info("waiting on readyToRun...");
 			readyToRun();
-			log.info("...synchronized on readyToRun");
+			// log.info("...synchronized on readyToRun");
 		}
 		startAdvanceTimeThread();
-		log.info("started logical time progression");
+		// log.info("started logical time progression");
 		while (!exitCondition) {
 			atr.requestSyncStart();
 			enteredTimeGrantedState();
@@ -129,7 +129,7 @@ public class EventInjection extends EventInjectionBase {
 			case 0:
 				Send_Obstacle_Notification((int)ignite_time);
 				Build_and_Send_CAN_Frame(EventInjectionparameter.EventInjectionPGN, Build_SPN());
-				System.out.println(" OSD " + Integer.toString(osd) + " currentime " + Double.toString(currentTime)+ " ignite_time " + ignite_time );
+				//  System.out.println(" OSD " + Integer.toString(osd) + " currentime " + Double.toString(currentTime)+ " ignite_time " + ignite_time );
 				break;
 			}
 			if (!exitCondition) {
@@ -161,10 +161,10 @@ public class EventInjection extends EventInjectionBase {
 			EventInjectionConfig federateConfig = federateConfigParser.parseArgs(args, EventInjectionConfig.class);
 			EventInjection federate = new EventInjection(federateConfig);
 			federate.execute();
-			log.info("Done.");
+			// log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
-			log.error(e);
+			// log.error(e);
 			System.exit(1);
 		}
 	}

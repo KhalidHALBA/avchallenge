@@ -119,7 +119,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 		
 		
 		if (super.isLateJoiner()) {
-			log.info("turning off time regulation (late joiner)");
+			//  log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
@@ -132,9 +132,9 @@ public class DataAnalytics extends DataAnalyticsBase {
 		putAdvanceTimeRequest(atr);
 
 		if (!super.isLateJoiner()) {
-			log.info("waiting on readyToPopulate...");
+			//  log.info("waiting on readyToPopulate...");
 			readyToPopulate();
-			log.info("...synchronized on readyToPopulate");
+			//  log.info("...synchronized on readyToPopulate");
 		}
 
 		///////////////////////////////////////////////////////////////////////
@@ -142,13 +142,13 @@ public class DataAnalytics extends DataAnalyticsBase {
 		///////////////////////////////////////////////////////////////////////
 
 		if (!super.isLateJoiner()) {
-			log.info("waiting on readyToRun...");
+			//  log.info("waiting on readyToRun...");
 			readyToRun();
-			log.info("...synchronized on readyToRun");
+			//  log.info("...synchronized on readyToRun");
 		}
 
 		startAdvanceTimeThread();
-		log.info("started logical time progression");
+		//  log.info("started logical time progression");
 
 		double[] xData = new double[3500];
 		ArrayList<Double> yData = new ArrayList<Double>();
@@ -204,7 +204,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 			int osd = (int) (currentTime) % 3;
 			int time = (int) (currentTime / 3);
 
-			System.out.println("time   " + time + "   control_speed  " + speed + " response_speed "  +  speed1 + " brake"  + brake + "  current_time " + currentTime);
+			//  System.out.println("time   " + time + "   control_speed  " + speed + " response_speed "  +  speed1 + " brake"  + brake + "  current_time " + currentTime);
 
 			switch (osd) {
 
@@ -273,7 +273,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 			DataAnalyticsConfig federateConfig = federateConfigParser.parseArgs(args, DataAnalyticsConfig.class);
 			DataAnalytics federate = new DataAnalytics(federateConfig);
 			federate.execute();
-			log.info("Done.");
+			//  log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
 			log.error(e);

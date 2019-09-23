@@ -139,19 +139,19 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 			String vehicleResponse = new String(receivePacket.getData());
 			
-			System.out.println(" vehicle dynamics " + vehicleResponse);
+			//  System.out.println(" vehicle dynamics " + vehicleResponse);
 	
 			String[] speeds = vehicleResponse.split(" ");
 			
 			float f = Float.valueOf(speeds[0].trim()).floatValue();
 			float f1 = f/100;
-			System.out.println("IGNITE speed response float = " + f1);
+			//  System.out.println("IGNITE speed response float = " + f1);
 			
 			UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f1);
 			
 			float b = Float.valueOf(speeds[1].trim()).floatValue();
 			float b1 = b/100;
-			System.out.println("IGNITE braking response float = " + b1);
+			//  System.out.println("IGNITE braking response float = " + b1);
 			
 			UCEFGatewayparameter.Brake_Pressure = Double.toString(b1);
 			
@@ -160,7 +160,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			
 			float t1 = t/100;
 			
-			System.out.println("IGNITE Time response float = " + t1);
+			//  System.out.println("IGNITE Time response float = " + t1);
 			
 			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t1);
 			
@@ -168,7 +168,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			clientSocket.close();
 
 		} catch (Exception e) {
-			System.out.println(e);
+			//  System.out.println(e);
 		}
 
 	}
@@ -187,7 +187,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 	private void execute() throws Exception {
 		if (super.isLateJoiner()) {
-			log.info("turning off time regulation (late joiner)");
+			// // // // log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
@@ -200,9 +200,9 @@ public class UCEFGateway extends UCEFGatewayBase {
 		putAdvanceTimeRequest(atr);
 
 		if (!super.isLateJoiner()) {
-			log.info("waiting on readyToPopulate...");
+			// // // // log.info("waiting on readyToPopulate...");
 			readyToPopulate();
-			log.info("...synchronized on readyToPopulate");
+			// // // // log.info("...synchronized on readyToPopulate");
 		}
 
 		///////////////////////////////////////////////////////////////////////
@@ -210,13 +210,13 @@ public class UCEFGateway extends UCEFGatewayBase {
 		///////////////////////////////////////////////////////////////////////
 
 		if (!super.isLateJoiner()) {
-			log.info("waiting on readyToRun...");
+			// // // // log.info("waiting on readyToRun...");
 			readyToRun();
-			log.info("...synchronized on readyToRun");
+			// // // // log.info("...synchronized on readyToRun");
 		}
 
 		startAdvanceTimeThread();
-		log.info("started logical time progression");
+		// // // // log.info("started logical time progression");
 
 		while (!exitCondition) {
 			atr.requestSyncStart();
@@ -324,7 +324,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			UCEFGatewayConfig federateConfig = federateConfigParser.parseArgs(args, UCEFGatewayConfig.class);
 			UCEFGateway federate = new UCEFGateway(federateConfig);
 			federate.execute();
-			log.info("Done.");
+			// // // // log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
 			log.error(e);
