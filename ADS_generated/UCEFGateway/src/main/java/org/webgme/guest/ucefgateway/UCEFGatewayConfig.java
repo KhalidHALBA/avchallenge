@@ -30,7 +30,7 @@ public class UCEFGatewayConfig extends FederateConfig {
 	@FederateParameter
 	public String Vehicle_Speed_Response;
 	@FederateParameter
-	public String Volt_Cmd;
+	public String Speed_Control_Ahead_GW;
 	@FederateParameter
 	public String Contactor_Override_Commands;
 	@FederateParameter

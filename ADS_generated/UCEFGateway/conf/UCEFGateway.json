@@ -10,7 +10,7 @@
   "Motor_Operating_Mode":"0",
   "Motor_Torque_cmd":"0",
   "Vehicle_Speed_Response":"0",
-  "Volt_Cmd":"0",
+  "Speed_Control_Ahead_GW":"0",
   "Contactor_Override_Commands":"0", 
   "Battery_Cooling_Heating_Commands":"0", 
   "Motor_Cooling_Heating_Commands":"0", 

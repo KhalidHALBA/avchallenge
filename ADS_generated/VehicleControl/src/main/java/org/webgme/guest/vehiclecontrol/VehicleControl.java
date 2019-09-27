@@ -10,12 +10,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.util.LinkedList; 
+import java.util.Queue; 
+  
+
 public class VehicleControl extends VehicleControlBase {
 	private final static Logger log = LogManager.getLogger();
 
 	private double currentTime = 0;
 
 	String Drive_Cycle_Speed = "0";
+	String Drive_Cycle_Speed_ahead = "0";
 
 	String speed = "0";
 
@@ -31,7 +36,7 @@ public class VehicleControl extends VehicleControlBase {
 
 		VehicleControlparameter.UCEFGateway_Vehicle_Speed_Response = params.UCEFGateway_Vehicle_Speed_Response;
 
-		VehicleControlparameter.UCEFGateway_Volt_Cmd = params.UCEFGateway_Volt_Cmd;
+		VehicleControlparameter.Speed_Control_Ahead_VC = params.Speed_Control_Ahead_VC;
 
 		VehicleControlparameter.messageTime = params.messageTime;
 		VehicleControlparameter.Vehicle_Control_Speed = params.Vehicle_Control_Speed;
@@ -72,41 +77,28 @@ public class VehicleControl extends VehicleControlBase {
 	}
 
 	public void Control(int speedline)
-
 	{
 
 		try {
 
 			if ((int) (Double.parseDouble(VehicleControlparameter.IGNITE_TIME)) >= 0) {
 				Drive_Cycle_Speed = Files.readAllLines(Paths.get(VehicleControlparameter.Drive_Cycle)).get(speedline);
+				Drive_Cycle_Speed_ahead = Files.readAllLines(Paths.get(VehicleControlparameter.Drive_Cycle)).get(speedline+1);
 			}
-
-			// // log.info("Control Input : Vehicle Response " +
-			// VehicleControlparameter.UCEFGateway_Motor_Torque_cmd
-			// + " Obstacle Notification " +
-			// VehicleControlparameter.EventInjection_Obstacle_Presence_distance
-			// + " DriveCycle Data " + Drive_Cycle_Speed);
 
 			if (VehicleControlparameter.EventInjection_Obstacle_Presence_distance.equals("true")) {
 
 				VehicleControlparameter.Vehicle_Control_Speed = "0";
 				VehicleControlparameter.UCEF_Control_Speed = Drive_Cycle_Speed;
-				// System.out.println( " obstacle detected : speed " +
-				// VehicleControlparameter.Vehicle_Control_Speed + " time " +
-				// speedline);
+				VehicleControlparameter.Speed_Control_Ahead_VC = "0";
+
 
 			} else {
 
 				VehicleControlparameter.UCEF_Control_Speed = Drive_Cycle_Speed;
 				VehicleControlparameter.Vehicle_Control_Speed = Drive_Cycle_Speed;
-				// // System.out.println(" obstacle NOT detected : speed " +
-				// VehicleControlparameter.Vehicle_Control_Speed + " time "+
-				// speedline + " currentTime" + currentTime);
+				VehicleControlparameter.Speed_Control_Ahead_VC = Drive_Cycle_Speed_ahead;
 
-				// VehicleControlparameter.Vehicle_Control_Speed =
-				// Double.toString(average);
-				// replace with transmit frame
-				// sendData = speed.getBytes();
 			}
 
 		} catch (Exception e) {
@@ -120,7 +112,7 @@ public class VehicleControl extends VehicleControlBase {
 	{
 		return VehicleControlparameter.VehicleControlSPNs = VehicleControlparameter.Vehicle_Control_Speed + " "
 				+ VehicleControlparameter.UCEF_Control_Speed + " " + VehicleControlparameter.VehicleControl_Event_Status
-				+ " " + VehicleControlparameter.Traction_Stability_Torque_Request;
+				+ " " + VehicleControlparameter.Traction_Stability_Torque_Request + " " + VehicleControlparameter.Speed_Control_Ahead_VC;
 	}
 
 	public void Build_and_Send_CAN_Frame(String pgn, String spn)

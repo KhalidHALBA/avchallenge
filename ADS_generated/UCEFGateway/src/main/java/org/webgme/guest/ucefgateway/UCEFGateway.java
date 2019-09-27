@@ -42,7 +42,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 		UCEFGatewayparameter.Vehicle_Speed_Response = params.Vehicle_Speed_Response;
 
-		UCEFGatewayparameter.Volt_Cmd = params.Volt_Cmd;
+		UCEFGatewayparameter.Speed_Control_Ahead_GW = params.Speed_Control_Ahead_GW;
 
 		UCEFGatewayparameter.Contactor_Override_Commands = params.Contactor_Override_Commands;
 
@@ -124,7 +124,10 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
-			sendData = (UCEFGatewayparameter.UCEF_Vehicle_Speed_Control).getBytes();
+
+			 System.out.println(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control+" "+UCEFGatewayparameter.Speed_Control_Ahead_GW);
+			
+			sendData = ( (int)(100*Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control))   +" "+   (int)(100*Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW))).getBytes();
 
 			DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 8888);
 
@@ -142,7 +145,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 			float f = Float.valueOf(speeds[0].trim()).floatValue();
 			float f1 = f / 100;
-			// System.out.println("IGNITE speed response float = " + f1);
+	
 
 			UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f1);
 
@@ -296,6 +299,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 		case "VehicleControl":
 			UCEFGatewayparameter.UCEF_Vehicle_Speed_Control = CSPNs[0];
 			UCEFGatewayparameter.VehicleControl_Event_Status = CSPNs[2];
+			UCEFGatewayparameter.Speed_Control_Ahead_GW = CSPNs[4];
 			UCEFGatewayparameter.messageTime = interaction.getTime();
 
 			break;

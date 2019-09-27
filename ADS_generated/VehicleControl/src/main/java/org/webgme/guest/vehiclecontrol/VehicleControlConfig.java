@@ -54,7 +54,7 @@ public class VehicleControlConfig extends FederateConfig {
 	@FederateParameter
 	public String UCEFGateway_Vehicle_Speed_Response;
 	@FederateParameter
-	public String UCEFGateway_Volt_Cmd;
+	public String Speed_Control_Ahead_VC;
 	@FederateParameter
 	public String EventInjection_Obstacle_Presence_distance;
 	@FederateParameter
