@@ -21,23 +21,23 @@ public class EventInjectionConfig extends FederateConfig {
 
 	// J1931-71 compliant local Messages
 	@FederateParameter
-	public String Peak_Voltage; // pgn ? SPN ?
+	public String sts1; // pgn ? SPN ?
 	@FederateParameter
-	public String Obstacle_Presence_distance;
+	public String Obstacle_Presence_notification;
 	@FederateParameter
-	public String Peak_Current; // pgn ? SPN ?
+	public String ste1; // pgn ? SPN ?
 	@FederateParameter
-	public String State_Of_Charge; // pgn ? SPN ?
+	public String sts2; // pgn ? SPN ?
 	@FederateParameter
-	public String State_Of_Health; // pgn ? SPN ?
+	public String ste2; // pgn ? SPN ?
 	@FederateParameter
-	public String Remaining_Capacity; // pgn ? SPN ?
+	public String IGNITE_TIME_1; // pgn ? SPN ?
 	@FederateParameter
 	public String Max_Temperature;
 	@FederateParameter
 	public String Min_Temperature;
 	@FederateParameter
-	public String Peak_Current_Limit;
+	public String ste1_Limit;
 
 
 	// J1931-71 compliant external Messages
@@ -53,8 +53,8 @@ public class EventInjectionConfig extends FederateConfig {
 	@FederateParameter
 	public String EventInjectionSPNs;
 
-	// String BMSSPNs = Peak_Voltage + Peak_Current + State_Of_Charge +
-	// State_Of_Health + Remaining_Capacity + Max_Temperature +Min_Temperature +
-	// Peak_Current_Limit ;
+	// String BMSSPNs = sts1 + ste1 + sts2 +
+	// ste2 + IGNITE_TIME_1 + Max_Temperature +Min_Temperature +
+	// ste1_Limit ;
 
 }

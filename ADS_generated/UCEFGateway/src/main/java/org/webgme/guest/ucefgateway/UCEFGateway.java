@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import java.net.*;
 import java.util.Queue;
 
-
 // Define the UCEFGateway type of federate for the federation.
 
 public class UCEFGateway extends UCEFGatewayBase {
@@ -43,7 +42,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 		UCEFGatewayparameter.Vehicle_Speed_Response = params.Vehicle_Speed_Response;
 
-		UCEFGatewayparameter.Volt_Cmd = params.Volt_Cmd;
+		UCEFGatewayparameter.Speed_Control_Ahead_GW = params.Speed_Control_Ahead_GW;
 
 		UCEFGatewayparameter.Contactor_Override_Commands = params.Contactor_Override_Commands;
 
@@ -86,7 +85,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 		UCEFGatewayparameter.Brake_Pressure = params.Brake_Pressure;
 
 		UCEFGatewayparameter.messageTime = params.messageTime;
-		
+
 		UCEFGatewayparameter.IGNITE_IP = params.IGNITE_IP;
 
 	}
@@ -115,8 +114,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 		}
 	}
 
-	public void Send_Receive(byte[] receiveData ) {
-
+	public void Send_Receive(byte[] receiveData) {
 
 		try {
 			DatagramSocket clientSocket = new DatagramSocket();
@@ -126,49 +124,49 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
-			sendData = (UCEFGatewayparameter.UCEF_Vehicle_Speed_Control).getBytes();
+
+			 System.out.println(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control+" "+UCEFGatewayparameter.Speed_Control_Ahead_GW);
+			
+			sendData = ( (int)(100*Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control))   +" "+   (int)(100*Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW))).getBytes();
 
 			DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 8888);
 
-			
 			clientSocket.send(sendPacket);
 
 			receivePacket.setLength(receiveData.length);
-			
+
 			clientSocket.receive(receivePacket);
 
 			String vehicleResponse = new String(receivePacket.getData());
-			
-			System.out.println(" vehicle dynamics " + vehicleResponse);
-	
+
+			// System.out.println(" vehicle dynamics " + vehicleResponse);
+
 			String[] speeds = vehicleResponse.split(" ");
-			
+
 			float f = Float.valueOf(speeds[0].trim()).floatValue();
-			float f1 = f/100;
-			System.out.println("IGNITE speed response float = " + f1);
-			
+			float f1 = f / 100;
+	
+
 			UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f1);
-			
+
 			float b = Float.valueOf(speeds[1].trim()).floatValue();
-			float b1 = b/100;
-			System.out.println("IGNITE braking response float = " + b1);
-			
+			float b1 = b / 100;
+			// System.out.println("IGNITE braking response float = " + b1);
+
 			UCEFGatewayparameter.Brake_Pressure = Double.toString(b1);
-			
-			
+
 			float t = Float.valueOf(speeds[2].trim()).floatValue();
-			
-			float t1 = t/100;
-			
-			System.out.println("IGNITE Time response float = " + t1);
-			
+
+			float t1 = t / 100;
+
+			// System.out.println("IGNITE Time response float = " + t1);
+
 			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t1);
-			
 
 			clientSocket.close();
 
 		} catch (Exception e) {
-			System.out.println(e);
+			// System.out.println(e);
 		}
 
 	}
@@ -176,7 +174,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 	public String Build_SPN() {
 
 		return UCEFGatewayparameter.UCEFGatewaySPNs = UCEFGatewayparameter.Vehicle_Speed_Response + " "
-				+ UCEFGatewayparameter.Brake_Pressure +" "+ UCEFGatewayparameter.IGNITE_Cycle_Time;
+				+ UCEFGatewayparameter.Brake_Pressure + " " + UCEFGatewayparameter.IGNITE_Cycle_Time;
 	}
 
 	public void Build_and_Send_CAN_Frame(String pgn, String spn) {
@@ -187,7 +185,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 	private void execute() throws Exception {
 		if (super.isLateJoiner()) {
-			log.info("turning off time regulation (late joiner)");
+			// // // // log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
@@ -200,9 +198,9 @@ public class UCEFGateway extends UCEFGatewayBase {
 		putAdvanceTimeRequest(atr);
 
 		if (!super.isLateJoiner()) {
-			log.info("waiting on readyToPopulate...");
+			// // // // log.info("waiting on readyToPopulate...");
 			readyToPopulate();
-			log.info("...synchronized on readyToPopulate");
+			// // // // log.info("...synchronized on readyToPopulate");
 		}
 
 		///////////////////////////////////////////////////////////////////////
@@ -210,13 +208,13 @@ public class UCEFGateway extends UCEFGatewayBase {
 		///////////////////////////////////////////////////////////////////////
 
 		if (!super.isLateJoiner()) {
-			log.info("waiting on readyToRun...");
+			// // // // log.info("waiting on readyToRun...");
 			readyToRun();
-			log.info("...synchronized on readyToRun");
+			// // // // log.info("...synchronized on readyToRun");
 		}
 
 		startAdvanceTimeThread();
-		log.info("started logical time progression");
+		// // // // log.info("started logical time progression");
 
 		while (!exitCondition) {
 			atr.requestSyncStart();
@@ -251,7 +249,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			// vCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 
 			checkReceivedSubscriptions();
-			
+
 			////////////////////////////////////////////////////////////////////
 			// TODO break here if ready to resign and break out of while loop //
 			////////////////////////////////////////////////////////////////////
@@ -301,6 +299,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 		case "VehicleControl":
 			UCEFGatewayparameter.UCEF_Vehicle_Speed_Control = CSPNs[0];
 			UCEFGatewayparameter.VehicleControl_Event_Status = CSPNs[2];
+			UCEFGatewayparameter.Speed_Control_Ahead_GW = CSPNs[4];
 			UCEFGatewayparameter.messageTime = interaction.getTime();
 
 			break;
@@ -324,7 +323,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			UCEFGatewayConfig federateConfig = federateConfigParser.parseArgs(args, UCEFGatewayConfig.class);
 			UCEFGateway federate = new UCEFGateway(federateConfig);
 			federate.execute();
-			log.info("Done.");
+			// // // // log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
 			log.error(e);

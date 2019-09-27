@@ -8,32 +8,26 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // Define the EventInjection type of federate for the federation.
-
 public class EventInjection extends EventInjectionBase {
 	private final static Logger log = LogManager.getLogger();
-
 	private double currentTime = 0;
-
-	boolean d = false;
+	boolean obstacle_presence = false;
 	public EventInjectionConfig EventInjectionparameter = new EventInjectionConfig();
-
 	CAN EventInjectionCAN = create_CAN();
 
 	public EventInjection(EventInjectionConfig params) throws Exception {
 		super(params);
-		EventInjectionparameter.Peak_Voltage = params.Peak_Voltage;
-		EventInjectionparameter.Obstacle_Presence_distance = params.Obstacle_Presence_distance;
-		EventInjectionparameter.Peak_Current = params.Peak_Current;
-		EventInjectionparameter.State_Of_Charge = params.State_Of_Charge;
-		EventInjectionparameter.State_Of_Health = params.State_Of_Health;
-		EventInjectionparameter.Remaining_Capacity = params.Remaining_Capacity;
+		EventInjectionparameter.Obstacle_Presence_notification = params.Obstacle_Presence_notification;
+		EventInjectionparameter.sts1 = params.sts1;
+		EventInjectionparameter.ste1 = params.ste1;
+		EventInjectionparameter.sts2 = params.sts2;
+		EventInjectionparameter.ste2 = params.ste2;
+		EventInjectionparameter.IGNITE_TIME_1 = params.IGNITE_TIME_1;
 		EventInjectionparameter.Max_Temperature = params.Max_Temperature;
 		EventInjectionparameter.Min_Temperature = params.Min_Temperature;
-		EventInjectionparameter.Peak_Current_Limit = params.Peak_Current_Limit;
+		EventInjectionparameter.ste1_Limit = params.ste1_Limit;
 		EventInjectionparameter.EventInjectionPGN = params.EventInjectionPGN;
 		EventInjectionparameter.EventInjectionSPNs = params.EventInjectionSPNs;
-	
-
 	}
 
 	private void checkReceivedSubscriptions() {
@@ -42,91 +36,82 @@ public class EventInjection extends EventInjectionBase {
 			if (interaction instanceof CAN) {
 				handleInteractionClass((CAN) interaction);
 			} else {
-				log.debug("unhandled interaction: {}", interaction.getClassName());
+				// log.debug("unhandled interaction: {}",
+				// interaction.getClassName());
 			}
 		}
 	}
 
-	public void Send_Obstacle_Notification()
+	public void Send_Obstacle_Notification(int ignite_t) {
 
-	{
+		// // System.out.println(" ignite_t " + ignite_t +" currentTime/3 "+
+		// (int)(currentTime/3) ) ;
 
-		if ((((currentTime / 3) > 2490) && ((currentTime / 3) < 2760)) || (((currentTime / 3) > 400) && ((currentTime / 3) < 500))   ) {
-			d = true;
-
-			EventInjectionparameter.Obstacle_Presence_distance = Boolean.toString(d);
-			System.out.println("obstacle detected");
-			log.info("obstacle distance " + Boolean.toString(d) + " currenttime " + Double.toString(currentTime));
-
-			System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_distance);
+		if ((ignite_t > Integer.parseInt(EventInjectionparameter.sts1))
+				&& (ignite_t < Integer.parseInt(EventInjectionparameter.ste1))
+				|| (ignite_t > Integer.parseInt(EventInjectionparameter.sts2))
+						&& (ignite_t < Integer.parseInt(EventInjectionparameter.ste2))) {
+			obstacle_presence = true;
+			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(obstacle_presence);
+			// System.out.println("obstacle detected");
+			// // log.info("obstacle distance " +
+			// Boolean.toString(obstacle_presence) + " currenttime " +
+			// Double.toString(currentTime));
+			// System.out.println("print string boolean " +
+			// EventInjectionparameter.Obstacle_Presence_notification);
+		} else {
+			obstacle_presence = false;
+			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(obstacle_presence);
+			// System.out.println("obstacle not detected currenttime " +
+			// Double.toString(currentTime));
+			// System.out.println("print string boolean " +
+			// EventInjectionparameter.Obstacle_Presence_notification);
 		}
-
-		else {
-			d = false;
-			EventInjectionparameter.Obstacle_Presence_distance = Boolean.toString(d);
-			System.out.println("obstacle not detected currenttime " + Double.toString(currentTime));
-			System.out.println("print string boolean " + EventInjectionparameter.Obstacle_Presence_distance);
-		}
-
 	}
 
 	public String Build_SPN() {
-
-		return EventInjectionparameter.EventInjectionSPNs = EventInjectionparameter.Obstacle_Presence_distance;
+		return EventInjectionparameter.EventInjectionSPNs = EventInjectionparameter.Obstacle_Presence_notification;
 	}
 
-	public void Build_and_Send_CAN_Frame(String pgn, String spn)
-
-	{
-
+	public void Build_and_Send_CAN_Frame(String pgn, String spn) {
 		EventInjectionCAN.set_ID18B(pgn);
 		EventInjectionCAN.set_DataField(spn);
 		EventInjectionCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
-
 	}
 
 	private void execute() throws Exception {
 		if (super.isLateJoiner()) {
-			log.info("turning off time regulation (late joiner)");
+			// log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
-
 		/////////////////////////////////////////////
 		// TODO perform basic initialization below //
 		/////////////////////////////////////////////
-
 		AdvanceTimeRequest atr = new AdvanceTimeRequest(currentTime);
 		putAdvanceTimeRequest(atr);
-
 		if (!super.isLateJoiner()) {
-			log.info("waiting on readyToPopulate...");
+			// log.info("waiting on readyToPopulate...");
 			readyToPopulate();
-			log.info("...synchronized on readyToPopulate");
+			// log.info("...synchronized on readyToPopulate");
 		}
-
 		///////////////////////////////////////////////////////////////////////
 		// TODO perform initialization that depends on other federates below //
 		///////////////////////////////////////////////////////////////////////
-
 		if (!super.isLateJoiner()) {
-			log.info("waiting on readyToRun...");
+			// log.info("waiting on readyToRun...");
 			readyToRun();
-			log.info("...synchronized on readyToRun");
+			// log.info("...synchronized on readyToRun");
 		}
-
 		startAdvanceTimeThread();
-		log.info("started logical time progression");
-
+		// log.info("started logical time progression");
 		while (!exitCondition) {
 			atr.requestSyncStart();
 			enteredTimeGrantedState();
-
 			////////////////////////////////////////////////////////////
 			// TODO send interactions that must be sent every logical //
 			// time step below //
 			////////////////////////////////////////////////////////////
-
 			// Set the interaction's parameters.
 			//
 			// CAN vCAN = create_CAN();
@@ -149,20 +134,18 @@ public class EventInjection extends EventInjectionBase {
 			// vCAN.set_originFed( < YOUR VALUE HERE > );
 			// vCAN.set_sourceFed( < YOUR VALUE HERE > );
 			// vCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
-
 			checkReceivedSubscriptions();
+			double ignite_time = Double.parseDouble(EventInjectionparameter.IGNITE_TIME_1);
 			int osd = (int) (currentTime) % 3;
-
 			switch (osd) {
-
 			case 0:
-				Send_Obstacle_Notification();
+				Send_Obstacle_Notification((int) ignite_time);
 				Build_and_Send_CAN_Frame(EventInjectionparameter.EventInjectionPGN, Build_SPN());
-				log.info(" OSD " + Integer.toString(osd) + " currentime " + Double.toString(currentTime));
+				// System.out.println(" OSD " + Integer.toString(osd) + "
+				// currentime " + Double.toString(currentTime)+ " ignite_time "
+				// + ignite_time );
 				break;
-
 			}
-
 			if (!exitCondition) {
 				currentTime += super.getStepSize();
 				AdvanceTimeRequest newATR = new AdvanceTimeRequest(currentTime);
@@ -171,14 +154,21 @@ public class EventInjection extends EventInjectionBase {
 				atr = newATR;
 			}
 		}
-
 		// call exitGracefully to shut down federate
 		exitGracefully();
-
 	}
 
 	private void handleInteractionClass(CAN interaction) {
-
+		///////////////////////////////////////////////////////////////
+		// TODO implement how to handle reception of the interaction //
+		///////////////////////////////////////////////////////////////
+		String delims = "[ ]+";
+		String[] CSPNs = interaction.get_DataField().split(delims);
+		switch (interaction.get_ID18B()) {
+		case "UCEFGateway":
+			EventInjectionparameter.IGNITE_TIME_1 = CSPNs[2];
+			break;
+		}
 	}
 
 	public static void main(String[] args) {
@@ -187,12 +177,11 @@ public class EventInjection extends EventInjectionBase {
 			EventInjectionConfig federateConfig = federateConfigParser.parseArgs(args, EventInjectionConfig.class);
 			EventInjection federate = new EventInjection(federateConfig);
 			federate.execute();
-			log.info("Done.");
+			// log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
-			log.error(e);
+			// log.error(e);
 			System.exit(1);
 		}
 	}
-
 }
