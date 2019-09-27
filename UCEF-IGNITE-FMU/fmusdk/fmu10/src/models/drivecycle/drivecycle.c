@@ -8,12 +8,14 @@
 #define NUMBER_OF_EVENT_INDICATORS 0
 #define BUFLEN 1024 //Max length of buffer
 #define PORT 8888
+
 #include "fmuTemplate.h"
 #include <winsock2.h>
 #include <stdint.h>
 #include <wS2tcpip.h>
 #include <stdio.h>
 #include <windows.h>
+#include <limits.h>
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -31,12 +33,13 @@ void setStartValues(ModelInstance *comp)
 {
 	r(cycle_speed_kmph_) = 0;
 	r(cycle_time_) = 0;
+    r(cycle_time_ahead_) = 0;
 	r(cycle_speed_ahead_kmph_) = 0;
-	r(cycle_time_ahead_) = 0;
 	r(vehicle_velocity_) = 0;
 	r(driver_brake_demand_) = 0;
 	i(counter_) = 0;
 }
+
 fmiReal getReal(ModelInstance *comp, fmiValueReference vr)
 {
 	switch (vr)
@@ -65,13 +68,46 @@ void initialize(ModelInstance *comp, fmiEventInfo *eventInfo)
 
 
 
+struct Queue 
+{ 
+    int front, rear, size; 
+    unsigned capacity; 
+    int* array; 
+}; 
+  
+
+
 void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 {
+
+
+
+ int front, rear, size; 
+    unsigned capacity  =   4000; 
+    int* array[4000]; 
+    struct Queue* queue = (struct Queue*) malloc(sizeof(struct Queue)); 
+    queue->capacity = capacity; 
+    queue->front = queue->size = 0;  
+    queue->rear = capacity - 1;  // This is important, see the enqueue 
+    queue->array = (int*) malloc(queue->capacity * sizeof(int)); 
+
+
+
+	    i(counter_) += 1;
+		eventInfo->upcomingTimeEvent = fmiTrue;
+		eventInfo->nextEventTime = 0.1 + comp->time;
+
+
+
+	// Queue* queue = createQueue(4000);  
 
 	SOCKET s;
 	struct sockaddr_in server, si_other;
 	int slen, recv_len;
 	char buf[BUFLEN];
+    // struct Queue* queue = createQueue(4000); 
+  
+
 
 	WSADATA wsa;
 
@@ -98,33 +134,40 @@ void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 	server.sin_addr.s_addr = INADDR_ANY;
 	server.sin_port = htons(PORT);
 
-	//Bind
+
+
 	if (bind(s, (struct sockaddr *)&server, sizeof(server)) == SOCKET_ERROR)
 	{
 		// printf("Bind failed with error code : %d" , WSAGetLastError());
 		exit(EXIT_FAILURE);
 	}
-	// puts("Bind done");
-	i(counter_) += 1;
+// puts("Bind done");
 
-		eventInfo->upcomingTimeEvent = fmiTrue;
-		eventInfo->nextEventTime = 0.1 + comp->time;
+fflush(stdout);
+memset(buf, 0, BUFLEN);
 
-		fflush(stdout);
-		memset(buf, 0, BUFLEN);
+if ((recv_len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *)&si_other, &slen)) == SOCKET_ERROR)
+{
+exit(EXIT_FAILURE);
+}
+    // r(cycle_speed_ahead_kmph_) = atof(buf);
+   
+	int init_size = strlen(buf);
+	char delim[] = " ";
+	char *ptr = strtok(buf, delim);
+	while(ptr != NULL)
+	{
+    queue->rear = (queue->rear + 1)%queue->capacity; 
+    queue->array[queue->rear] =  atoi(ptr); 
+    queue->size = queue->size + 1; 
+	ptr = strtok(NULL, delim);
+	}
+    r(cycle_speed_kmph_) =  0.01*((queue->array[queue->front]));
+    r(cycle_speed_ahead_kmph_) =  0.01*((queue->array[queue->rear]));
 
-		if ((recv_len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *)&si_other, &slen)) == SOCKET_ERROR)
-		{
-			exit(EXIT_FAILURE);
-		}
-
-		r(cycle_speed_kmph_) = (float)(atoi(buf));
-
-		
 		int a = 100 * ((r(vehicle_velocity_)) * 3.6);
 		int b = 10000 * r(driver_brake_demand_);
 		int t = 100*(r(cycle_time_));
-
 
 		// extract speed decimal values
 
@@ -139,7 +182,6 @@ void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 		int bb2 = ((b - (bb1 * 1000)) / 100);
 		int bb3 = ((b - (bb1 * 1000) - (bb2 * 100))/10);
 		int bb4 = b - (bb1 * 1000) - (bb2 * 100) - (bb3*10);
-
 
 		// extract CycleTime decimal values
 
@@ -156,12 +198,10 @@ void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 		char s3 = '0' + aa3;
         char s4 = '0' + aa4;
         
-
 		char b1 = '0' + bb1;
 		char b2 = '0' + bb2;
 		char b3 = '0' + bb3;
 		char b4 = '0' + bb4;
-
 
 		char t1 = '0' + tt1;
 		char t2 = '0' + tt2;
@@ -169,8 +209,7 @@ void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 		char t4 = '0' + tt4;
 		char t5 = '0' + tt5;
 
-        printf(" update a %d                         b %d                        t %d \n", a, b, t);
-		printf(" update aa1 %d  aa2 %d aa3 %d aa4 %d bb1 %d bb2 %d bb3 %d bb4 %d tt1 %d tt2 %d tt3 %d tt4 %d tt5 %d \n", aa1, aa2, aa3, aa4, bb1, bb2, bb3, bb4, tt1, tt2, tt3, tt4, tt5);
+         printf(" cycle_time_ahead %f cycle_time_ %f  cycle_speed_ahead_kmph_  %f cycle_speed_kmph %f  vehicle_velocity_   %f\n", r(cycle_time_ahead_) ,  r(cycle_time_) , r(cycle_speed_ahead_kmph_) , r(cycle_speed_kmph_) ,  ((r(vehicle_velocity_)) * 3.6) );
 
 		char DYNAMICS[] = {s1, s2, s3, s4, (char)32, b1, b2, b3, b4, (char)32, t1, t2, t3, t4, t5};
 
@@ -178,6 +217,10 @@ void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 		{
 			exit(EXIT_FAILURE);
 		}
+      
+  
+
+   
 
 	closesocket(s);
 	WSACleanup();
