@@ -12,22 +12,14 @@ public class EventInjection extends EventInjectionBase {
 	private final static Logger log = LogManager.getLogger();
 	private double currentTime = 0;
 	boolean obstacle_presence = false;
+	
 	public EventInjectionConfig EventInjectionparameter = new EventInjectionConfig();
 	CAN EventInjectionCAN = create_CAN();
 
 	public EventInjection(EventInjectionConfig params) throws Exception {
 		super(params);
-		EventInjectionparameter.Obstacle_Presence_notification = params.Obstacle_Presence_notification;
-		EventInjectionparameter.sts1 = params.sts1;
-		EventInjectionparameter.ste1 = params.ste1;
-		EventInjectionparameter.sts2 = params.sts2;
-		EventInjectionparameter.ste2 = params.ste2;
-		EventInjectionparameter.IGNITE_TIME_1 = params.IGNITE_TIME_1;
-		EventInjectionparameter.Max_Temperature = params.Max_Temperature;
-		EventInjectionparameter.Min_Temperature = params.Min_Temperature;
-		EventInjectionparameter.ste1_Limit = params.ste1_Limit;
-		EventInjectionparameter.EventInjectionPGN = params.EventInjectionPGN;
-		EventInjectionparameter.EventInjectionSPNs = params.EventInjectionSPNs;
+		EventInjectionparameter = params;
+
 	}
 
 	private void checkReceivedSubscriptions() {
@@ -43,34 +35,30 @@ public class EventInjection extends EventInjectionBase {
 	}
 
 	public void Send_Obstacle_Notification(int ignite_t) {
-
-		// // System.out.println(" ignite_t " + ignite_t +" currentTime/3 "+
-		// (int)(currentTime/3) ) ;
-
 		if ((ignite_t > Integer.parseInt(EventInjectionparameter.sts1))
 				&& (ignite_t < Integer.parseInt(EventInjectionparameter.ste1))
 				|| (ignite_t > Integer.parseInt(EventInjectionparameter.sts2))
 						&& (ignite_t < Integer.parseInt(EventInjectionparameter.ste2))) {
 			obstacle_presence = true;
 			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(obstacle_presence);
-			// System.out.println("obstacle detected");
-			// // log.info("obstacle distance " +
-			// Boolean.toString(obstacle_presence) + " currenttime " +
-			// Double.toString(currentTime));
-			// System.out.println("print string boolean " +
-			// EventInjectionparameter.Obstacle_Presence_notification);
 		} else {
 			obstacle_presence = false;
 			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(obstacle_presence);
-			// System.out.println("obstacle not detected currenttime " +
-			// Double.toString(currentTime));
-			// System.out.println("print string boolean " +
-			// EventInjectionparameter.Obstacle_Presence_notification);
+		}
+		if ((ignite_t >  Integer.parseInt(EventInjectionparameter.sts1)-Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))
+				&& (ignite_t <  Integer.parseInt(EventInjectionparameter.ste1)-Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))
+				|| (ignite_t > Integer.parseInt(EventInjectionparameter.sts2)-Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))
+						&& (ignite_t < Integer.parseInt(EventInjectionparameter.ste2)-Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))) {
+			obstacle_presence = true;
+			EventInjectionparameter.Obstacle_Presence_notification_ahead = Boolean.toString(obstacle_presence);
+		} else {
+			obstacle_presence = false;
+			EventInjectionparameter.Obstacle_Presence_notification_ahead = Boolean.toString(obstacle_presence);
 		}
 	}
 
 	public String Build_SPN() {
-		return EventInjectionparameter.EventInjectionSPNs = EventInjectionparameter.Obstacle_Presence_notification;
+		return EventInjectionparameter.EventInjectionSPNs = EventInjectionparameter.Obstacle_Presence_notification + " " + EventInjectionparameter.Obstacle_Presence_notification_ahead;
 	}
 
 	public void Build_and_Send_CAN_Frame(String pgn, String spn) {

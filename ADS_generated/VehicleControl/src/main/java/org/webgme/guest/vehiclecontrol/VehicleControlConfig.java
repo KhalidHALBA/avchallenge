@@ -27,7 +27,7 @@ public class VehicleControlConfig extends FederateConfig {
 	public String VehicleControl_Event_Status; // pgn ? SPN ?
 	// J1931-71 NON-compliant local Messages
 	@FederateParameter
-	public String Traction_Stability_Torque_Request;
+	public String IGNITE_LOOKAHEAD;
 	// J1931-71 compliant external Messages : (ExtrenalEntity_Message)
 	// @FederateParameter
 	// public String UCEFGateway_Motor_Torque;
@@ -48,7 +48,7 @@ public class VehicleControlConfig extends FederateConfig {
 	@FederateParameter
 	public String Vehicle_Speed;
 	@FederateParameter
-	public String UCEFGateway_Motor_Operating_Mode;
+	public String EventInjection_Obstacle_Presence_Ahead;
 	@FederateParameter
 	public String UCEFGateway_Motor_Torque_cmd;
 	@FederateParameter
@@ -56,7 +56,7 @@ public class VehicleControlConfig extends FederateConfig {
 	@FederateParameter
 	public String Speed_Control_Ahead_VC;
 	@FederateParameter
-	public String EventInjection_Obstacle_Presence_distance;
+	public String EventInjection_Obstacle_Presence;
 	@FederateParameter
 	public String Drive_Cycle;
 }

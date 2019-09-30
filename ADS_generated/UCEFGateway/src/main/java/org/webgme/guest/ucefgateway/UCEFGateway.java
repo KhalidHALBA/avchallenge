@@ -32,61 +32,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 	public UCEFGateway(UCEFGatewayConfig params) throws Exception {
 		super(params);
 
-		UCEFGatewayparameter.UCEFGatewayPGN = params.UCEFGatewayPGN;
-
-		UCEFGatewayparameter.UCEFGatewaySPNs = params.UCEFGatewaySPNs;
-
-		UCEFGatewayparameter.Motor_Operating_Mode = params.Motor_Operating_Mode;
-
-		UCEFGatewayparameter.Motor_Torque_cmd = params.Motor_Torque_cmd;
-
-		UCEFGatewayparameter.Vehicle_Speed_Response = params.Vehicle_Speed_Response;
-
-		UCEFGatewayparameter.Speed_Control_Ahead_GW = params.Speed_Control_Ahead_GW;
-
-		UCEFGatewayparameter.Contactor_Override_Commands = params.Contactor_Override_Commands;
-
-		UCEFGatewayparameter.Battery_Cooling_Heating_Commands = params.Battery_Cooling_Heating_Commands;
-
-		UCEFGatewayparameter.Motor_Cooling_Heating_Commands = params.Motor_Cooling_Heating_Commands;
-
-		UCEFGatewayparameter.Inverter_Cooling_Heating_Commands = params.Inverter_Cooling_Heating_Commands;
-
-		UCEFGatewayparameter.DataAnalytics_Motor_Temperature = params.DataAnalytics_Motor_Temperature;
-
-		UCEFGatewayparameter.IGNITE_Cycle_Time = params.IGNITE_Cycle_Time;
-
-		UCEFGatewayparameter.DataAnalytics_Vehicle_Speed_Response = params.DataAnalytics_Vehicle_Speed_Response;
-
-		UCEFGatewayparameter.DataAnalytics_Motor_Power_Limits = params.DataAnalytics_Motor_Power_Limits;
-
-		UCEFGatewayparameter.EventInjection_Battery_Peak_Current = params.EventInjection_Battery_Peak_Current;
-
-		UCEFGatewayparameter.EventInjection_Obstacle_Presence_distance = params.EventInjection_Obstacle_Presence_distance;
-
-		UCEFGatewayparameter.EventInjection_Battery_Peak_Voltage = params.EventInjection_Battery_Peak_Voltage;
-
-		UCEFGatewayparameter.EventInjection_Battery_State_of_charge_and_Health = params.EventInjection_Battery_State_of_charge_and_Health;
-
-		UCEFGatewayparameter.EventInjection_Battery_Remaining_Capacity = params.EventInjection_Battery_Remaining_Capacity;
-
-		UCEFGatewayparameter.EventInjection_Battery_Max_Min_Cell_Temperature = params.EventInjection_Battery_Max_Min_Cell_Temperature;
-
-		UCEFGatewayparameter.EventInjection_Battery_Pack_Power_limit = params.EventInjection_Battery_Pack_Power_limit;
-
-		UCEFGatewayparameter.UCEF_Vehicle_Speed_Control = params.UCEF_Vehicle_Speed_Control;
-
-		UCEFGatewayparameter.VehicleControl_Vehicle_Speed = params.VehicleControl_Vehicle_Speed;
-
-		UCEFGatewayparameter.VehicleControl_Event_Status = params.VehicleControl_Event_Status;
-
-		UCEFGatewayparameter.Accel_Pedal_Position = params.Accel_Pedal_Position;
-
-		UCEFGatewayparameter.Brake_Pressure = params.Brake_Pressure;
-
-		UCEFGatewayparameter.messageTime = params.messageTime;
-
-		UCEFGatewayparameter.IGNITE_IP = params.IGNITE_IP;
+		UCEFGatewayparameter = params;
 
 	}
 
@@ -125,7 +71,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
 
-			 System.out.println(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control+" "+UCEFGatewayparameter.Speed_Control_Ahead_GW);
+	
 			
 			sendData = ( (int)(100*Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control))   +" "+   (int)(100*Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW))).getBytes();
 
@@ -162,6 +108,9 @@ public class UCEFGateway extends UCEFGatewayBase {
 			// System.out.println("IGNITE Time response float = " + t1);
 
 			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t1);
+			
+			
+			 log.info("   UCEFGatewayparameter.IGNITE_Cycle_Time  " + UCEFGatewayparameter.IGNITE_Cycle_Time+  "UCEF_Vehicle_Speed_Control  "+UCEFGatewayparameter.UCEF_Vehicle_Speed_Control+"   Speed_Control_Ahead_GW  "+UCEFGatewayparameter.Speed_Control_Ahead_GW);
 
 			clientSocket.close();
 

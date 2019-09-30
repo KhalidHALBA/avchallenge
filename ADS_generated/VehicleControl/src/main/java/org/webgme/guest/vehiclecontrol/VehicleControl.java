@@ -21,7 +21,14 @@ public class VehicleControl extends VehicleControlBase {
 
 	String Drive_Cycle_Speed = "0";
 	String Drive_Cycle_Speed_ahead = "0";
+	int counter__1 = 0;
+	int timer = 0;
+	int counter__3 = 0;
+	int counter__4 = 0;
+	double solver_step = 0.1;
 
+	
+	
 	String speed = "0";
 
 	public VehicleControlConfig VehicleControlparameter = new VehicleControlConfig();
@@ -29,27 +36,7 @@ public class VehicleControl extends VehicleControlBase {
 
 	public VehicleControl(VehicleControlConfig params) throws Exception {
 		super(params);
-
-		VehicleControlparameter.UCEFGateway_Motor_Operating_Mode = params.UCEFGateway_Motor_Operating_Mode;
-
-		VehicleControlparameter.UCEFGateway_Motor_Torque_cmd = params.UCEFGateway_Motor_Torque_cmd;
-
-		VehicleControlparameter.UCEFGateway_Vehicle_Speed_Response = params.UCEFGateway_Vehicle_Speed_Response;
-
-		VehicleControlparameter.Speed_Control_Ahead_VC = params.Speed_Control_Ahead_VC;
-
-		VehicleControlparameter.messageTime = params.messageTime;
-		VehicleControlparameter.Vehicle_Control_Speed = params.Vehicle_Control_Speed;
-		VehicleControlparameter.VehicleControl_Event_Status = params.VehicleControl_Event_Status;
-		VehicleControlparameter.Traction_Stability_Torque_Request = params.Traction_Stability_Torque_Request;
-		VehicleControlparameter.UCEFGateway_PGN = params.UCEFGateway_PGN;
-		VehicleControlparameter.UCEF_Control_Speed = params.UCEF_Control_Speed;
-		VehicleControlparameter.IGNITE_TIME = params.IGNITE_TIME;
-		VehicleControlparameter.VehicleControlPGN = params.VehicleControlPGN;
-		VehicleControlparameter.VehicleControlSPNs = params.VehicleControlSPNs;
-		VehicleControlparameter.Vehicle_Speed = params.Vehicle_Speed;
-		VehicleControlparameter.EventInjection_Obstacle_Presence_distance = params.EventInjection_Obstacle_Presence_distance;
-		VehicleControlparameter.Drive_Cycle = params.Drive_Cycle;
+		VehicleControlparameter = params;
 
 	}
 
@@ -65,46 +52,77 @@ public class VehicleControl extends VehicleControlBase {
 	}
 
 	public void VehicleControl_Event_Status()
-
 	{
-
 		int length = 10;
 		boolean useLetters = true;
 		boolean useNumbers = false;
 		String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
 		VehicleControlparameter.VehicleControl_Event_Status = generatedString;
-
 	}
+	
+	public void Control(int IGNITE_TIME__)
+	{
+		
+	try {   
+			if ((int) (Double.parseDouble(VehicleControlparameter.IGNITE_TIME)) >= 0) {
+				Drive_Cycle_Speed = Files.readAllLines(Paths.get(VehicleControlparameter.Drive_Cycle)).get(IGNITE_TIME__);
+				Drive_Cycle_Speed_ahead = Files.readAllLines(Paths.get(VehicleControlparameter.Drive_Cycle)).get(IGNITE_TIME__+Integer.parseInt(VehicleControlparameter.IGNITE_LOOKAHEAD));
+			}
+		
+			if (VehicleControlparameter.EventInjection_Obstacle_Presence.equals("true")) {
+						VehicleControlparameter.Vehicle_Control_Speed = "0" ;
+			
+			} 
+			
+			else 
+			
+			{
 
-	public void Control(int speedline)
+					VehicleControlparameter.Vehicle_Control_Speed = Drive_Cycle_Speed;
+
+//	log.info("false condition IGNITE_TIME "+ IGNITE_TIME__+" Vehicle_Control_Speed "+ VehicleControlparameter.Vehicle_Control_Speed + " Speed_Control_Ahead_VC " + VehicleControlparameter.Speed_Control_Ahead_VC + " UCEF_Control_Speed " +VehicleControlparameter.UCEF_Control_Speed );
+
+				
+		
+			}
+			
+			
+			
+			
+   if (VehicleControlparameter.EventInjection_Obstacle_Presence_Ahead.equals("true")) {
+				VehicleControlparameter.Speed_Control_Ahead_VC = "0" ;
+	
+	} 
+	
+	else 
+	
 	{
 
-		try {
+			VehicleControlparameter.Speed_Control_Ahead_VC = Drive_Cycle_Speed_ahead;
+	
 
-			if ((int) (Double.parseDouble(VehicleControlparameter.IGNITE_TIME)) >= 0) {
-				Drive_Cycle_Speed = Files.readAllLines(Paths.get(VehicleControlparameter.Drive_Cycle)).get(speedline);
-				Drive_Cycle_Speed_ahead = Files.readAllLines(Paths.get(VehicleControlparameter.Drive_Cycle)).get(speedline+1);
-			}
+	}
+			
+			
+			
+//			VehicleControlparameter.Vehicle_Control_Speed = Drive_Cycle_Speed;
+//			VehicleControlparameter.Speed_Control_Ahead_VC = Drive_Cycle_Speed_ahead;
+//
+ log.info("IGNITE_TIME "+ IGNITE_TIME__+ " IGNITE_LOOKAHEAD "+ VehicleControlparameter.IGNITE_LOOKAHEAD +" Vehicle_Control_Speed "+ VehicleControlparameter.Vehicle_Control_Speed + " Speed_Control_Ahead_VC " + VehicleControlparameter.Speed_Control_Ahead_VC );
+//
+// 			
+//			
 
-			if (VehicleControlparameter.EventInjection_Obstacle_Presence_distance.equals("true")) {
-
-				VehicleControlparameter.Vehicle_Control_Speed = "0";
-				VehicleControlparameter.UCEF_Control_Speed = Drive_Cycle_Speed;
-				VehicleControlparameter.Speed_Control_Ahead_VC = "0";
-
-
-			} else {
-
-				VehicleControlparameter.UCEF_Control_Speed = Drive_Cycle_Speed;
-				VehicleControlparameter.Vehicle_Control_Speed = Drive_Cycle_Speed;
-				VehicleControlparameter.Speed_Control_Ahead_VC = Drive_Cycle_Speed_ahead;
-
-			}
-
+			
+			
+			
+			
+			
+    
 		} catch (Exception e) {
 			// System.out.println(e);
 		}
-
+    
 	}
 
 	public String Build_SPN()
@@ -112,7 +130,7 @@ public class VehicleControl extends VehicleControlBase {
 	{
 		return VehicleControlparameter.VehicleControlSPNs = VehicleControlparameter.Vehicle_Control_Speed + " "
 				+ VehicleControlparameter.UCEF_Control_Speed + " " + VehicleControlparameter.VehicleControl_Event_Status
-				+ " " + VehicleControlparameter.Traction_Stability_Torque_Request + " " + VehicleControlparameter.Speed_Control_Ahead_VC;
+				+ " " + VehicleControlparameter.IGNITE_LOOKAHEAD + " " + VehicleControlparameter.Speed_Control_Ahead_VC;
 	}
 
 	public void Build_and_Send_CAN_Frame(String pgn, String spn)
@@ -237,7 +255,8 @@ public class VehicleControl extends VehicleControlBase {
 		String[] CSPNs = interaction.get_DataField().split(delims);
 		switch (interaction.get_ID18B()) {
 		case "EventInjection":
-			VehicleControlparameter.EventInjection_Obstacle_Presence_distance = CSPNs[0];
+			VehicleControlparameter.EventInjection_Obstacle_Presence = CSPNs[0];
+			VehicleControlparameter.EventInjection_Obstacle_Presence_Ahead = CSPNs[1];
 			VehicleControlparameter.messageTime = interaction.getTime();
 
 			break;
