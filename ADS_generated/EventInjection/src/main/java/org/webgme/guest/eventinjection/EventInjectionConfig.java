@@ -33,9 +33,9 @@ public class EventInjectionConfig extends FederateConfig {
 	@FederateParameter
 	public String IGNITE_TIME_1; // pgn ? SPN ?
 	@FederateParameter
-	public String Max_Temperature;
+	public String Obstacle_Presence_notification_ahead;
 	@FederateParameter
-	public String Min_Temperature;
+	public String IGNITE_LOOKAHEAD;
 	@FederateParameter
 	public String ste1_Limit;
 
@@ -54,7 +54,7 @@ public class EventInjectionConfig extends FederateConfig {
 	public String EventInjectionSPNs;
 
 	// String BMSSPNs = sts1 + ste1 + sts2 +
-	// ste2 + IGNITE_TIME_1 + Max_Temperature +Min_Temperature +
+	// ste2 + IGNITE_TIME_1 + Obstacle_Presence_notification_ahead +IGNITE_LOOKAHEAD +
 	// ste1_Limit ;
 
 }
