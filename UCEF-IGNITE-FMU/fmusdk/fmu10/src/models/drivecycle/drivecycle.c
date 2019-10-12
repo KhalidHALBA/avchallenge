@@ -80,9 +80,10 @@ struct Queue
 void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 {
 
-
-
- int front, rear, size; 
+    double precision = 0.001;
+	double communication_delay = 0.3;
+    double timestep  = 0.1;
+    int front, rear, size; 
     unsigned capacity  =   4000; 
     int* array[4000]; 
     struct Queue* queue = (struct Queue*) malloc(sizeof(struct Queue)); 
@@ -95,7 +96,7 @@ void eventUpdate(ModelInstance *comp, fmiEventInfo *eventInfo)
 
 	    i(counter_) += 1;
 		eventInfo->upcomingTimeEvent = fmiTrue;
-		eventInfo->nextEventTime = 0.1 + comp->time;
+		eventInfo->nextEventTime = timestep + comp->time;
 
 
 
@@ -162,12 +163,12 @@ exit(EXIT_FAILURE);
     queue->size = queue->size + 1; 
 	ptr = strtok(NULL, delim);
 	}
-    r(cycle_speed_kmph_) =  0.01*((queue->array[queue->front]));
-    r(cycle_speed_ahead_kmph_) =  0.01*((queue->array[queue->rear]));
+    r(cycle_speed_kmph_) =  precision*((queue->array[queue->front]));
+    r(cycle_speed_ahead_kmph_) =  precision*((queue->array[queue->rear]));
 
 		int a = 100 * ((r(vehicle_velocity_)) * 3.6);
 		int b = 10000 * r(driver_brake_demand_);
-		int t = 100*(r(cycle_time_));
+		int t = 100*(r(cycle_time_)+ communication_delay);
 
 		// extract speed decimal values
 
@@ -209,7 +210,7 @@ exit(EXIT_FAILURE);
 		char t4 = '0' + tt4;
 		char t5 = '0' + tt5;
 
-         printf(" cycle_time_ahead %f cycle_time_ %f  cycle_speed_ahead_kmph_  %f cycle_speed_kmph %f  vehicle_velocity_   %f\n", r(cycle_time_ahead_) ,  r(cycle_time_) , r(cycle_speed_ahead_kmph_) , r(cycle_speed_kmph_) ,  ((r(vehicle_velocity_)) * 3.6) );
+        //  printf(" cycle_time_ahead %f cycle_time_ %f  cycle_speed_ahead_kmph_  %f cycle_speed_kmph %f  vehicle_velocity_   %f\n", r(cycle_time_ahead_) ,  r(cycle_time_) , r(cycle_speed_ahead_kmph_) , r(cycle_speed_kmph_) ,  ((r(vehicle_velocity_)) * 3.6) );
 
 		char DYNAMICS[] = {s1, s2, s3, s4, (char)32, b1, b2, b3, b4, (char)32, t1, t2, t3, t4, t5};
 
@@ -218,9 +219,13 @@ exit(EXIT_FAILURE);
 			exit(EXIT_FAILURE);
 		}
       
-  
+fflush(stdout);
+memset(buf, 0, BUFLEN);
+memset(DYNAMICS, 0, BUFLEN);
+// memset(delim, 0, BUFLEN);
+// memset(ptr, 0, BUFLEN);
 
-   
+
 
 	closesocket(s);
 	WSACleanup();
