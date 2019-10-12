@@ -130,11 +130,11 @@ public class EventInjection extends EventInjectionBase {
 			int osd = (int) (currentTime) % 2;
 			switch (osd) {
 			case 0:
-//				Send_Obstacle_Notification((int) ignite_time);
-//				Build_and_Send_CAN_Frame(EventInjectionparameter.EventInjectionPGN, Build_SPN());
-//				System.out.println(" ignite_time " + ignite_time + " notif "
-//						+ EventInjectionparameter.Obstacle_Presence_notification + " notif_ahead "
-//						+ EventInjectionparameter.Obstacle_Presence_notification_ahead);
+				Send_Obstacle_Notification((int) ignite_time);
+				Build_and_Send_CAN_Frame(EventInjectionparameter.EventInjectionPGN, Build_SPN());
+				System.out.println(" ignite_time " + ignite_time + " notif "
+						+ EventInjectionparameter.Obstacle_Presence_notification + " notif_ahead "
+						+ EventInjectionparameter.Obstacle_Presence_notification_ahead);
 				break;
 			}
 			if (!exitCondition) {
