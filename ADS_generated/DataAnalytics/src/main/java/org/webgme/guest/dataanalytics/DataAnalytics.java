@@ -7,14 +7,12 @@ import org.cpswt.hla.base.AdvanceTimeRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.awt.BasicStroke;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
-import org.knowm.xchart.style.Styler.YAxisPosition;
 import org.knowm.xchart.style.colors.XChartSeriesColors;
 import org.knowm.xchart.style.lines.SeriesLines;
 import org.knowm.xchart.style.markers.SeriesMarkers;
@@ -97,8 +95,8 @@ public class DataAnalytics extends DataAnalyticsBase {
 		ArrayList<Double> initdata = new ArrayList<Double>();
 		initdata.add(0.0);
 
-		XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time [0.1 second]", "Speed [kph] / Driver_Brake_demand [0-100] ",
-				"Vehicle_Velocity", null, initdata);
+		XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time [1 second]",
+				"Speed [kph] / Driver_Brake_demand [0-100] ", "Vehicle_Velocity", null, initdata);
 
 		SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
 		sw.displayChart();
@@ -118,42 +116,32 @@ public class DataAnalytics extends DataAnalyticsBase {
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
-
 		/////////////////////////////////////////////
 		// TODO perform basic initialization below //
 		/////////////////////////////////////////////
-
 		AdvanceTimeRequest atr = new AdvanceTimeRequest(currentTime);
 		putAdvanceTimeRequest(atr);
-
 		if (!super.isLateJoiner()) {
 			// log.info("waiting on readyToPopulate...");
 			readyToPopulate();
 			// log.info("...synchronized on readyToPopulate");
 		}
-
 		///////////////////////////////////////////////////////////////////////
 		// TODO perform initialization that depends on other federates below //
 		///////////////////////////////////////////////////////////////////////
-
 		if (!super.isLateJoiner()) {
 			// log.info("waiting on readyToRun...");
 			readyToRun();
 			// log.info("...synchronized on readyToRun");
 		}
-
 		startAdvanceTimeThread();
 		// log.info("started logical time progression");
-
 		double[] xData = new double[3500];
 		ArrayList<Double> yData = new ArrayList<Double>();
-
 		double[] xData1 = new double[3500];
 		ArrayList<Double> yData1 = new ArrayList<Double>();
-
 		double[] xData2 = new double[3500];
 		ArrayList<Double> yData2 = new ArrayList<Double>();
-
 		while (!exitCondition) {
 			atr.requestSyncStart();
 			enteredTimeGrantedState();
@@ -192,8 +180,8 @@ public class DataAnalytics extends DataAnalyticsBase {
 			final double brake = Double.parseDouble(DataAnalyticsparameter.UCEFGateway_Torque_Commands);
 			final double speed1 = Double.parseDouble(DataAnalyticsparameter.Engine_Speed);
 
-			int osd = (int) (currentTime) % 3;
-			int time = (int) (currentTime / 3);
+			int osd = (int) (currentTime) % 2;
+			int time = (int) (currentTime / 2);
 
 			// System.out.println("time " + time + " control_speed " + speed + "
 			// response_speed " + speed1 + " brake" + brake + " current_time " +

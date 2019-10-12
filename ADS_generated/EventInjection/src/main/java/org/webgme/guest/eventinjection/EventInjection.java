@@ -12,14 +12,12 @@ public class EventInjection extends EventInjectionBase {
 	private final static Logger log = LogManager.getLogger();
 	private double currentTime = 0;
 	boolean obstacle_presence = false;
-	
 	public EventInjectionConfig EventInjectionparameter = new EventInjectionConfig();
 	CAN EventInjectionCAN = create_CAN();
 
 	public EventInjection(EventInjectionConfig params) throws Exception {
 		super(params);
 		EventInjectionparameter = params;
-
 	}
 
 	private void checkReceivedSubscriptions() {
@@ -45,10 +43,14 @@ public class EventInjection extends EventInjectionBase {
 			obstacle_presence = false;
 			EventInjectionparameter.Obstacle_Presence_notification = Boolean.toString(obstacle_presence);
 		}
-		if ((ignite_t >  Integer.parseInt(EventInjectionparameter.sts1)-Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))
-				&& (ignite_t <  Integer.parseInt(EventInjectionparameter.ste1)-Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))
-				|| (ignite_t > Integer.parseInt(EventInjectionparameter.sts2)-Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))
-						&& (ignite_t < Integer.parseInt(EventInjectionparameter.ste2)-Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))) {
+		if ((ignite_t > Integer.parseInt(EventInjectionparameter.sts1)
+				- Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))
+				&& (ignite_t < Integer.parseInt(EventInjectionparameter.ste1)
+						- Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))
+				|| (ignite_t > Integer.parseInt(EventInjectionparameter.sts2)
+						- Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))
+						&& (ignite_t < Integer.parseInt(EventInjectionparameter.ste2)
+								- Integer.parseInt(EventInjectionparameter.IGNITE_LOOKAHEAD))) {
 			obstacle_presence = true;
 			EventInjectionparameter.Obstacle_Presence_notification_ahead = Boolean.toString(obstacle_presence);
 		} else {
@@ -58,7 +60,8 @@ public class EventInjection extends EventInjectionBase {
 	}
 
 	public String Build_SPN() {
-		return EventInjectionparameter.EventInjectionSPNs = EventInjectionparameter.Obstacle_Presence_notification + " " + EventInjectionparameter.Obstacle_Presence_notification_ahead;
+		return EventInjectionparameter.EventInjectionSPNs = EventInjectionparameter.Obstacle_Presence_notification + " "
+				+ EventInjectionparameter.Obstacle_Presence_notification_ahead;
 	}
 
 	public void Build_and_Send_CAN_Frame(String pgn, String spn) {
@@ -124,14 +127,14 @@ public class EventInjection extends EventInjectionBase {
 			// vCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 			checkReceivedSubscriptions();
 			double ignite_time = Double.parseDouble(EventInjectionparameter.IGNITE_TIME_1);
-			int osd = (int) (currentTime) % 3;
+			int osd = (int) (currentTime) % 2;
 			switch (osd) {
 			case 0:
-				Send_Obstacle_Notification((int) ignite_time);
-				Build_and_Send_CAN_Frame(EventInjectionparameter.EventInjectionPGN, Build_SPN());
-				// System.out.println(" OSD " + Integer.toString(osd) + "
-				// currentime " + Double.toString(currentTime)+ " ignite_time "
-				// + ignite_time );
+//				Send_Obstacle_Notification((int) ignite_time);
+//				Build_and_Send_CAN_Frame(EventInjectionparameter.EventInjectionPGN, Build_SPN());
+//				System.out.println(" ignite_time " + ignite_time + " notif "
+//						+ EventInjectionparameter.Obstacle_Presence_notification + " notif_ahead "
+//						+ EventInjectionparameter.Obstacle_Presence_notification_ahead);
 				break;
 			}
 			if (!exitCondition) {

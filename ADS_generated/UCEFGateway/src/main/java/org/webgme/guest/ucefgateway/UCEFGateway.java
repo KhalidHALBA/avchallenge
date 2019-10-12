@@ -9,10 +9,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.net.*;
 import java.util.Queue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 // Define the UCEFGateway type of federate for the federation.
 
 public class UCEFGateway extends UCEFGatewayBase {
+
+	ExecutorService myExecutor = Executors.newCachedThreadPool();
 	private final static Logger log = LogManager.getLogger();
 
 	private double currentTime = 0;
@@ -70,34 +74,25 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
-
-	
-			
-			sendData = ( (int)(100*Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control))   +" "+   (int)(100*Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW))).getBytes();
-
+			sendData = ((int) (1000 * Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control)) + " "
+					+ (int) (1000 * Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW))).getBytes();
 			DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 8888);
-
 			clientSocket.send(sendPacket);
-
 			receivePacket.setLength(receiveData.length);
 
 			clientSocket.receive(receivePacket);
 
 			String vehicleResponse = new String(receivePacket.getData());
 
-			// System.out.println(" vehicle dynamics " + vehicleResponse);
-
 			String[] speeds = vehicleResponse.split(" ");
 
 			float f = Float.valueOf(speeds[0].trim()).floatValue();
 			float f1 = f / 100;
-	
 
 			UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f1);
 
 			float b = Float.valueOf(speeds[1].trim()).floatValue();
 			float b1 = b / 100;
-			// System.out.println("IGNITE braking response float = " + b1);
 
 			UCEFGatewayparameter.Brake_Pressure = Double.toString(b1);
 
@@ -105,17 +100,15 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 			float t1 = t / 100;
 
-			// System.out.println("IGNITE Time response float = " + t1);
-
 			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t1);
-			
-			
-			 log.info("   UCEFGatewayparameter.IGNITE_Cycle_Time  " + UCEFGatewayparameter.IGNITE_Cycle_Time+  "UCEF_Vehicle_Speed_Control  "+UCEFGatewayparameter.UCEF_Vehicle_Speed_Control+"   Speed_Control_Ahead_GW  "+UCEFGatewayparameter.Speed_Control_Ahead_GW);
+
+			System.out.println(" speed " + 1000 * Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control)
+					+ "  speed ahead  " + 1000 * Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW));
 
 			clientSocket.close();
 
 		} catch (Exception e) {
-			// System.out.println(e);
+
 		}
 
 	}
@@ -203,10 +196,10 @@ public class UCEFGateway extends UCEFGatewayBase {
 			// TODO break here if ready to resign and break out of while loop //
 			////////////////////////////////////////////////////////////////////
 
-			int osd = (int) (currentTime) % 3;
+			int osd = (int) (currentTime) % 2;
 			switch (osd) {
 
-			case 2:
+			case 0:
 				byte[] receiveData = new byte[1024];
 				Send_Receive(receiveData);
 				Build_and_Send_CAN_Frame(UCEFGatewayparameter.UCEFGatewayPGN, Build_SPN());
@@ -238,6 +231,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 		switch (interaction.get_ID18B()) {
 
 		case "COA":
+
 			UCEFGatewayparameter.COA_Message = interaction.get_DataField();
 			UCEFGatewayparameter.messageTime = interaction.getTime();
 			s.add(UCEFGatewayparameter.COA_Message);
