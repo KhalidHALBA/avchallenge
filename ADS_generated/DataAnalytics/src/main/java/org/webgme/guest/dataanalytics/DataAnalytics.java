@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
+import org.knowm.xchart.style.Styler;
 import org.knowm.xchart.style.colors.XChartSeriesColors;
 import org.knowm.xchart.style.lines.SeriesLines;
 import org.knowm.xchart.style.markers.SeriesMarkers;
@@ -71,13 +72,14 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 		chart.getStyler().setXAxisMax((double) 3500);
 		chart.getStyler().setXAxisMin((double) 0);
+		chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideN);	
 
 		Thread.sleep(ost);
 
-		chart.updateXYSeries("Vehicle_Velocity", null, data, null);
-		chart.updateXYSeries("FTP75_DC_Speed_Control", null, data1, null).setMarker(SeriesMarkers.NONE)
+		chart.updateXYSeries("Vehicle_Speed", null, data, null);
+		chart.updateXYSeries("Speed_Request", null, data1, null).setMarker(SeriesMarkers.NONE)
 				.setLineColor(XChartSeriesColors.RED).setLineStyle(SeriesLines.SOLID).setLineWidth(2);
-		chart.updateXYSeries("Driver_Brake_demand", null, data2, null).setMarker(SeriesMarkers.NONE)
+		chart.updateXYSeries("Brake_demand", null, data2, null).setMarker(SeriesMarkers.NONE)
 				.setLineColor(XChartSeriesColors.BLACK).setLineStyle(SeriesLines.DASH_DOT).setLineWidth(2);
 		sw.repaintChart();
 
@@ -95,24 +97,24 @@ public class DataAnalytics extends DataAnalyticsBase {
 		ArrayList<Double> initdata = new ArrayList<Double>();
 		initdata.add(0.0);
 
-		XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time [1 second]",
-				"Speed [kph] / Driver_Brake_demand [0-100] ", "Vehicle_Velocity", null, initdata);
+		XYChart chart = QuickChart.getChart("UCEF-IGNITE-Analytics", "Time [0.1 second]",
+				"Speed [kph] / Brake_demand [0-100] ", "Vehicle_Speed", null, initdata);
 
 		SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
-		sw.displayChart();
+		sw.displayChart().setSize(3000, 2000);
 
 		ArrayList<Double> initdata1 = new ArrayList<Double>();
 		initdata1.add(0.0);
 
-		chart.addSeries("FTP75_DC_Speed_Control", initdata1);
+		chart.addSeries("Speed_Request", initdata1);
 
 		ArrayList<Double> initdata2 = new ArrayList<Double>();
 		initdata2.add(0.0);
 
-		chart.addSeries("Driver_Brake_demand", initdata2);
+		chart.addSeries("Brake_demand", initdata2);
 
 		if (super.isLateJoiner()) {
-			// log.info("turning off time regulation (late joiner)");
+			// //log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
@@ -122,20 +124,20 @@ public class DataAnalytics extends DataAnalyticsBase {
 		AdvanceTimeRequest atr = new AdvanceTimeRequest(currentTime);
 		putAdvanceTimeRequest(atr);
 		if (!super.isLateJoiner()) {
-			// log.info("waiting on readyToPopulate...");
+			// //log.info("waiting on readyToPopulate...");
 			readyToPopulate();
-			// log.info("...synchronized on readyToPopulate");
+			// //log.info("...synchronized on readyToPopulate");
 		}
 		///////////////////////////////////////////////////////////////////////
 		// TODO perform initialization that depends on other federates below //
 		///////////////////////////////////////////////////////////////////////
 		if (!super.isLateJoiner()) {
-			// log.info("waiting on readyToRun...");
+			// //log.info("waiting on readyToRun...");
 			readyToRun();
-			// log.info("...synchronized on readyToRun");
+			// //log.info("...synchronized on readyToRun");
 		}
 		startAdvanceTimeThread();
-		// log.info("started logical time progression");
+		// //log.info("started logical time progression");
 		double[] xData = new double[3500];
 		ArrayList<Double> yData = new ArrayList<Double>();
 		double[] xData1 = new double[3500];
@@ -183,7 +185,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 			int osd = (int) (currentTime) % 2;
 			int time = (int) (currentTime / 2);
 
-			// System.out.println("time " + time + " control_speed " + speed + "
+			// //System.out.println("time " + time + " control_speed " + speed + "
 			// response_speed " + speed1 + " brake" + brake + " current_time " +
 			// currentTime);
 
@@ -255,7 +257,7 @@ public class DataAnalytics extends DataAnalyticsBase {
 			DataAnalyticsConfig federateConfig = federateConfigParser.parseArgs(args, DataAnalyticsConfig.class);
 			DataAnalytics federate = new DataAnalytics(federateConfig);
 			federate.execute();
-			// log.info("Done.");
+			// //log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
 			log.error(e);

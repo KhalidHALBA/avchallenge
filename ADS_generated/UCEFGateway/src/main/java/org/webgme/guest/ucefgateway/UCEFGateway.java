@@ -102,8 +102,8 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t1);
 
-			System.out.println(" speed " + 1000 * Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control)
-					+ "  speed ahead  " + 1000 * Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW));
+		//	//System.out.println(" speed " + 1000 * Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control)
+		//			+ "  speed ahead  " + 1000 * Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW));
 
 			clientSocket.close();
 
@@ -127,7 +127,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 	private void execute() throws Exception {
 		if (super.isLateJoiner()) {
-			// // // // log.info("turning off time regulation (late joiner)");
+			// // // // //log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
@@ -140,9 +140,9 @@ public class UCEFGateway extends UCEFGatewayBase {
 		putAdvanceTimeRequest(atr);
 
 		if (!super.isLateJoiner()) {
-			// // // // log.info("waiting on readyToPopulate...");
+			// // // // //log.info("waiting on readyToPopulate...");
 			readyToPopulate();
-			// // // // log.info("...synchronized on readyToPopulate");
+			// // // // //log.info("...synchronized on readyToPopulate");
 		}
 
 		///////////////////////////////////////////////////////////////////////
@@ -150,13 +150,13 @@ public class UCEFGateway extends UCEFGatewayBase {
 		///////////////////////////////////////////////////////////////////////
 
 		if (!super.isLateJoiner()) {
-			// // // // log.info("waiting on readyToRun...");
+			// // // // //log.info("waiting on readyToRun...");
 			readyToRun();
-			// // // // log.info("...synchronized on readyToRun");
+			// // // // //log.info("...synchronized on readyToRun");
 		}
 
 		startAdvanceTimeThread();
-		// // // // log.info("started logical time progression");
+		// // // // //log.info("started logical time progression");
 
 		while (!exitCondition) {
 			atr.requestSyncStart();
@@ -266,7 +266,7 @@ public class UCEFGateway extends UCEFGatewayBase {
 			UCEFGatewayConfig federateConfig = federateConfigParser.parseArgs(args, UCEFGatewayConfig.class);
 			UCEFGateway federate = new UCEFGateway(federateConfig);
 			federate.execute();
-			// // // // log.info("Done.");
+			// // // // //log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
 			log.error(e);

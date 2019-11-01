@@ -59,7 +59,7 @@ public class VehicleControl extends VehicleControlBase {
 
 			}
 			if (VehicleControlparameter.EventInjection_Obstacle_Presence.equals("true")) {
-				VehicleControlparameter.Vehicle_Control_Speed = "0";
+				VehicleControlparameter.Vehicle_Control_Speed = "0.2";
 			} else {
 
 				int sampling_factor_ = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
@@ -74,7 +74,7 @@ public class VehicleControl extends VehicleControlBase {
 
 			}
 			if (VehicleControlparameter.EventInjection_Obstacle_Presence_Ahead.equals("true")) {
-				VehicleControlparameter.Speed_Control_Ahead_VC = "0";
+				VehicleControlparameter.Speed_Control_Ahead_VC = "0.2";
 			} else {
 
 				int sampling_factor_ahead = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
@@ -89,11 +89,11 @@ public class VehicleControl extends VehicleControlBase {
 
 			}
 
-			System.out.println("time " + IGNITE_TIME__ + " speed " + VehicleControlparameter.Vehicle_Control_Speed
-					+ " speed_ahead " + VehicleControlparameter.Speed_Control_Ahead_VC);
+		//	//System.out.println("time " + IGNITE_TIME__ + " speed " + VehicleControlparameter.Vehicle_Control_Speed
+			//		+ " speed_ahead " + VehicleControlparameter.Speed_Control_Ahead_VC);
 
 		} catch (Exception e) {
-			// System.out.println(e);
+			// //System.out.println(e);
 		}
 	}
 
@@ -117,7 +117,7 @@ public class VehicleControl extends VehicleControlBase {
 
 	private void execute() throws Exception {
 		if (super.isLateJoiner()) {
-			// log.info("turning off time regulation (late joiner)");
+			// //log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
@@ -130,9 +130,9 @@ public class VehicleControl extends VehicleControlBase {
 		putAdvanceTimeRequest(atr);
 
 		if (!super.isLateJoiner()) {
-			// log.info("waiting on readyToPopulate...");
+			// //log.info("waiting on readyToPopulate...");
 			readyToPopulate();
-			// log.info("...synchronized on readyToPopulate");
+			// //log.info("...synchronized on readyToPopulate");
 		}
 
 		///////////////////////////////////////////////////////////////////////
@@ -140,13 +140,13 @@ public class VehicleControl extends VehicleControlBase {
 		///////////////////////////////////////////////////////////////////////
 
 		if (!super.isLateJoiner()) {
-			// log.info("waiting on readyToRun...");
+			// //log.info("waiting on readyToRun...");
 			readyToRun();
-			// log.info("...synchronized on readyToRun");
+			// //log.info("...synchronized on readyToRun");
 		}
 
 		startAdvanceTimeThread();
-		// log.info("started logical time progression");
+		// //log.info("started logical time progression");
 
 		while (!exitCondition) {
 			atr.requestSyncStart();
@@ -187,7 +187,7 @@ public class VehicleControl extends VehicleControlBase {
 
 			// int igtm = (int) (IGNITE_TIME_d) % 20;
 
-			// log.info("ucef time " + (int) (currentTime / 3) + " ignite time
+			// //log.info("ucef time " + (int) (currentTime / 3) + " ignite time
 			// "+ IGNITE_TIME_d + " logical time " + currentTime );
 
 			switch (osd) {
@@ -276,7 +276,7 @@ public class VehicleControl extends VehicleControlBase {
 			VehicleControlConfig federateConfig = federateConfigParser.parseArgs(args, VehicleControlConfig.class);
 			VehicleControl federate = new VehicleControl(federateConfig);
 			federate.execute();
-			// log.info("Done.");
+			// //log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
 			log.error(e);

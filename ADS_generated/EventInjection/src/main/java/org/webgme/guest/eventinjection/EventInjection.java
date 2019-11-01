@@ -72,7 +72,7 @@ public class EventInjection extends EventInjectionBase {
 
 	private void execute() throws Exception {
 		if (super.isLateJoiner()) {
-			// log.info("turning off time regulation (late joiner)");
+			// //log.info("turning off time regulation (late joiner)");
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
@@ -82,20 +82,20 @@ public class EventInjection extends EventInjectionBase {
 		AdvanceTimeRequest atr = new AdvanceTimeRequest(currentTime);
 		putAdvanceTimeRequest(atr);
 		if (!super.isLateJoiner()) {
-			// log.info("waiting on readyToPopulate...");
+			// //log.info("waiting on readyToPopulate...");
 			readyToPopulate();
-			// log.info("...synchronized on readyToPopulate");
+			// //log.info("...synchronized on readyToPopulate");
 		}
 		///////////////////////////////////////////////////////////////////////
 		// TODO perform initialization that depends on other federates below //
 		///////////////////////////////////////////////////////////////////////
 		if (!super.isLateJoiner()) {
-			// log.info("waiting on readyToRun...");
+			// //log.info("waiting on readyToRun...");
 			readyToRun();
-			// log.info("...synchronized on readyToRun");
+			// //log.info("...synchronized on readyToRun");
 		}
 		startAdvanceTimeThread();
-		// log.info("started logical time progression");
+		// //log.info("started logical time progression");
 		while (!exitCondition) {
 			atr.requestSyncStart();
 			enteredTimeGrantedState();
@@ -132,9 +132,9 @@ public class EventInjection extends EventInjectionBase {
 			case 0:
 				Send_Obstacle_Notification((int) ignite_time);
 				Build_and_Send_CAN_Frame(EventInjectionparameter.EventInjectionPGN, Build_SPN());
-				System.out.println(" ignite_time " + ignite_time + " notif "
-						+ EventInjectionparameter.Obstacle_Presence_notification + " notif_ahead "
-						+ EventInjectionparameter.Obstacle_Presence_notification_ahead);
+//				//System.out.println(" ignite_time " + ignite_time + " notif "
+//						+ EventInjectionparameter.Obstacle_Presence_notification + " notif_ahead "
+//						+ EventInjectionparameter.Obstacle_Presence_notification_ahead);
 				break;
 			}
 			if (!exitCondition) {
@@ -168,7 +168,7 @@ public class EventInjection extends EventInjectionBase {
 			EventInjectionConfig federateConfig = federateConfigParser.parseArgs(args, EventInjectionConfig.class);
 			EventInjection federate = new EventInjection(federateConfig);
 			federate.execute();
-			// log.info("Done.");
+			// //log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
 			// log.error(e);

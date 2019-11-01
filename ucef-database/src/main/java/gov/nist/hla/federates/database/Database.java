@@ -56,7 +56,7 @@ public class Database implements GatewayCallback {
     // Reads the configuration file
     private static GatewayConfiguration readConfiguration(String filepath)
             throws IOException {
-        log.info("Reading JSON configuration file at " + filepath);
+        //log.info("Reading JSON configuration file at " + filepath);
         File configFile = Paths.get(filepath).toFile();
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(configFile, GatewayConfiguration.class);
@@ -111,12 +111,12 @@ public class Database implements GatewayCallback {
 				indexMap.put(1, className);  // Represent index table in index map
 				newInteractionTable = true;
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-				log.info(e); // Interaction table cannot be created
+				//log.info(e); // Interaction table cannot be created
 			} finally {
     			try {
 					connection.close(); // Close the connection to the database schema
 				} catch (SQLException e) {
-					log.info(e);  // Connection cannot be closed
+					//log.info(e);  // Connection cannot be closed
 				}
     		}
 		} else {
@@ -132,12 +132,12 @@ public class Database implements GatewayCallback {
 		    				createInteractionTable(schemaName, className, maxKeyInMap+1); // Create new interaction table
 		    				indexMap.put(maxKeyInMap+1, className); // Represent index table in index map
 		    			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-		    				log.info(e); // Interaction table cannot be created
+		    				//log.info(e); // Interaction table cannot be created
 		    			} finally {
 		        			try {
 		    					connection.close(); // Close the connection to the database schema
 		    				} catch (SQLException e) {
-		    					log.info(e); // Connection cannot be closed
+		    					//log.info(e); // Connection cannot be closed
 		    				}
 		        		}
 		            }
@@ -161,12 +161,12 @@ public class Database implements GatewayCallback {
     				 addColumnToInteractionTable(className, indexId, entry.getKey());
     			 }
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-    			log.info(e); // Columns could not be added to the interaction table
+    			//log.info(e); // Columns could not be added to the interaction table
     		} finally {
     			try {
 					connection.close(); // Close the connection to the database schema
 				} catch (SQLException e) {
-					log.info(e); // The connection could not be closed
+					//log.info(e); // The connection could not be closed
 				}
     		}
         }
@@ -177,7 +177,7 @@ public class Database implements GatewayCallback {
         	// Adds a row to the interaction table
 			updateInteractionTable(className, indexId, timeStep, parameters);
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-			log.info(e); // Interaction table could not be updated.
+			//log.info(e); // Interaction table could not be updated.
 		}
     }
 	
@@ -190,12 +190,12 @@ public class Database implements GatewayCallback {
 				createObjectTable(schemaName, className, 1); // Create first object table
 				indexMap.put(1, className); // Represent index table in index map
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-				log.info(e); // Object table cannot be created
+				//log.info(e); // Object table cannot be created
 			} finally {
     			try {
 					connection.close(); // Close the connection to the database schema
 				} catch (SQLException e) {
-					log.info(e); // Connection cannot be closed
+					//log.info(e); // Connection cannot be closed
 				}
     		}
 		} else {
@@ -210,12 +210,12 @@ public class Database implements GatewayCallback {
 		    				createObjectTable(schemaName, className, maxKeyInMap+1); // Create new object table
 		    				indexMap.put(maxKeyInMap+1, className); // Represent index table in index map
 		    			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-		    				log.info(e); // Object table cannot be created
+		    				//log.info(e); // Object table cannot be created
 		    			} finally {
 		        			try {
 		    					connection.close(); // Close the connection to the database schema
 		    				} catch (SQLException e) {
-		    					log.info(e); // Connection cannot be closed
+		    					//log.info(e); // Connection cannot be closed
 		    				}
 		        		}
 		            }
@@ -240,12 +240,12 @@ public class Database implements GatewayCallback {
 			// Adds a row to the object table
 			updateObjectTable(className, indexId, timeStep, instanceName, attribute, description);
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-			log.info(e);  // Object table could not be updated.
+			//log.info(e);  // Object table could not be updated.
 		} finally {
 			try {
 				connection.close(); // Close the connection to the database schema
 			} catch (SQLException e) {
-				log.info(e); // The connection could not be closed
+				//log.info(e); // The connection could not be closed
 			}
 		}
         }
@@ -278,7 +278,7 @@ public class Database implements GatewayCallback {
 		
 		// Send the query to MySQL to create the schema where all of the tables will be stored
 		s.executeUpdate("CREATE SCHEMA IF NOT EXISTS `" + schemaName + "`");
-		log.info("A schema named " + schemaName + "has been created in MySQL.");
+		//log.info("A schema named " + schemaName + "has been created in MySQL.");
 	}
 	
 	/**
@@ -299,7 +299,7 @@ public class Database implements GatewayCallback {
 		
 		// Send the query to MySQL to create the index table
 		s.executeUpdate("CREATE TABLE IF NOT EXISTS `" + schemaName + "`.`IndexTable` (`indexId` INT NOT NULL AUTO_INCREMENT,`dataName` TEXT,PRIMARY KEY(`indexId`));");
-		log.info("The IndexTable has been created.");
+		//log.info("The IndexTable has been created.");
 	}
 	
 	/**
@@ -338,7 +338,7 @@ public class Database implements GatewayCallback {
 		s.executeUpdate("CREATE TABLE IF NOT EXISTS `" + schemaName + "`.`" + newTableName + "` (`entryId` "
 				+ "INT NOT NULL AUTO_INCREMENT,`indexId` INT,`timeStep` INT,`instanceName` TEXT,`attribute` "
 				+ "TEXT,`description` TEXT,PRIMARY KEY (`entryId`),FOREIGN KEY (`indexId`) REFERENCES IndexTable(`indexId`));");
-		log.info("An object table named " + tableName + "has been created in MySQL.");
+		//log.info("An object table named " + tableName + "has been created in MySQL.");
 	}
 	
 	/**
@@ -376,7 +376,7 @@ public class Database implements GatewayCallback {
 		// Send the query to MySQL to create the interaction table
 		s.executeUpdate("CREATE TABLE IF NOT EXISTS `" + schemaName + "`.`" + newTableName + "` (`entryId` INT NOT NULL AUTO_INCREMENT,"
 				+ "`indexId` INT,`timeStep` INT, PRIMARY KEY (`entryId`),FOREIGN KEY (`indexId`) REFERENCES IndexTable(`indexId`));");
-		log.info("An interaction table named " + tableName + "has been created in MySQL.");
+		//log.info("An interaction table named " + tableName + "has been created in MySQL.");
 	}
 	
 	/**
