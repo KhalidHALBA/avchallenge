@@ -59,7 +59,7 @@ public class VehicleControl extends VehicleControlBase {
 
 			}
 			if (VehicleControlparameter.EventInjection_Obstacle_Presence.equals("true")) {
-				VehicleControlparameter.Vehicle_Control_Speed = "0.2";
+				VehicleControlparameter.Vehicle_Control_Speed = "0";
 			} else {
 
 				int sampling_factor_ = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
@@ -74,7 +74,7 @@ public class VehicleControl extends VehicleControlBase {
 
 			}
 			if (VehicleControlparameter.EventInjection_Obstacle_Presence_Ahead.equals("true")) {
-				VehicleControlparameter.Speed_Control_Ahead_VC = "0.2";
+				VehicleControlparameter.Speed_Control_Ahead_VC = "0.0";
 			} else {
 
 				int sampling_factor_ahead = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
@@ -89,8 +89,8 @@ public class VehicleControl extends VehicleControlBase {
 
 			}
 
-		//	//System.out.println("time " + IGNITE_TIME__ + " speed " + VehicleControlparameter.Vehicle_Control_Speed
-			//		+ " speed_ahead " + VehicleControlparameter.Speed_Control_Ahead_VC);
+		log.info("time " + IGNITE_TIME__ + " speed " + VehicleControlparameter.Vehicle_Control_Speed
+				+ " speed_ahead " + VehicleControlparameter.Speed_Control_Ahead_VC);
 
 		} catch (Exception e) {
 			// //System.out.println(e);
