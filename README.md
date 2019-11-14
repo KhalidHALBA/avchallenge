@@ -17,12 +17,12 @@
 ##	3- Configuration : once the insallation is done :
 ### 3.a- Rename the license file provided by ricardo as : ricardo.lic and Move it to : 
 C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic 
-### 3.b- make sure the configuration on Ricardo License Manager Control Panel is as follows 
+### 3.b- Make sure the configuration on Ricardo License Manager Control Panel is as follows 
 ![Image](https://i.ibb.co/qMs1Gtm/6.png)
-### 3.c- make sure the License service is up and running, if not , right click on the service highlighter and click start.
+### 3.c- Make sure the License service is up and running, if not , right click on the service highlighter and click start.
 ![Image](https://i.ibb.co/vBnrHGF/7.png)
-### 3.d- you can also start/stop or check the status of the license service from LMTOOLS utility 
-#### : 3.d.i- start/stop the service 
+### 3.d- You can also start/stop or check the status of the license service from LMTOOLS utility 
+#### 3.d.i- start/stop the service 
 ![Image](https://i.ibb.co/1ntMgpV/8.png)
-#### : 3.d.ii- check status
+#### 3.d.ii- check status
 ![Image](https://i.ibb.co/qnrLvnD/9.png)
