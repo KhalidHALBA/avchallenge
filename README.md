@@ -32,14 +32,12 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 ### 1.a) UCEF VM Configuration  
 
-#### 1.a.i) Perfs
-* CPU
-* RAM
-* Storage 
+#### 1.a.i) Minimum Perfs
+* CPU : 4 cores
+* RAM : 4 GB
 #### 1.a.ii) Networking
-* NAT interface 
-* Host Only Interface
-* 
+* Add NAT interface
+* Add Host Only Interface
 ### 1.b) Gateway UDP socket Configuration 
 
 ## 2) IGNITE Side 
