@@ -52,6 +52,8 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 ### 1.c) Sampler & Lookahead Configuration
 
+### 1.c.i) Sampler Configuration
+
 * The sampler samples the FTP 75 drive cycle in a way that matches IGNITE's output time step. For a 10 HZ sampling rate the configuration is set in vehicle control federate as follows : 
 
 
@@ -60,6 +62,16 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 - parameter to set : sampling_rate
 
 ![Image](https://i.ibb.co/BKBVsj7/11.png)
+
+* The lookahead parameter describes the ability of the autonomous vehicle controller to anticipate speed and braking operations. It matches IGNITE's lookahead parameter. To modify on UCEF we use the "IGNITE_LOOKAHEAD" parameter in the following files : 
+
+
+- location 1) : /home/vagrant/avchallenge/ADS_generated/VehicleControl/conf/VehicleControl.json
+- location 2) : /home/vagrant/avchallenge/ADS_deployment/conf/default/vehiclecontrol.json
+
+![Image](https://i.ibb.co/VBBFRvy/12.png)
+
+### 1.c.i) Lookahead Configuration
 
 
 ## 2) IGNITE Side 
