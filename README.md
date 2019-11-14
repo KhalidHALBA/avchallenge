@@ -26,4 +26,31 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 ![Image](https://i.ibb.co/1ntMgpV/8.png)
 #### 3.d.ii- check status
 ![Image](https://i.ibb.co/qnrLvnD/9.png)
-# B) Running the Experiment :
+# B) Configuring the Experiment :
+
+## 1) UCEF Side
+
+### 1.a) UCEF VM Configuration  
+
+### 1.b) Gateway UDP socket Configuration 
+
+## 2) IGNITE Side 
+
+### 2.a) IGNITE VM Configuration  
+
+### 2.b) FMU UDP socket Configuration 
+
+
+# C) Running the Experiment :
+
+
+## 1) IGNITE Side
+
+### 1.a)  Data Viewing 
+
+## 2) UCEF Side 
+
+### 2.a)  Data Logging & Viewing 
+
+
+
