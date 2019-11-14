@@ -3,7 +3,7 @@
 ### 1.a- Goto https://software.ricardo.com/login and login to the website 
 ![Image](https://i.ibb.co/xj4bVzp/1.png)
 ### Goto the download portal : 
-![Image](https://software.ricardo.com/support/release-downloads)
+https://software.ricardo.com/support/release-downloads
 ### 1.b- Pick on 2018.1 release 
 ![Image](https://i.ibb.co/JvtQGNq/2.png)
 ### 1.c- Click on RS_2018.1_windows_installer.exe
