@@ -29,16 +29,25 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 # B) Configuring the Experiment :
 
 ## 1) UCEF Side
+* clone the avchallenge repository in /home/vagrant. 
+`git clone https://github.com/usnistgov/avchallenge.git -b feature/latest`
 
 ### 1.a) UCEF VM Configuration  
-
 #### 1.a.i) Minimum Perfs
 * CPU : 4 cores
 * RAM : 4 GB
 #### 1.a.ii) Networking
 * Add NAT interface
 * Add Host Only Interface
-### 1.b) Gateway UDP socket Configuration 
+### 1.b) Gateway Federate UDP socket Configuration 
+
+* IGNITE and UCEF communicate over a UDP socket, each end sends and receives data. Make sure both ends are on the same subnet. The UDP socket is configured in a way that we need to tell UCEF the target system that hosts IGNITE. We use the UCEF Gateway Federate configuration file to set the target IP Address parameter, this configuration needs to be set in two locations  : 
+
+- location 1) : /home/vagrant/avchallenge/ADS_generated/UCEFGateway/conf/UCEFGateway.json
+- location 2) : /home/vagrant/avchallenge/ADS_deployment/conf/default/UCEFGateway.json
+- parameter to set : IGNITE IP
+
+![Image](https://i.ibb.co/F7HgD6T/10.png)
 
 ## 2) IGNITE Side 
 
