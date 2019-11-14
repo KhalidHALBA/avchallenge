@@ -32,11 +32,19 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 ### 1.a) UCEF VM Configuration  
 
+#### 1.a.i) Perfs
+* CPU
+* RAM
+* Storage 
+#### 1.a.ii) Networking
+* NAT interface 
+* Host Only Interface
+* 
 ### 1.b) Gateway UDP socket Configuration 
 
 ## 2) IGNITE Side 
 
-### 2.a) IGNITE VM Configuration  
+### 2.a) IGNITE Configuration  
 
 ### 2.b) FMU UDP socket Configuration 
 
@@ -46,11 +54,15 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 ## 1) IGNITE Side
 
-### 1.a)  Data Viewing 
+### 1.a)  Parameters Settings 
+### 1.b)  Running IGNITE
+### 1.c)  Data Viewing 
 
 ## 2) UCEF Side 
 
-### 2.a)  Data Logging & Viewing 
+### 2.a)  Parameters Settings 
+### 2.b)  Running UCEF
+### 2.c)  Data Logging & Viewing 
 
 
 
