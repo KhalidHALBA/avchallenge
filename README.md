@@ -33,7 +33,7 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 `git clone https://github.com/usnistgov/avchallenge.git -b feature/latest`
 
 ### 1.a) UCEF VM Configuration  
-#### 1.a.i) Minimum Perfs
+#### 1.a.i) Minimum Configuration Settings
 * CPU : 4 cores
 * RAM : 4 GB
 #### 1.a.ii) Networking
@@ -44,10 +44,23 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 * IGNITE and UCEF communicate over a UDP socket, each end sends and receives data. Make sure both ends are on the same subnet. The UDP socket is configured in a way that we need to tell UCEF the target system that hosts IGNITE. We use the UCEF Gateway Federate configuration file to set the target IP Address parameter, this configuration needs to be set in two locations  : 
 
 - location 1) : /home/vagrant/avchallenge/ADS_generated/UCEFGateway/conf/UCEFGateway.json
-- location 2) : /home/vagrant/avchallenge/ADS_deployment/conf/default/UCEFGateway.json
+- location 2) : /home/vagrant/avchallenge/ADS_deployment/conf/default/ucefgateway.json
 - parameter to set : IGNITE IP
 
 ![Image](https://i.ibb.co/F7HgD6T/10.png)
+
+
+### 1.c) Sampler & Lookahead Configuration
+
+* The sampler samples the FTP 75 drive cycle in a way that matches IGNITE's output time step. For a 10 HZ sampling rate the configuration is set in vehicle control federate as follows : 
+
+
+- location 1) : /home/vagrant/avchallenge/ADS_generated/VehicleControl/conf/VehicleControl.json
+- location 2) : /home/vagrant/avchallenge/ADS_deployment/conf/default/vehiclecontrol.json
+- parameter to set : 
+
+![Image](https://i.ibb.co/BKBVsj7/11.png)
+
 
 ## 2) IGNITE Side 
 
