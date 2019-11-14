@@ -19,6 +19,9 @@ public class VehicleControlConfig extends FederateConfig {
 	 * ABS Measured Wheel Speed.
 	 */
 
+	
+	@FederateParameter
+	public double sampling_rate;
 	@FederateParameter
 	public double messageTime;
 	@FederateParameter

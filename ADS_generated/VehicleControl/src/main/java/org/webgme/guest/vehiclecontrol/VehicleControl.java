@@ -21,8 +21,6 @@ public class VehicleControl extends VehicleControlBase {
 	String Drive_Cycle_Speed_ahead_1 = "0";
 	double speed_ = 0;
 	double speed_ahead_ = 0;
-	double sampling_rate = 0.1;
-
 	String speed = "0";
 
 	public VehicleControlConfig VehicleControlparameter = new VehicleControlConfig();
@@ -64,7 +62,7 @@ public class VehicleControl extends VehicleControlBase {
 
 				int sampling_factor_ = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
 
-				double sampling_step_ = sampling_rate
+				double sampling_step_ = VehicleControlparameter.sampling_rate
 						* (Double.parseDouble(Drive_Cycle_Speed_ahead) - Double.parseDouble(Drive_Cycle_Speed));
 
 				DecimalFormat f = new DecimalFormat("##.000");
@@ -74,11 +72,11 @@ public class VehicleControl extends VehicleControlBase {
 
 			}
 			if (VehicleControlparameter.EventInjection_Obstacle_Presence_Ahead.equals("true")) {
-				VehicleControlparameter.Speed_Control_Ahead_VC = "0.0";
+				VehicleControlparameter.Speed_Control_Ahead_VC = "0";
 			} else {
 
 				int sampling_factor_ahead = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
-				double sampling_step_ahead = sampling_rate
+				double sampling_step_ahead = VehicleControlparameter.sampling_rate
 						* (Double.parseDouble(Drive_Cycle_Speed_ahead_1) - Double.parseDouble(Drive_Cycle_Speed_ahead));
 
 				DecimalFormat f = new DecimalFormat("##.000");
@@ -89,7 +87,7 @@ public class VehicleControl extends VehicleControlBase {
 
 			}
 
-		log.info("time " + IGNITE_TIME__ + " speed " + VehicleControlparameter.Vehicle_Control_Speed
+	log.info("time " + IGNITE_TIME__ + " speed " + VehicleControlparameter.Vehicle_Control_Speed
 				+ " speed_ahead " + VehicleControlparameter.Speed_Control_Ahead_VC);
 
 		} catch (Exception e) {

@@ -18,6 +18,7 @@
 "EventInjection_Obstacle_Presence" : "0",
 "UCEF_Control_Speed":"0", 
 "IGNITE_TIME":"0",
+"sampling_rate":0.1,
 "VehicleControlPGN" : "VehicleControl",
 "VehicleControlSPNs" :   "0",
 "messageTime":0.0
