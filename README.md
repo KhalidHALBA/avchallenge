@@ -1,4 +1,4 @@
-# IGNITE installation guide : 
+# A) IGNITE installation guide : 
 ##	1- Download : 
 ### 1.a- Goto https://software.ricardo.com/login and login to the website 
 ![Image](https://i.ibb.co/xj4bVzp/1.png)
@@ -26,3 +26,4 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 ![Image](https://i.ibb.co/1ntMgpV/8.png)
 #### 3.d.ii- check status
 ![Image](https://i.ibb.co/qnrLvnD/9.png)
+# B) Running the Experiment :
