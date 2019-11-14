@@ -57,7 +57,7 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 - location 1) : /home/vagrant/avchallenge/ADS_generated/VehicleControl/conf/VehicleControl.json
 - location 2) : /home/vagrant/avchallenge/ADS_deployment/conf/default/vehiclecontrol.json
-- parameter to set : 
+- parameter to set : sampling_rate
 
 ![Image](https://i.ibb.co/BKBVsj7/11.png)
 
