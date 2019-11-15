@@ -170,15 +170,19 @@ We configure Simulation, FMU, and Vehicle Settings :
 
 #### 2.f.1) Simulation Time and Output time step (refresh rate )
 
+![Image](https://i.ibb.co/W5M7jSj/IMG-0448.jpg)
+
 #### 2.f.2) Lookahead
+![Image](https://i.ibb.co/cJQZsLR/IMG-0453.jpg)
 
 #### 2.f.3) Setting the FMU type tp Co-Simulation
+![Image](https://i.ibb.co/fqMTnVf/IMG-0449.jpg)
 
 #### 2.f.3) Setting the vehicle Parameters
-![Image](https://i.ibb.co/W5M7jSj/IMG-0448.jpg)
-![Image](https://i.ibb.co/fqMTnVf/IMG-0449.jpg)
+
+
 ![Image](https://i.ibb.co/fkjmgfT/IMG-0452.jpg)
-![Image](https://i.ibb.co/cJQZsLR/IMG-0453.jpg)
+
 
 
 
