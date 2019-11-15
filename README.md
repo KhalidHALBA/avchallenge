@@ -198,7 +198,7 @@ We configure Simulation, FMU, and Vehicle Settings :
 ![Image](https://i.ibb.co/DV2wGfQ/Screen-Shot-2019-11-14-at-23-13-12-PM.png)
 ![Image](https://i.ibb.co/cYV6rc4/Screen-Shot-2019-11-14-at-23-12-36-PM.png)
 
-
+![Image](https://i.ibb.co/87DYY1S/Screen-Shot-2019-11-14-at-23-18-17-PM.png)
 ### 1.c)  Data Viewing 
 
 
