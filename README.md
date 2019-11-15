@@ -63,6 +63,9 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 ![Image](https://i.ibb.co/BKBVsj7/11.png)
 
+
+### 1.c.ii) Lookahead Configuration
+
 * The lookahead parameter describes the ability of the autonomous vehicle controller to anticipate speed and braking operations. It matches IGNITE's lookahead parameter. To modify on UCEF we use the "IGNITE_LOOKAHEAD" parameter in the following files : 
 
 
@@ -71,14 +74,64 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 ![Image](https://i.ibb.co/VBBFRvy/12.png)
 
-### 1.c.i) Lookahead Configuration
 
 
 ## 2) IGNITE Side 
 
-### 2.a) IGNITE Configuration  
+### 2.a) FMU Prepation
 
-### 2.b) FMU UDP socket Configuration 
+* clone the avchallenge repository in C:\Users\vagrant\Desktop\avchallenge 
+`git clone https://github.com/usnistgov/avchallenge.git -b feature/latest`
+
+
+#### 2.a.1) FMU Configuration : Important parameters 
+
+We have to configure the following parameters before compiling the FMU : 
+
+*  Refresh Rate
+- The Refresh Rate value needs to be set on the FMU as well. It makes the socket ready to receive values at time durations equal to the refresh rate configured on UCEF's sampler and IGNITE's output time step.
+
+
+*  Communication Delay 
+- Use we IGNITE time to steer UCEF's drivce cycle generation. The time is carried in a UDP socket with a certain delay that needs to be compensated in order to match the native Drivecycle pattern. The communication_delay parameter enables the compensation of that time. It is set to 0.3 seconds in this experiment (measured delay).
+
+
+![Image](https://i.ibb.co/kKwSh46/13.png)
+
+
+
+#### 2.a.2) FMU Compilation
+
+`C:\Users\vagrant\Desktop\avchallenge\UCEF-IGNITE-FMU\fmusdk\fmu10\src\models>build_fmu cs drivecycle -win64`
+
+
+
+#### 2.b) IGNITE Preparation
+
+* Start IGNITE
+* Load Vehicle Model : 
+- SUV ELECTRIC : `C:\Program Files\Ricardo\2018.1\Products\IGNITE\Examples\Powertrain_library\Fuel_economy\SUV_electric\suv_electric.ignx`
+
+
+
+### 2.a) FMU 
+
+
+
+* Open IGNITE
+* Import the Vehicle Model 
+
+
+
+### 2.a) Modelica Breakout Module 
+
+### 2.c) Connecting Modules 
+
+### 2.d) Configuring IGNITE 
+
+#### 2.d.1) Simulation Time and Output time step (refresh rate )
+
+#### 2.d.2) Lookahead
 
 
 # C) Running the Experiment :
