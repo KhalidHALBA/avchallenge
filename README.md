@@ -166,9 +166,21 @@ Connecting the modules will yield the following configuration :
 
 ### 2.f) Configuring IGNITE 
 
+We configure Simulation, FMU, and Vehicle Settings : 
+
 #### 2.f.1) Simulation Time and Output time step (refresh rate )
 
 #### 2.f.2) Lookahead
+
+#### 2.f.3) Setting the FMU type tp Co-Simulation
+
+#### 2.f.3) Setting the vehicle Parameters
+![Image](https://i.ibb.co/W5M7jSj/IMG-0448.jpg)
+![Image](https://i.ibb.co/fqMTnVf/IMG-0449.jpg)
+![Image](https://i.ibb.co/fkjmgfT/IMG-0452.jpg)
+![Image](https://i.ibb.co/cJQZsLR/IMG-0453.jpg)
+
+
 
 
 # C) Running the Experiment :
@@ -176,13 +188,11 @@ Connecting the modules will yield the following configuration :
 
 ## 1) IGNITE Side
 
-### 1.a)  Parameters Settings 
 ### 1.b)  Running IGNITE
 ### 1.c)  Data Viewing 
 
 ## 2) UCEF Side 
 
-### 2.a)  Parameters Settings 
 ### 2.b)  Running UCEF
 ### 2.c)  Data Logging & Viewing 
 
