@@ -192,21 +192,31 @@ We configure Simulation, FMU, and Vehicle Settings :
 
 ## 1) IGNITE Side
 
-### 1.b)  Running IGNITE
+### 1.a)  Running IGNITE
 
-![Image](https://i.ibb.co/SXgsGz1/Screen-Shot-2019-11-14-at-23-13-27-PM.png)
-![Image](https://i.ibb.co/DV2wGfQ/Screen-Shot-2019-11-14-at-23-13-12-PM.png)
+> Right click OCT and hit run
+
 ![Image](https://i.ibb.co/cYV6rc4/Screen-Shot-2019-11-14-at-23-12-36-PM.png)
 
+> wait until the solution monitor pops up and remains in listening mode.
+
+![Image](https://i.ibb.co/DV2wGfQ/Screen-Shot-2019-11-14-at-23-13-12-PM.png)
+
+
+
+### 1.b)  Data Viewing 
+
+
+
+> when the simulation is 
+
 ![Image](https://i.ibb.co/87DYY1S/Screen-Shot-2019-11-14-at-23-18-17-PM.png)
-### 1.c)  Data Viewing 
 
 
 
 ## 2) UCEF Side 
 
-### 2.b)  Running UCEF
-
+> Running the Federation
 
 ![Image](https://i.ibb.co/TLSRDWq/image001.png)
 
