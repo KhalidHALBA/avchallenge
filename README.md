@@ -109,29 +109,43 @@ We have to configure the following parameters before compiling the FMU :
 #### 2.b) IGNITE Preparation
 
 * Start IGNITE
-* Load Vehicle Model : 
+* Load Vehicle Model after making a backup copy.
 - SUV ELECTRIC : `C:\Program Files\Ricardo\2018.1\Products\IGNITE\Examples\Powertrain_library\Fuel_economy\SUV_electric\suv_electric.ignx`
 
 
+![Image](https://i.ibb.co/0mvbh09/14.png)
 
-### 2.a) FMU 
+- Vehicle Model is loaded !
+
+![Image](https://i.ibb.co/CtgLrw3/15.png)
+
+### 2.c) Load FMU 
+
+The pictures below show steps to follow for loading the FMU
+
+
+![Image](https://i.ibb.co/DfTswX8/16.jpg)
+
+![Image](https://i.ibb.co/0qJhTjz/22.jpg)
+
 
 
 
 * Open IGNITE
-* Import the Vehicle Model 
 
 
 
-### 2.a) Modelica Breakout Module 
 
-### 2.c) Connecting Modules 
 
-### 2.d) Configuring IGNITE 
+### 2.d) Modelica Breakout Module 
 
-#### 2.d.1) Simulation Time and Output time step (refresh rate )
+### 2.e) Connecting Modules 
 
-#### 2.d.2) Lookahead
+### 2.f) Configuring IGNITE 
+
+#### 2.f.1) Simulation Time and Output time step (refresh rate )
+
+#### 2.f.2) Lookahead
 
 
 # C) Running the Experiment :
