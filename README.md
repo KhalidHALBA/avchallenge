@@ -207,8 +207,10 @@ We configure Simulation, FMU, and Vehicle Settings :
 
 ### 2.b)  Running UCEF
 
+
+![Image](https://i.ibb.co/TLSRDWq/image001.png)
+
 ![Image](https://i.ibb.co/R3dpdwm/image002.png)
 
 
-![Image](https://i.ibb.co/TLSRDWq/image001.png)
 
