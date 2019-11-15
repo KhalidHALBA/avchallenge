@@ -121,20 +121,24 @@ We have to configure the following parameters before compiling the FMU :
 
 ### 2.c) Load FMU 
 
-The pictures below show steps to follow for loading the FMU
+The pictures below show steps to follow  : 
+
+
+> Loading the FMU
 
 
 ![Image](https://i.ibb.co/DfTswX8/16.jpg)
 
 ![Image](https://i.ibb.co/4TVX9Rx/aaaa.jpg)
+
 ![Image](https://i.ibb.co/hL2vH6Y/aaa.jpg)
 
 
+> Drag and Drop the Loaded FMU to the Model space and delete the native drivecycle modelica component. 
+
+
+
 ![Image](https://i.ibb.co/0qJhTjz/22.jpg)
-
-
-
-
 
 
 * Open IGNITE
