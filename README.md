@@ -141,15 +141,28 @@ The pictures below show steps to follow  :
 ![Image](https://i.ibb.co/0qJhTjz/22.jpg)
 
 
-* Open IGNITE
-
-
-
 
 
 ### 2.d) Modelica Breakout Module 
 
+For IGNITE 2019.1 , we choose the DriveCycleBreakout built in module.
+
+For IGNITE 2018.1 , We follow the same steps we have seen above to load the modelica Module except : 
+
+> step 3 :  we choose "Library" instead of FMU
+> step 5 :  we load TCPLib.mo instead of drivecycle.c 
+> step 10 : we drag and drop 
+
+
+![Image](https://i.ibb.co/kx7mT7j/modmod.jpg)
+
+
 ### 2.e) Connecting Modules 
+
+Connecting the modules will yield the following configuration : 
+
+![Image](https://i.ibb.co/Lrz83D6/24.png)
+
 
 ### 2.f) Configuring IGNITE 
 
