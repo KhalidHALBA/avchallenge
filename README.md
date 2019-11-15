@@ -194,11 +194,11 @@ We configure Simulation, FMU, and Vehicle Settings :
 
 ### 1.a)  Running IGNITE
 
-> Right click OCT and hit run
+> Right click OCT and hit run : 
 
 ![Image](https://i.ibb.co/cYV6rc4/Screen-Shot-2019-11-14-at-23-12-36-PM.png)
 
-> wait until the solution monitor pops up and remains in listening mode.
+> wait until the solution monitor pops up and remains in listening mode : 
 
 ![Image](https://i.ibb.co/DV2wGfQ/Screen-Shot-2019-11-14-at-23-13-12-PM.png)
 
@@ -208,17 +208,16 @@ We configure Simulation, FMU, and Vehicle Settings :
 
 
 
-> when the simulation is 
+> when the simulation is over, RPost shows the data : 
 
 ![Image](https://i.ibb.co/87DYY1S/Screen-Shot-2019-11-14-at-23-18-17-PM.png)
 
 
-
 ## 2) UCEF Side 
 
-> Running the Federation
+> Running the Federation : 
 
-![Image](https://i.ibb.co/TLSRDWq/image001.png)
+![Image](https://i.ibb.co/0YjBtWt/Screen-Shot-2019-11-14-at-23-26-25-PM.png)
 
 ![Image](https://i.ibb.co/R3dpdwm/image002.png)
 
