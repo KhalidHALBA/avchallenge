@@ -193,12 +193,22 @@ We configure Simulation, FMU, and Vehicle Settings :
 ## 1) IGNITE Side
 
 ### 1.b)  Running IGNITE
+
+![Image](https://i.ibb.co/SXgsGz1/Screen-Shot-2019-11-14-at-23-13-27-PM.png)
+![Image](https://i.ibb.co/DV2wGfQ/Screen-Shot-2019-11-14-at-23-13-12-PM.png)
+![Image](https://i.ibb.co/cYV6rc4/Screen-Shot-2019-11-14-at-23-12-36-PM.png)
+
+
 ### 1.c)  Data Viewing 
+
+
 
 ## 2) UCEF Side 
 
 ### 2.b)  Running UCEF
-### 2.c)  Data Logging & Viewing 
+
+![Image](https://i.ibb.co/R3dpdwm/image002.png)
 
 
+![Image](https://i.ibb.co/TLSRDWq/image001.png)
 
