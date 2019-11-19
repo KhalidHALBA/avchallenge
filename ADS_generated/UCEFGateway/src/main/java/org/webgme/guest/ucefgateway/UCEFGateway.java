@@ -68,45 +68,29 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 		try {
 			DatagramSocket clientSocket = new DatagramSocket();
-
 			InetAddress IPAddress = InetAddress.getByName(UCEFGatewayparameter.IGNITE_IP);
 			byte[] sendData = new byte[1024];
-
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-
 			sendData = ((int) (1000 * Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control)) + " "
 					+ (int) (1000 * Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW))).getBytes();
 			DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 8888);
 			clientSocket.send(sendPacket);
 			receivePacket.setLength(receiveData.length);
-
 			clientSocket.receive(receivePacket);
-
 			String vehicleResponse = new String(receivePacket.getData());
-
 			String[] speeds = vehicleResponse.split(" ");
-
 			float f = Float.valueOf(speeds[0].trim()).floatValue();
 			float f1 = f / 100;
-
 			UCEFGatewayparameter.Vehicle_Speed_Response = Double.toString(f1);
-
 			float b = Float.valueOf(speeds[1].trim()).floatValue();
 			float b1 = b / 100;
-
 			UCEFGatewayparameter.Brake_Pressure = Double.toString(b1);
-
 			float t = Float.valueOf(speeds[2].trim()).floatValue();
-
 			float t1 = t / 100;
-
 			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t1);
-
 		//	//System.out.println(" speed " + 1000 * Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control)
 		//			+ "  speed ahead  " + 1000 * Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW));
-
 			clientSocket.close();
-
 		} catch (Exception e) {
 
 		}

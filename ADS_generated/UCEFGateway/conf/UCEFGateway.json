@@ -29,7 +29,7 @@
   "UCEF_Vehicle_Speed_Control" : "0",
   "VehicleControl_Vehicle_Speed" : "0",
   "VehicleControl_Event_Status" : "0",
-  "IGNITE_IP":"192.168.56.106",
+  "IGNITE_IP":"192.168.56.105",
   "Accel_Pedal_Position":"0",
   "Brake_Pressure":"0",
   "messageTime" : 0,

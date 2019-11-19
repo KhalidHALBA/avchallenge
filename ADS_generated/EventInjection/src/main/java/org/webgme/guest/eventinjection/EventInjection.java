@@ -57,6 +57,16 @@ public class EventInjection extends EventInjectionBase {
 			obstacle_presence = false;
 			EventInjectionparameter.Obstacle_Presence_notification_ahead = Boolean.toString(obstacle_presence);
 		}
+		
+		
+		
+		
+		
+		log.info( "event " + EventInjectionparameter.Obstacle_Presence_notification + "event_ahead " 
+				+ EventInjectionparameter.Obstacle_Presence_notification_ahead ) ;
+		
+		
+		
 	}
 
 	public String Build_SPN() {
