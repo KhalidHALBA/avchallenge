@@ -225,7 +225,7 @@ We configure Simulation, FMU, and Vehicle Settings :
 
 #### B.2.f.4- Setting the vehicle Parameters
 
-
+* to set the vehicle mass for example (and other vehicle paramaters) follow the instructions below : 
 ![Image](https://i.ibb.co/fkjmgfT/IMG-0452.jpg)
 
 
@@ -239,11 +239,14 @@ We configure Simulation, FMU, and Vehicle Settings :
 
 ### C.1.a-  Running IGNITE
 
-> Right click OCT and hit run : 
+After loading the modelica vehicle model and the FMU as well as the Modelica Breakout component and connecting/configuring all the elements properly we can run the experiment. 
+
+
+* On the session pane, Right click on Model->Solutions->OCT_1 and hit run : 
 
 ![Image](https://i.ibb.co/cYV6rc4/Screen-Shot-2019-11-14-at-23-12-36-PM.png)
 
-> wait until the solution monitor pops up and remains in listening mode : 
+* Wait until the solution monitor pops up and remains in listening mode : 
 
 ![Image](https://i.ibb.co/DV2wGfQ/Screen-Shot-2019-11-14-at-23-13-12-PM.png)
 
@@ -253,10 +256,15 @@ We configure Simulation, FMU, and Vehicle Settings :
 
 
 
-> when the simulation is over, RPost shows the data : 
+> when the simulation is over, RPost, IGNITE's analytics tool can be used to show the data : 
+
+* This is how to launch it : 
 
 ![Image](https://i.ibb.co/87DYY1S/Screen-Shot-2019-11-14-at-23-18-17-PM.png)
 
+* Below is an example of simulation data analytics after execution.
+
+![Image](https://i.ibb.co/YZyt629/RPOST.png)
 
 ## C.2- UCEF Side 
 
@@ -264,7 +272,13 @@ We configure Simulation, FMU, and Vehicle Settings :
 
 ![Image](https://i.ibb.co/0YjBtWt/Screen-Shot-2019-11-14-at-23-26-25-PM.png)
 
+The federates are up and running :  
+
 ![Image](https://i.ibb.co/R3dpdwm/image002.png)
+
+The data analytics federate shows the signals we are intereste in : speed request, braking demand, and vehicle velocity
+
+![Image](https://i.ibb.co/qdrKJPf/datanalytics.png)
 
 
 
