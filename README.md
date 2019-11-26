@@ -49,7 +49,7 @@
 ![Image](https://i.ibb.co/xj4bVzp/1.png)
 ### Goto the download portal : 
 https://software.ricardo.com/support/release-downloads
-### A.1.b- Pick on 2018.1 release 
+### A.1.b- Pick 2018.1 release 
 ![Image](https://i.ibb.co/JvtQGNq/2.png)
 ### A.1.c- Click on RS_2018.1_windows_installer.exe
 ![Image](https://i.ibb.co/MsGz8FC/3.png)
@@ -123,7 +123,7 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 ## B.2- IGNITE Side 
 
-### B.2.a- FMU Prepation
+### B.2.a- FMU Preparation
 
 * clone the avchallenge repository in C:\Users\vagrant\Desktop\avchallenge 
 `git clone https://github.com/usnistgov/avchallenge.git -b feature/latest`
@@ -149,8 +149,6 @@ We have to configure the following parameters before compiling the FMU :
 
 `C:\Users\vagrant\Desktop\avchallenge\UCEF-IGNITE-FMU\fmusdk\fmu10\src\models>build_fmu cs drivecycle -win64`
 
-
-
 ### B.2.b- IGNITE Preparation
 
 * Start IGNITE
@@ -166,7 +164,7 @@ We have to configure the following parameters before compiling the FMU :
 
 ### B.2.c- Load FMU 
 
-The pictures below show steps to follow  : 
+The pictures below show numbered steps to follow for loading the FMU : 
 
 
 > Loading the FMU
