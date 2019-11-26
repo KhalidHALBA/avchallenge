@@ -2,45 +2,13 @@
 =========================================================================================
 # A) IGNITE installation guide : 
 ##	A.1- Download : 
-### A.1.a- Goto https://software.ricardo.com/login and login to the website 
-### A.1.b- Pick on 2018.1 release 
-### A.1.c- Click on RS_2018.1_windows_installer.exe
-##	A.2- Installation 
-### A.2.a- Click on the installer
-### A.2.b- Insert login and password and click next, accept agreement.
-### A.2.c- Don’t forget to select the license manager when installing 
-### A.3.a- Rename the license file provided by ricardo as : ricardo.lic and Move it to : 
-### A.3.b- Make sure the configuration on Ricardo License Manager Control Panel is as follows 
-### A.3.c- Make sure the License service is up and running, if not , right click on the service highlighter and click start.
-### A.3.d- You can also start/stop or check the status of the license service from LMTOOLS utility 
-#### A.3.d.i- start/stop the service 
-#### A.3.d.ii- check status
+##	A.2- Installation :
+##  A.3- License configuration 
 # B) Configuring the Experiment :
 ## B.1- UCEF Side
-### B.1.a- UCEF VM Configuration  
-#### B.1.a.i- Minimum Configuration Settings
-#### B.1.a.ii- Networking
-### B.1.b- Gateway Federate UDP socket Configuration 
-### B.1.c- Sampler & Lookahead Configuration
-#### B.1.c.i- Sampler Configuration
-#### B.1.c.ii Lookahead Configuration
 ## B.2- IGNITE Side 
-### B.2.a- FMU Prepation
-#### B.2.a.1- FMU Configuration : Important parameters 
-#### B.2.a.2- FMU Compilation
-### B.2.b- IGNITE Preparation
-### B.2.c- Load FMU 
-### B.2.d- Modelica Breakout Module 
-### B.2.e- Connecting Modules 
-### B.2.f- Configuring IGNITE 
-#### B.2.f.1- Simulation Time and Output time step (refresh rate)
-#### B.2.f.2- Lookahead
-#### B.2.f.3- Setting the FMU type tp Co-Simulation
-#### B.2.f.4- Setting the vehicle Parameters
 # C) Running the Experiment :
 ## C.1- IGNITE Side
-### C.1.a-  Running IGNITE
-### C.1.b-  Data Viewing 
 ## C.2- UCEF Side
 =========================================================================================
 # A) IGNITE installation guide : 
@@ -59,7 +27,8 @@ https://software.ricardo.com/support/release-downloads
 ### A.2.b- Insert login and password and click next, accept agreement.
 ### A.2.c- Don’t forget to select the license manager when installing 
 ![Image](https://i.ibb.co/NWpHkb3/5.png)
-##	A.3- Configuration : once the insallation is done :
+##	A.3- License Configuration : 
+once the insallation is done :
 ### A.3.a- Rename the license file provided by ricardo as : ricardo.lic and Move it to : 
 C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic 
 ### A.3.b- Make sure the configuration on Ricardo License Manager Control Panel is as follows 
