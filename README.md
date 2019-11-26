@@ -1,5 +1,5 @@
 # Outline 
-==========================================
+=========================================================================================
 # A) IGNITE installation guide : 
 ##	A.1- Download : 
 ### A.1.a- Goto https://software.ricardo.com/login and login to the website 
@@ -42,17 +42,7 @@
 ### C.1.a-  Running IGNITE
 ### C.1.b-  Data Viewing 
 ## C.2- UCEF Side
-
-
-
-
-
-
-
-
-
-
-
+=========================================================================================
 # A) IGNITE installation guide : 
 ##	A.1- Download : 
 ### A.1.a- Goto https://software.ricardo.com/login and login to the website 
