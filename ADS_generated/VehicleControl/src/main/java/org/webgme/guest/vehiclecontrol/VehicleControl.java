@@ -15,14 +15,12 @@ public class VehicleControl extends VehicleControlBase {
 	private final static Logger log = LogManager.getLogger();
 
 	private double currentTime = 0;
-	int e = 0;
-	String Drive_Cycle_Speed = "0";
-	String Drive_Cycle_Speed_ahead = "0";
-	String Drive_Cycle_Speed_ahead_1 = "0";
-	double speed_ = 0;
-	double speed_ahead_ = 0;
-	int j = 0;
-	int g = 0;
+	
+	int e,j,g = 0;
+	String Drive_Cycle_Speed, Drive_Cycle_Speed_ahead,Drive_Cycle_Speed_ahead_1  = "0";
+	double speed_, speed_ahead_ = 0;
+
+
 
 	public VehicleControlConfig VehicleControlparameter = new VehicleControlConfig();
 	CAN VehicleControlCAN = create_CAN();
@@ -57,66 +55,65 @@ public class VehicleControl extends VehicleControlBase {
 						.get((int) IGNITE_TIME__ + 2);
 
 			}
-			
 
-			
-			
 			if (VehicleControlparameter.EventInjection_Obstacle_Presence.equals("true")) {
-				
-				
+
 				j++;
-//				g=0;	
-				
-				
-			if(j<10){	
-			
-			Drive_Cycle_Speed_ahead = "0.0";
-			int sampling_factor = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
-			double sampling_step_ = VehicleControlparameter.sampling_rate
-					* (Double.parseDouble(Drive_Cycle_Speed_ahead) - Double.parseDouble(Drive_Cycle_Speed));
 
-			DecimalFormat f = new DecimalFormat("##.000");
-			speed_ = Double.parseDouble(f.format(Double.parseDouble(Drive_Cycle_Speed) + sampling_factor* sampling_step_));
+				if (j < 10) {
 
-			VehicleControlparameter.Vehicle_Control_Speed = Double.toString(speed_);
-			
+					Drive_Cycle_Speed_ahead = "0.2";
+					int sampling_factor = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
+					double sampling_step_ = VehicleControlparameter.sampling_rate
+							* (Double.parseDouble(Drive_Cycle_Speed_ahead) - Double.parseDouble(Drive_Cycle_Speed));
+
+					DecimalFormat f = new DecimalFormat("##.000");
+					speed_ = Double.parseDouble(
+							f.format(Double.parseDouble(Drive_Cycle_Speed) + sampling_factor * sampling_step_));
+
+					VehicleControlparameter.Vehicle_Control_Speed = Double.toString(speed_);
+
+				} else {
+
+					VehicleControlparameter.Vehicle_Control_Speed = "0.2";
+				}
+			} else {
+
+				j = 0;
+
+				int sampling_factor_ = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
+				double sampling_step_ = VehicleControlparameter.sampling_rate
+						* (Double.parseDouble(Drive_Cycle_Speed_ahead) - Double.parseDouble(Drive_Cycle_Speed));
+				DecimalFormat f = new DecimalFormat("##.000");
+				speed_ = Double.parseDouble(
+						f.format(Double.parseDouble(Drive_Cycle_Speed) + sampling_factor_ * sampling_step_));
+				VehicleControlparameter.Vehicle_Control_Speed = Double.toString(speed_);
 			}
-			else	
-			{
-				
-				
-				VehicleControlparameter.Vehicle_Control_Speed = "0.0";
-			}
-		} 
-			else {
-				
-				j=0;
-				
-			int sampling_factor_ = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
-			double sampling_step_ = VehicleControlparameter.sampling_rate
-					* (Double.parseDouble(Drive_Cycle_Speed_ahead) - Double.parseDouble(Drive_Cycle_Speed));
-			DecimalFormat f = new DecimalFormat("##.000");
-			speed_ = Double.parseDouble(
-					f.format(Double.parseDouble(Drive_Cycle_Speed) + sampling_factor_ * sampling_step_));
-			VehicleControlparameter.Vehicle_Control_Speed = Double.toString(speed_);
-		}
-			
+
+			if (VehicleControlparameter.EventInjection_Obstacle_Presence_Ahead.equals("true")) {
 
 			
-			
-			
-			
-			
-				if (VehicleControlparameter.EventInjection_Obstacle_Presence_Ahead.equals("true")) {
-					
-					
-//					j=0;
-					g++;	
-					
-					
-				if(g<10){	
-				
-				Drive_Cycle_Speed_ahead_1 = "0.0";
+				g++;
+
+				if (g < 10) {
+
+					Drive_Cycle_Speed_ahead_1 = "0.2";
+					int sampling_factor_ahead = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
+					double sampling_step_ahead = VehicleControlparameter.sampling_rate
+							* (Double.parseDouble(Drive_Cycle_Speed_ahead_1)
+									- Double.parseDouble(Drive_Cycle_Speed_ahead));
+
+					DecimalFormat f = new DecimalFormat("##.000");
+					speed_ahead_ = Double.parseDouble(f.format(
+							Double.parseDouble(Drive_Cycle_Speed_ahead) + sampling_factor_ahead * sampling_step_ahead));
+
+					VehicleControlparameter.Speed_Control_Ahead_VC = Double.toString(speed_ahead_);
+
+				} else {
+					VehicleControlparameter.Speed_Control_Ahead_VC = "0.2";
+				}
+			} else {
+				g = 0;
 				int sampling_factor_ahead = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
 				double sampling_step_ahead = VehicleControlparameter.sampling_rate
 						* (Double.parseDouble(Drive_Cycle_Speed_ahead_1) - Double.parseDouble(Drive_Cycle_Speed_ahead));
@@ -126,40 +123,13 @@ public class VehicleControl extends VehicleControlBase {
 						Double.parseDouble(Drive_Cycle_Speed_ahead) + sampling_factor_ahead * sampling_step_ahead));
 
 				VehicleControlparameter.Speed_Control_Ahead_VC = Double.toString(speed_ahead_);
-				
-				}
-				else	
-				{
-					VehicleControlparameter.Speed_Control_Ahead_VC = "0.0";
-				}
-			} 
-			else {
-                 g=0;
-				int sampling_factor_ahead = (int) (10 * (IGNITE_TIME__ - ((int) (IGNITE_TIME__))));
-				double sampling_step_ahead = VehicleControlparameter.sampling_rate
-						* (Double.parseDouble(Drive_Cycle_Speed_ahead_1) - Double.parseDouble(Drive_Cycle_Speed_ahead));
+			}
 
-				DecimalFormat f = new DecimalFormat("##.000");
-				speed_ahead_ = Double.parseDouble(f.format(
-						Double.parseDouble(Drive_Cycle_Speed_ahead) + sampling_factor_ahead * sampling_step_ahead));
-
-				VehicleControlparameter.Speed_Control_Ahead_VC = Double.toString(speed_ahead_);
-			}	
-				
-				
-
-				
-				
-				
-				
-				
-				
-				
-	log.info("time " + IGNITE_TIME__ + " speed " + VehicleControlparameter.Vehicle_Control_Speed
-				+ " speed_ahead " + VehicleControlparameter.Speed_Control_Ahead_VC + " j " + j + " g " + g );
+			log.info("time " + IGNITE_TIME__ + " speed " + VehicleControlparameter.Vehicle_Control_Speed
+					+ " speed_ahead " + VehicleControlparameter.Speed_Control_Ahead_VC + " j " + j + " g " + g);
 
 		} catch (Exception e) {
-			// //System.out.println(e);
+
 		}
 	}
 
@@ -183,7 +153,7 @@ public class VehicleControl extends VehicleControlBase {
 
 	private void execute() throws Exception {
 		if (super.isLateJoiner()) {
-			// //log.info("turning off time regulation (late joiner)");
+
 			currentTime = super.getLBTS() - super.getLookAhead();
 			super.disableTimeRegulation();
 		}
@@ -196,9 +166,9 @@ public class VehicleControl extends VehicleControlBase {
 		putAdvanceTimeRequest(atr);
 
 		if (!super.isLateJoiner()) {
-			// //log.info("waiting on readyToPopulate...");
+
 			readyToPopulate();
-			// //log.info("...synchronized on readyToPopulate");
+
 		}
 
 		///////////////////////////////////////////////////////////////////////
@@ -206,13 +176,12 @@ public class VehicleControl extends VehicleControlBase {
 		///////////////////////////////////////////////////////////////////////
 
 		if (!super.isLateJoiner()) {
-			// //log.info("waiting on readyToRun...");
+
 			readyToRun();
-			// //log.info("...synchronized on readyToRun");
+
 		}
 
 		startAdvanceTimeThread();
-		// //log.info("started logical time progression");
 
 		while (!exitCondition) {
 			atr.requestSyncStart();
@@ -247,45 +216,14 @@ public class VehicleControl extends VehicleControlBase {
 			// vCAN.sendInteraction(getLRC(), currentTime + getLookAhead());
 
 			checkReceivedSubscriptions();
+
 			int osd = (int) (currentTime) % 2;
-
 			double IGNITE_TIME_d = (Double.parseDouble(VehicleControlparameter.IGNITE_TIME));
-
-			// int igtm = (int) (IGNITE_TIME_d) % 20;
-
-			// //log.info("ucef time " + (int) (currentTime / 3) + " ignite time
-			// "+ IGNITE_TIME_d + " logical time " + currentTime );
-
 			switch (osd) {
-
 			case 0:
-
+				
 				Control(IGNITE_TIME_d);
-
-				//
-				// for ( e=0 ; e < 7; )
-				//
-				// {
-				//
-				//
-				// e++;
-				//
-				// VehicleControlparameter.Speed_Control_Ahead_VC =
-				// Double.toString(0.0);
-				//
-				// VehicleControlparameter.Vehicle_Control_Speed =
-				// Double.toString(0.0);
-				//
-				// }
-				//
-				//
-				// for ( ;e >= 7 ; )
-				// {
-				//
 				Build_and_Send_CAN_Frame(VehicleControlparameter.VehicleControlPGN, Build_SPN());
-				//
-				// }
-
 				break;
 			}
 
@@ -294,15 +232,18 @@ public class VehicleControl extends VehicleControlBase {
 			////////////////////////////////////////////////////////////////////
 
 			if (!exitCondition) {
+				
 				currentTime += super.getStepSize();
 				AdvanceTimeRequest newATR = new AdvanceTimeRequest(currentTime);
 				putAdvanceTimeRequest(newATR);
 				atr.requestSyncEnd();
 				atr = newATR;
+			
 			}
 		}
 
 		// call exitGracefully to shut down federate
+		
 		exitGracefully();
 
 		//////////////////////////////////////////////////////////////////////
@@ -318,6 +259,7 @@ public class VehicleControl extends VehicleControlBase {
 		String[] CSPNs = interaction.get_DataField().split(delims);
 		switch (interaction.get_ID18B()) {
 		case "EventInjection":
+		
 			VehicleControlparameter.EventInjection_Obstacle_Presence = CSPNs[0];
 			VehicleControlparameter.EventInjection_Obstacle_Presence_Ahead = CSPNs[1];
 			VehicleControlparameter.messageTime = interaction.getTime();
@@ -342,7 +284,6 @@ public class VehicleControl extends VehicleControlBase {
 			VehicleControlConfig federateConfig = federateConfigParser.parseArgs(args, VehicleControlConfig.class);
 			VehicleControl federate = new VehicleControl(federateConfig);
 			federate.execute();
-			// //log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
 			log.error(e);

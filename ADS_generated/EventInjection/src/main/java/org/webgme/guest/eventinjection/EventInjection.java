@@ -26,8 +26,7 @@ public class EventInjection extends EventInjectionBase {
 			if (interaction instanceof CAN) {
 				handleInteractionClass((CAN) interaction);
 			} else {
-				// log.debug("unhandled interaction: {}",
-				// interaction.getClassName());
+				
 			}
 		}
 	}
@@ -57,16 +56,9 @@ public class EventInjection extends EventInjectionBase {
 			obstacle_presence = false;
 			EventInjectionparameter.Obstacle_Presence_notification_ahead = Boolean.toString(obstacle_presence);
 		}
-		
-		
-		
-		
-		
+
 		log.info( "event " + EventInjectionparameter.Obstacle_Presence_notification + "event_ahead " 
 				+ EventInjectionparameter.Obstacle_Presence_notification_ahead ) ;
-		
-		
-		
 	}
 
 	public String Build_SPN() {
@@ -142,9 +134,7 @@ public class EventInjection extends EventInjectionBase {
 			case 0:
 				Send_Obstacle_Notification((int) ignite_time);
 				Build_and_Send_CAN_Frame(EventInjectionparameter.EventInjectionPGN, Build_SPN());
-//				//System.out.println(" ignite_time " + ignite_time + " notif "
-//						+ EventInjectionparameter.Obstacle_Presence_notification + " notif_ahead "
-//						+ EventInjectionparameter.Obstacle_Presence_notification_ahead);
+
 				break;
 			}
 			if (!exitCondition) {

@@ -31,7 +31,7 @@
   "VehicleControl_Event_Status" : "0",
   "Accel_Pedal_Position":"0",
   "Brake_Pressure":"0",
-  "IGNITE_IP":"192.168.56.105",
+  "IGNITE_IP":"192.168.56.4",
   "messageTime" : 0,
   "COA_Message" : "0"
 }

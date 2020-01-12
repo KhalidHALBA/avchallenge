@@ -7,6 +7,7 @@ import org.cpswt.hla.base.AdvanceTimeRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -62,18 +63,18 @@ public class DataAnalytics extends DataAnalyticsBase {
 	{
 
 		final ArrayList<Double> data1 = fill_array(ost, speed1, xData, yData1);
-
 		final ArrayList<Double> data2 = fill_array(ost, brake, xData2, yData2);
-
 		final ArrayList<Double> data = fill_array(ost, speed, xData, yData);
 
 		chart.getStyler().setYAxisMax((double) 100);
 		chart.getStyler().setYAxisMin(null, (double) 0);
-
 		chart.getStyler().setXAxisMax((double) 3500);
 		chart.getStyler().setXAxisMin((double) 0);
-		chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideN);	
-
+		chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideN);
+		chart.getStyler().setChartTitleFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+		chart.getStyler().setAxisTitleFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+		chart.getStyler().setAxisTickLabelsFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
+		chart.getStyler().setLegendFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
 		Thread.sleep(ost);
 
 		chart.updateXYSeries("Vehicle_Speed", null, data, null);
@@ -185,10 +186,6 @@ public class DataAnalytics extends DataAnalyticsBase {
 			int osd = (int) (currentTime) % 2;
 			int time = (int) (currentTime / 2);
 
-			// //System.out.println("time " + time + " control_speed " + speed + "
-			// response_speed " + speed1 + " brake" + brake + " current_time " +
-			// currentTime);
-
 			switch (osd) {
 
 			case 0:
@@ -219,10 +216,8 @@ public class DataAnalytics extends DataAnalyticsBase {
 				atr = newATR;
 			}
 		}
-
 		// call exitGracefully to shut down federate
 		exitGracefully();
-
 		//////////////////////////////////////////////////////////////////////
 		// TODO Perform whatever cleanups are needed before exiting the app //
 		//////////////////////////////////////////////////////////////////////
@@ -232,7 +227,6 @@ public class DataAnalytics extends DataAnalyticsBase {
 		///////////////////////////////////////////////////////////////
 		// TODO implement how to handle reception of the interaction //
 		///////////////////////////////////////////////////////////////
-
 		String delims = "[ ]+";
 		String[] CSPNs = interaction.get_DataField().split(delims);
 		switch (interaction.get_ID18B()) {
@@ -240,7 +234,6 @@ public class DataAnalytics extends DataAnalyticsBase {
 			DataAnalyticsparameter.UCEFGateway_Torque_Commands = CSPNs[1];
 			DataAnalyticsparameter.Motor_Power_Limits = CSPNs[0];
 			DataAnalyticsparameter.messageTime = interaction.getTime();
-
 			break;
 		case "VehicleControl":
 			DataAnalyticsparameter.Engine_Speed = CSPNs[0];
@@ -248,7 +241,6 @@ public class DataAnalytics extends DataAnalyticsBase {
 
 			break;
 		}
-
 	}
 
 	public static void main(String[] args) {
@@ -257,7 +249,6 @@ public class DataAnalytics extends DataAnalyticsBase {
 			DataAnalyticsConfig federateConfig = federateConfigParser.parseArgs(args, DataAnalyticsConfig.class);
 			DataAnalytics federate = new DataAnalytics(federateConfig);
 			federate.execute();
-			// //log.info("Done.");
 			System.exit(0);
 		} catch (Exception e) {
 			log.error(e);

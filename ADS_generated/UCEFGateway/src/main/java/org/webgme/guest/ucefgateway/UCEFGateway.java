@@ -12,8 +12,6 @@ import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-// Define the UCEFGateway type of federate for the federation.
-
 public class UCEFGateway extends UCEFGatewayBase {
 
 	ExecutorService myExecutor = Executors.newCachedThreadPool();
@@ -29,7 +27,6 @@ public class UCEFGateway extends UCEFGatewayBase {
 
 	Queue<String> s = new LinkedList<String>();
 	Queue<Double> t = new LinkedList<Double>();
-
 	Queue<String> s1 = new LinkedList<String>();
 	Queue<Double> t1 = new LinkedList<Double>();
 
@@ -88,10 +85,12 @@ public class UCEFGateway extends UCEFGatewayBase {
 			float t = Float.valueOf(speeds[2].trim()).floatValue();
 			float t1 = t / 100;
 			UCEFGatewayparameter.IGNITE_Cycle_Time = Double.toString(t1);
-		//	//System.out.println(" speed " + 1000 * Double.parseDouble(UCEFGatewayparameter.UCEF_Vehicle_Speed_Control)
-		//			+ "  speed ahead  " + 1000 * Double.parseDouble(UCEFGatewayparameter.Speed_Control_Ahead_GW));
 			clientSocket.close();
 		} catch (Exception e) {
+			
+			
+			
+			 System.out.println("THIS is an exception "+e.getMessage());
 
 		}
 
