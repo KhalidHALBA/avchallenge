@@ -97,13 +97,6 @@ waitUntilJoined Database 1
 
 
 
-# cd $root_directory
-# xterm -fg white -bg black -l -lf $logs_directory/Database-${timestamp}.log -T "Database" -geometry 70x20+120+100 -e "mvn exec:java -P ExecJava,Database" &
-# waitUntilJoined Database 1
-
-
-
-
 cd $root_directory
 xterm -fg green -fa 'Monospace' -fs  12 -bg black -l -lf $logs_directory/UCEFGateway-${timestamp}.log -T "UCEFGateway" -geometry 70x20+100+110 -e "mvn exec:java -P ExecJava,UCEFGateway" &
 sleep 10
