@@ -20,11 +20,7 @@
             <artifactId>DataAnalytics</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
-        <dependency><!-- The dependency for the user written code-->
-            <groupId>org.webgme.guest.database</groupId>
-            <artifactId>Database</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-        </dependency>
+
         <dependency><!-- The dependency for the user written code-->
             <groupId>org.webgme.guest.eventinjection</groupId>
             <artifactId>EventInjection</artifactId>
