@@ -10,6 +10,8 @@ if [ ! -d $1 ]; then
     exit 1;
 fi
 
+
+
 root_directory=`pwd`
 printf " root dir $root_directory "
 logs_directory=$root_directory/logs
@@ -88,8 +90,8 @@ curl -o /dev/null -s -X POST http://$fedmgr_host:$fedmgr_port/fedmgr --data '{"a
 
 
 
-cd /home/vagrant/Desktop/ADS/ucef-database/target
-xterm -fg white -fa 'Monospace' -fs 12 -bg black -l -lf  /home/vagrant/Desktop/ADS/ucef-database/target/log/Database-${timestamp}.log -T "Database" -geometry 70x20+60+80 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar Database-0.0.1-SNAPSHOT.jar conf/Database.json" &
+cd /home/vagrant/avchallenge/ADS_generated/ucef-database/target
+xterm -fg white -fa 'Monospace' -fs 12 -bg black -l -lf /home/vagrant/avchallenge/ADS_generated/ucef-database/target/log/Database-${timestamp}.log -T "Database" -geometry 70x20+60+80 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar Database-0.0.1-SNAPSHOT.jar conf/Database.json" &
 sleep 10
 waitUntilJoined Database 1
 

@@ -4,14 +4,29 @@ import org.webgme.guest.vehiclecontrol.rti.*;
 import org.cpswt.config.FederateConfigParser;
 import org.cpswt.hla.InteractionRoot;
 import org.cpswt.hla.base.AdvanceTimeRequest;
+
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class VehicleControl extends VehicleControlBase {
+
+public class VehicleControl extends VehicleControlBase  {
+	
+	ExecutorService myExecutor = Executors.newCachedThreadPool();
+	
 	private final static Logger log = LogManager.getLogger();
 
 	private double currentTime = 0;
@@ -19,8 +34,6 @@ public class VehicleControl extends VehicleControlBase {
 	int e,j,g = 0;
 	String Drive_Cycle_Speed, Drive_Cycle_Speed_ahead,Drive_Cycle_Speed_ahead_1  = "0";
 	double speed_, speed_ahead_ = 0;
-
-
 
 	public VehicleControlConfig VehicleControlparameter = new VehicleControlConfig();
 	CAN VehicleControlCAN = create_CAN();
@@ -41,7 +54,6 @@ public class VehicleControl extends VehicleControlBase {
 			}
 		}
 	}
-
 	public void Control(double IGNITE_TIME__) {
 
 		try {
@@ -151,6 +163,13 @@ public class VehicleControl extends VehicleControlBase {
 
 	}
 
+	public void update_chart(int ost) throws Exception
+
+	{
+	
+		System.out.println(" this should be a button  " + ost); 		
+	}
+	
 	private void execute() throws Exception {
 		if (super.isLateJoiner()) {
 
@@ -183,6 +202,49 @@ public class VehicleControl extends VehicleControlBase {
 
 		startAdvanceTimeThread();
 
+
+					
+					
+					
+					
+					
+					// myExecutor.execute(new Runnable() {
+					// 	public void run() {
+					// 		try {
+					// 			JFrame frame = new JFrame("Demo program for JFrame");			
+					// 			frame.setLayout(new GridLayout());
+					// 			frame.setSize(300, 200);
+					// 			frame.setVisible(true);
+								
+					// 			frame.setVisible(true);
+								
+					// 		} catch (Exception e) {
+
+					// 			e.printStackTrace();
+					// 		}
+					// 	}
+					// });
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
 		while (!exitCondition) {
 			atr.requestSyncStart();
 			enteredTimeGrantedState();
@@ -220,6 +282,7 @@ public class VehicleControl extends VehicleControlBase {
 			int osd = (int) (currentTime) % 2;
 			double IGNITE_TIME_d = (Double.parseDouble(VehicleControlparameter.IGNITE_TIME));
 			switch (osd) {
+			
 			case 0:
 				
 				Control(IGNITE_TIME_d);
