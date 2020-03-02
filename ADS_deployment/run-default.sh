@@ -91,7 +91,7 @@ curl -o /dev/null -s -X POST http://$fedmgr_host:$fedmgr_port/fedmgr --data '{"a
 
 
 cd /home/vagrant/avchallenge/ADS_generated/ucef-database/target
-xterm -fg white -fa 'Monospace' -fs 12 -bg black -l -lf /home/vagrant/avchallenge/ADS_generated/ucef-database/target/log/Database-${timestamp}.log -T "Database" -geometry 70x20+60+80 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar Database-0.0.1-SNAPSHOT.jar conf/Database.json" &
+xterm -fg white -fa 'Monospace' -fs 12 -bg black -l -T "Database" -geometry 70x20+60+80 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar Database-0.0.1-SNAPSHOT.jar conf/Database.json" &
 sleep 10
 waitUntilJoined Database 1
 
