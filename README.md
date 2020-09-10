@@ -417,7 +417,7 @@ After loading the modelica vehicle model and the FMU as well as the Modelica Bre
 
 -  Running the Federation : 
 
-![Image](https://i.ibb.co/0YjBtWt/Screen-Shot-2019-11-14-at-23-26-25-PM.png)
+![image](https://i.ibb.co/YbbRmzx/Screen-Shot-2020-09-09-at-22-29-31-PM.png)
 
 The federates are up and running :  
 
