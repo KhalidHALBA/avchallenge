@@ -1,0 +1,134 @@
+{
+  "federateTypesAllowed": [
+    "Communications",
+    "Data",
+    "FailOpSafe",
+    "Monitor",
+    "OEDRC",
+    "OESActual",
+    "OESNominal",
+    "PhysicsEngine",
+    "Response",
+    "Sensors",
+    "TimingLocation",
+    "TripManager",
+    "TripPlan",
+    "VisualizeAnalytics"
+  ],
+  "expectedFederates": [
+    {
+      "federateType": "Communications",
+      "count": 1
+    },
+    {
+      "federateType": "Data",
+      "count": 1
+    },
+    {
+      "federateType": "FailOpSafe",
+      "count": 1
+    },
+    {
+      "federateType": "Monitor",
+      "count": 1
+    },
+    {
+      "federateType": "OEDRC",
+      "count": 1
+    },
+    {
+      "federateType": "OESActual",
+      "count": 1
+    },
+    {
+      "federateType": "OESNominal",
+      "count": 1
+    },
+    {
+      "federateType": "PhysicsEngine",
+      "count": 1
+    },
+    {
+      "federateType": "Response",
+      "count": 1
+    },
+    {
+      "federateType": "Sensors",
+      "count": 1
+    },
+    {
+      "federateType": "TimingLocation",
+      "count": 1
+    },
+    {
+      "federateType": "TripManager",
+      "count": 1
+    },
+    {
+      "federateType": "TripPlan",
+      "count": 1
+    },
+    {
+      "federateType": "VisualizeAnalytics",
+      "count": 1
+    }
+  ],
+  "lateJoinerFederates": [
+    {
+      "federateType": "Communications",
+      "count": 0
+    },
+    {
+      "federateType": "Data",
+      "count": 0
+    },
+    {
+      "federateType": "FailOpSafe",
+      "count": 0
+    },
+    {
+      "federateType": "Monitor",
+      "count": 0
+    },
+    {
+      "federateType": "OEDRC",
+      "count": 0
+    },
+    {
+      "federateType": "OESActual",
+      "count": 0
+    },
+    {
+      "federateType": "OESNominal",
+      "count": 0
+    },
+    {
+      "federateType": "PhysicsEngine",
+      "count": 0
+    },
+    {
+      "federateType": "Response",
+      "count": 0
+    },
+    {
+      "federateType": "Sensors",
+      "count": 0
+    },
+    {
+      "federateType": "TimingLocation",
+      "count": 0
+    },
+    {
+      "federateType": "TripManager",
+      "count": 0
+    },
+    {
+      "federateType": "TripPlan",
+      "count": 0
+    },
+    {
+      "federateType": "VisualizeAnalytics",
+      "count": 0
+    }
+  ]
+}

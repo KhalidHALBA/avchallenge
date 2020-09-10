@@ -1,0 +1,8 @@
+{
+  "federateRTIInitWaitTimeMs": 200,
+  "federateType": "Data",
+  "federationId": "ADSNA",
+  "isLateJoiner": false,
+    "stepSize": 1.0,
+    "lookAhead": 0.1
+}

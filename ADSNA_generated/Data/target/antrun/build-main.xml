@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy todir="/home/vagrant/ADSNA/ADSNA_generated/Data/target/conf" overwrite="true">
+    <fileset dir="/home/vagrant/ADSNA/ADSNA_generated/Data/conf"/>
+  </copy>
+  <copy todir="/home/vagrant/ADSNA/ADSNA_generated/Data/target" overwrite="true">
+    <fileset file="/home/vagrant/ADSNA/ADSNA_generated/Data/RTI.rid"/>
+  </copy>
+</target>
+</project>

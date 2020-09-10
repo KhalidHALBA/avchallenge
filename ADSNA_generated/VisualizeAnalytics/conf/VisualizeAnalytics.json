@@ -1,0 +1,19 @@
+{
+  "federateRTIInitWaitTimeMs": 200,
+  "federateType": "VisualizeAnalytics",
+  "federationId": "ADSNA",
+  "isLateJoiner": false,
+  "lookAhead": 0.2,
+  "stepSize": 1.0,
+  "messageTime" : 0,
+  "Engine_Speed":"0",       
+  "Engine_Temperature":"0",
+  "Motor_Power_Limits":"0",  
+  "Inverter_Temperature":"0", 
+  "UCEFGateway_Torque_Commands" : "0",
+  "maxValue": 10.0,
+  "numberOfInputs": 2,
+  "Vehicle_Speed_Response":"0",
+  "DataAnalyticsPGN" : "DataAnalytics",
+  "DataAnalyticsSPNs" : "0"
+}
