@@ -222,7 +222,7 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 ## C.1- UCEF Side
 
-* create the ADS notional arhitecture folder : 
+* create the ADS notional arhitecture folder (ADSNA) : 
 
 `mkdir /home/vagrant/ADSNA` 
 
@@ -417,8 +417,8 @@ After loading the modelica vehicle model and the FMU as well as the Modelica Bre
 
 - Building the federation : 
 
-* On ADS_deployment folder run this command : mvn clean package
-* On ADS_generated folder  run this command : bash build-all.sh
+* On ADSNA_deployment folder run this command : mvn clean package
+* On ADSNA_generated folder  run this command : bash build-all.sh
 
 -  Running the Federation : 
 
