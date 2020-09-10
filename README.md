@@ -222,9 +222,14 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 ## C.1- UCEF Side
 
-* clone the avchallenge repository in /home/vagrant. 
+* create the ADS notional arhitecture folder : 
 
-`git clone https://github.com/usnistgov/avchallenge.git -b feature/latest`
+`mkdir /home/vagrant/ADSNA` 
+
+* clone the notionalArchitecture branch of the avchallenge repository in /home/vagrant/ADSNA. 
+
+`cd /home/vagrant/ADSNA` 
+`git clone https://github.com/usnistgov/avchallenge -b feature/notionalArchitecture` 
 
 ### C.1.a- Gateway Federate UDP socket Configuration 
 
@@ -236,8 +241,8 @@ C:\Program Files\Ricardo\licmgr\licenses\ricardo.lic
 
 We use the UCEF Gateway Federate configuration file to set the target IP Address parameter, this configuration needs to be set in two locations  : 
 
-- location 1) : /home/vagrant/avchallenge/ADS_generated/UCEFGateway/conf/UCEFGateway.json
-- location 2) : /home/vagrant/avchallenge/ADS_deployment/conf/default/ucefgateway.json
+- location 1) : /home/vagrant/ADSNA/avchallenge/ADSNA_generated/PhysicsEngine/conf/PhysicsEngine.json
+- location 2) : /home/vagrant/ADSNA/avchallenge/ADSNA_deployment/conf/default/physicsengine.json
 - parameter to set : IGNITE_IP
 
 ![Image](https://i.ibb.co/F7HgD6T/10.png)
@@ -250,8 +255,8 @@ We use the UCEF Gateway Federate configuration file to set the target IP Address
 * The sampler samples the FTP 75 drive cycle in a way that matches IGNITE's output time step. For a 10 HZ sampling rate the configuration is set in vehicle control federate as follows : 
 
 
-- location 1) : /home/vagrant/avchallenge/ADS_generated/VehicleControl/conf/VehicleControl.json
-- location 2) : /home/vagrant/avchallenge/ADS_deployment/conf/default/vehiclecontrol.json
+- location 1) : /home/vagrant/ADSNA/avchallenge/ADSNA_generated/Response/conf/Response.json
+- location 2) : /home/vagrant/ADSNA/avchallenge/ADSNA_deployment/conf/default/response.json
 - parameter to set : sampling_rate
 
 ![Image](https://i.ibb.co/BKBVsj7/11.png)
@@ -261,8 +266,8 @@ We use the UCEF Gateway Federate configuration file to set the target IP Address
 
 * The lookahead parameter describes the ability of the autonomous vehicle controller to anticipate speed and braking operations. It matches IGNITE's lookahead parameter. To modify on UCEF we use the "IGNITE_LOOKAHEAD" parameter in the following files : 
 
-- location 1) : /home/vagrant/avchallenge/ADS_generated/VehicleControl/conf/VehicleControl.json
-- location 2) : /home/vagrant/avchallenge/ADS_deployment/conf/default/vehiclecontrol.json
+- location 1) : /home/vagrant/ADSNA/avchallenge/ADSNA_generated/Response/conf/Response.json
+- location 2) : /home/vagrant/ADSNA/avchallenge/ADSNA_deployment/conf/default/response.json
 
 ![Image](https://i.ibb.co/VBBFRvy/12.png)
 
@@ -277,7 +282,7 @@ We use the UCEF Gateway Federate configuration file to set the target IP Address
 
 * clone the avchallenge repository in C:\Users\vagrant\Desktop\ using Git Bash
 
-`git clone https://github.com/usnistgov/avchallenge.git -b feature/latest`
+`git clone https://github.com/usnistgov/avchallenge.git -b feature/notionalArchitecture`
 
 #### C.2.a.i- FMU Editing
 
