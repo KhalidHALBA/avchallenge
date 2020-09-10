@@ -424,11 +424,5 @@ After loading the modelica vehicle model and the FMU as well as the Modelica Bre
 
 ![image](https://i.ibb.co/YbbRmzx/Screen-Shot-2020-09-09-at-22-29-31-PM.png)
 
-The federates are up and running :  
-
-![Image](https://i.ibb.co/R3dpdwm/image002.png)
-
-The data analytics federate shows the signals we are interested in : speed request, braking demand, and vehicle velocity in real time.
-
-![Image](https://i.ibb.co/qdrKJPf/datanalytics.png)
-
+The Notional Architecture federates are up and running as seen in the figure below, each Xterm window represents a federate, and The data analytics federate shows the signals we are interested in : speed request, braking demand, and vehicle velocity in real time.
+![Image](https://i.ibb.co/cT44vZ6/Screen-Shot-2020-09-10-at-00-19-19-AM.png)
